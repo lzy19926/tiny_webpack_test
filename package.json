@@ -1,0 +1,17 @@
+{
+  "name": "mywebpack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "node tiny_webpack/src/index.js",
+    "dev": "node tiny_webpack_dev_server/src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "single-line-log": "^1.1.2",
+    "tiny_webpack": "file:tiny_webpack",
+    "tiny_webpack_dev_server": "file:tiny_webpack_dev_server"
+  }
+}
