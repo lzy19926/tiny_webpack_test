@@ -8,11 +8,9 @@
 
 var _constants = require("./constants.js");
 
-var _b = require("./b.js");
-
-console.log("\u6211\u53EB".concat(_constants.name, ",\u4ECA\u5E74").concat(_constants.age, "\u5C81,\u6027\u522B").concat(_constants.sex), _b.b);
+console.log("\u6211\u53EB".concat(_constants.name, ",\u4ECA\u5E74").concat(_constants.age, "\u5C81,\u6027\u522B").concat(_constants.sex), b);
         } ,
- {"./constants.js":1,"./b.js":2} 
+ {"./constants.js":1} 
  ],
 1:[
  function(require,module,exports){
@@ -22,44 +20,14 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.sex = exports.role = exports.name = exports.age = void 0;
-
-var _b = require("./b.js");
-
 var name = '王五9';
 exports.name = name;
-var age = 1234;
+var age = 12345;
 exports.age = age;
 var sex = '男';
 exports.sex = sex;
 var role = '学生123';
 exports.role = role;
-console.log(_b.b);
-        } ,
- {"./b.js":3} 
- ],
-2:[
- function(require,module,exports){
-            "use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.b = void 0;
-var b = 2;
-exports.b = b;
-        } ,
- {} 
- ],
-3:[
- function(require,module,exports){
-            "use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.b = void 0;
-var b = 2;
-exports.b = b;
         } ,
  {} 
  ],
