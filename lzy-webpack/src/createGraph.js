@@ -2,14 +2,15 @@ const fs = require('fs')
 const path = require('path')
 const babel = require('@babel/core')
 const parser = require('@babel/parser')
+const { changeColor } = require('./utils')
 const traverse = require('@babel/traverse').default
 const ProgressBar = require('./progressBar')
 
-let fileID = -1;
 
+let fileID = -1;
 let step = 0
 let allStep = 0
-var pb = new ProgressBar('webpack', 25);
+var pb = new ProgressBar('lzy-webpack', 30);
 
 // 进度条相关
 function getProgressCount(entry) {
@@ -20,9 +21,13 @@ function getProgressCount(entry) {
 // 渲染单次进度
 function renderProgressBar(text) {
     step += 1
-    const total = 100
-    const completed = Math.floor((step / allStep * 100))
+    let total = 100
+    let completed = Math.floor((step / allStep * 100))
+    if (completed >= 100) {
+        completed = 100
+    }
     pb.render({ completed, total, text });
+
 }
 
 // 构建文件资源数据
@@ -76,6 +81,7 @@ function createGraph(entry) {
     //1 通过入口文件构建文件资源
     const mainAsset = createAssets(entry)
 
+    // todo  这里需要进行模块比较  重复的模块不推入
     //2 使用队列循环方式构建依赖图(遍历+递归 使用createAssets处理每个js文件)
     const queue = [mainAsset]
 
@@ -169,7 +175,9 @@ function bundleModules(modulesStr) {
 
         })();
     `
-    renderProgressBar(`生成依赖图`) //! ------------------------进度显示
+    //! ------------------------完成构建进度显示
+    renderProgressBar(changeColor(`√`, 92))
+    console.log(changeColor(`构建完成,访问 ${changeColor(' http://localhost:8080', 96)} \n\n`, 92));
     return result
 }
 

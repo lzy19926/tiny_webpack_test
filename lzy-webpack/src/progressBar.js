@@ -1,5 +1,5 @@
 const slog = require('single-line-log').stdout; // 单行打印文本库
-
+const { changeColor } = require('./utils')
 
 /*
 todo 使用方法
@@ -8,6 +8,7 @@ todo 使用方法
   更新进度条 更新百分之1
     pb.render({ completed: 1, total: 100 });
 */
+
 
 // 封装的 ProgressBar 工具
 class ProgressBar {
@@ -35,7 +36,7 @@ class ProgressBar {
         }
 
         // 进度条文本
-        var cmdText = this.description + ': ' + (100 * percent).toFixed(2) + '% ' + cell + empty + ' ' + opts.completed + '/' + opts.total;
+        var cmdText = changeColor(this.description) + ': ' + (100 * percent).toFixed(2) + '% ' + cell + empty + ' ' + opts.completed + '/' + opts.total;
 
         // 进度条后文本
         var afterText = opts.text

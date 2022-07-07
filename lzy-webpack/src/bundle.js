@@ -1,12 +1,14 @@
 const fs = require('fs')
+const path = require('path')
+const { changeColor } = require('./utils')
 const { compress } = require('./compressCode')
 const { createGraph, bundleGraph, bundleModules, getProgressCount } = require('./createGraph')
 
 
 class Webpack {
     constructor(webpackConfig) {
-        this.Manifast = null
-        this.mapping = null
+        this.Manifast = null // 细节图
+        this.mapping = null;// KV对应
         this.config = webpackConfig
     }
 
@@ -73,17 +75,15 @@ class Webpack {
     }
 
     bundle() {
-        console.time('bundle用时')
         const result = this.createBundleCode()
-        console.timeEnd('bundle用时')
 
         try {
             this.createDist(result)   // 生成dist文件夹
-            console.log('打包完成,访问 http://localhost:8080 打开页面');
+            const coloredPath = changeColor(path.basename(this.config.output), 96)
+            console.log(`打包成功 请查看${coloredPath}文件夹`)
         } catch (err) {
             console.log(err);
         }
-
     }
 }
 

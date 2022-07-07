@@ -7,15 +7,15 @@ var memoFs = new MemoryFileSystem()
 
 
 //! 写一个bundle.js文件到内存中
-function saveBundleToMemo(result) {
-    memoFs.mkdirpSync("/memoStatic");
-    memoFs.writeFileSync("/memoStatic/bundle.js", result);
-    // const res = memoFs.readFileSync("/memoStatic/bundle.js");
-    // console.log(res);
-}
+// function saveBundleToMemo(result) {
+//     memoFs.mkdirpSync("/memoStatic");
+//     memoFs.writeFileSync("/memoStatic/bundle.js", result);
+//     // const res = memoFs.readFileSync("/memoStatic/bundle.js");
+//     // console.log(res);
+// }
 
 
-function hotUpdate(webpack, app) {
+function hotUpdate(webpack) {
     //TODO 创建WebSocketServer到3001端口 (是一个独立的服务)
     const ws = new WebSocket.Server({ port: 3001 });
 
@@ -52,12 +52,12 @@ function watchFileChange(absolutePath, callback) {
         //! 文件时间精确到100ms
         var status = fs.statSync(filePath)
         var editTimeStr = status.mtimeMs.toString()
-        var editTime = editTimeStr.slice(0, editTimeStr.length - 7)
+        var editTime = editTimeStr.slice(0, editTimeStr.length - 8)
         if (editTime == lastEditTime) return
         lastEditTime = editTime
 
         //! 执行代码
-        if (filename) {
+        if ( filename) {
             const filePath = path.join(absolutePath, filename)
             console.log(`${filePath}文件发生更新,启动热更新`)
             callback(filePath)

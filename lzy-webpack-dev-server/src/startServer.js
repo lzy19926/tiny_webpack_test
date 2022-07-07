@@ -3,7 +3,7 @@ const path = require('path')
 const serve = require("koa-static")
 const Webpack = require('../../lzy-webpack/src/bundle')
 const { hotUpdate } = require('./hotUpdate')
-const webpackConfig = require('../../../webpack.config')
+const webpackConfig = require('../../webpack.config')
 
 
 function startServer() {
