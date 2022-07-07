@@ -1,0 +1,23 @@
+{
+  "name": "lzy-webpack",
+  "version": "1.0.7",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "lzy-webpack": "./src/index.js" 
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.18.5",
+    "@babel/parser": "^7.18.5",
+    "@babel/preset-env": "^7.18.2",
+    "@babel/traverse": "^7.18.5",
+    "single-line-log": "^1.1.2",
+    "uglify-js": "^3.16.2"
+  }
+}

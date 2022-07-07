@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "build": "node tiny_webpack/src/index.js",
-    "dev": "node tiny_webpack_dev_server/src/index.js"
+    "dev": "node tiny_webpack_dev_server/src/index.js",
+    "tbuild": "lzy-webpack",
+    "tdev": "lzy-webpack-dev-server"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "single-line-log": "^1.1.2",
-    "tiny_webpack": "file:tiny_webpack",
-    "tiny_webpack_dev_server": "file:tiny_webpack_dev_server"
+    "lzy-webpack": "^1.0.7",
+    "lzy-webpack-dev-server": "^1.0.2"
   }
 }
