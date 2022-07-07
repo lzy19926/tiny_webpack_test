@@ -4,15 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "node lzy-webpack/src/index.js",
-    "dev": "node lzy-webpack-dev-server/src/index.js",
-    "tbuild": "lzy-webpack",
-    "tdev": "lzy-webpack-dev-server"
+    "tbuild": "node lzy-webpack/src/index.js",
+    "tdev": "node lzy-webpack-dev-server/src/index.js",
+    "build": "lzy-webpack",
+    "dev": "lzy-webpack-dev-server"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lzy-webpack": "^1.0.8",
-    "lzy-webpack-dev-server": "^1.0.3"
+    "lzy-webpack": "^1.0.9",
+    "lzy-webpack-dev-server": "^1.1.0"
   }
 }
