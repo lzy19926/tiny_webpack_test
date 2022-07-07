@@ -41,10 +41,10 @@ class ProgressBar {
         var afterText = opts.text
 
         // 在单行输出文本
-        // slog(cmdText + ' ' + afterText + '\n\n');
+        slog(cmdText + ' ' + afterText + '\n\n');
 
         // 逐行输出
-        console.log(cmdText + ' ' + afterText + '\n');
+        // console.log(cmdText + ' ' + afterText + '\n');
     };
 
 }
