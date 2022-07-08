@@ -5,7 +5,8 @@ const parser = require('@babel/parser')
 const { changeColor } = require('./utils')
 const traverse = require('@babel/traverse').default
 const ProgressBar = require('./progressBar')
-
+const webpackConfig = require('../../webpack.config')
+const { compress } = require('./compressCode')
 
 let fileID = -1;
 let step = 0
@@ -19,15 +20,15 @@ function getProgressCount(entry) {
     allStep = filesCount * 3 + 1 // 三部分 （构建+构建依赖+打包模块） +  生成依赖图+写入dist
 }
 // 渲染单次进度
-function renderProgressBar(text) {
+function renderProgressBar(text, opt) {
     step += 1
     let total = 100
     let completed = Math.floor((step / allStep * 100))
-    if (completed >= 100) {
+    // 超出构建数或者完成构建  直接渲染100
+    if (completed >= 100 || opt?.done) {
         completed = 100
     }
     pb.render({ completed, total, text });
-
 }
 
 // 构建文件资源数据
@@ -50,9 +51,9 @@ function createAssets(absolutePath) {
     const dependencies = []
 
     traverse(ast, {
-        ImportDeclaration: (path, state) => {
-            // console.log(path.node.source.value) //path是该语句的资源  .node就是转换后的AST树
-            dependencies.push(path.node.source.value) //todo 每次遇到import语句  将其文件路径push到依赖数组
+        ImportDeclaration: (childAst, state) => {
+            const depRaletivePath = childAst.node.source.value
+            dependencies.push(depRaletivePath) //todo 每次遇到import语句  将其文件路径push到依赖数组
         }
     })
 
@@ -74,7 +75,6 @@ function createAssets(absolutePath) {
     }
 
 }
-
 //构建文件依赖图   (注意  import 文件的时候需要加上后缀.js)
 function createGraph(entry) {
 
@@ -96,7 +96,7 @@ function createGraph(entry) {
             const absolutePath = path.join(dirname, relativePath) // 获取import文件的绝对路径
             const childAsset = createAssets(absolutePath) //! 通过绝对路径构建子文件资源
 
-            asset.mapping[relativePath] = childAsset.fileID //!通过相对路径和id匹配 构建资源依赖图
+            asset.mapping[relativePath] = absolutePath //!通过相对路径和绝对路径匹配（ID） 构建资源依赖图
             queue.push(childAsset) // 处理好的资源推入数组 (childAsset会进入下个循环继续执行)
         })
     }
@@ -108,7 +108,6 @@ function createGraph(entry) {
 // 通过依赖图生成模块对象
 function bundleGraph(graph) {
     let modulesStr = '';
-
     // 构建每个module为键值对 并添加进modules对象(所有资源都以字符串形式构建)
     //todo 注意  (1.处理模块为键值对 id为key 值保存模块的code和mapping)
     //todo 2. 模块的code应放在一个函数里 因为每个模块的code中使用了require,exports两个API 需要传入
@@ -117,7 +116,7 @@ function bundleGraph(graph) {
 
         renderProgressBar(`打包模块${module.filePath}`); //! ------------------------进度显示
 
-        const key = module.fileID
+        const key = JSON.stringify(module.filePath)
         const code = `function(require,module,exports){
             ${module.code}
         } `
@@ -133,25 +132,54 @@ function bundleGraph(graph) {
 
 // 实现CMD 打包文件依赖图
 function bundleModules(modulesStr) {
+    //todo 用于热更新的代码
+    const hotReplaceCode = `
+    //todo 热模块替换代码  监听src下文件夹变化  重新生成bundle中的代码并传给客户端  使用eval执行代码
+    function hotModuleReplace() {
+        var ws = new WebSocket("ws://localhost:3001/");
+        //监听建立连接
+        ws.onopen = function (res) {
+            console.warn('websocket连接成功,热更新准备就绪');
+        }
+
+        //监听服务端发来modules 
+        ws.onmessage = function (res) {
+            const newModule = eval('(' + res.data + ')')
+            for (let key in newModule) { //替换本地的modules 重新执行require(entry) (重新执行bundle整体文件)
+                modules[key] = newModule[key]
+                require(${JSON.stringify(webpackConfig.entry)})
+            }
+        }
+    };
+
+    hotModuleReplace()
+`
+    //todo 实际推送的热更新代码
+    let pushedHotReplaceCode = '';
+
+    //todo hot为true时进行热更新
+    if (webpackConfig.hot) {
+        pushedHotReplaceCode = hotReplaceCode
+    }
 
     // 构建的结果是一个立即执行函数   将modules传进去
     // module中包含了 fn函数(将模块代码包裹并执行的函数) 和模块依赖的mapping 
     // 在require函数中 因为要执行fn函数  需要传入fn(require,module,export) 三个参数
     //todo 也就是模拟了node的require方法和生成模拟module对象
-    const result = `
+    let result = `
     // -------------------泽亚的webpack---------------------------
         (function(){
             //todo 传入modules
             var modules = ${modulesStr}
 
             //todo 创建require函数 获取modules的函数代码和mapping对象
-            function require(id){
+            function require(raletivePath){
 
                 //! 通过id获取module 解构出代码执行函数fn和mapping
-                const [fn,mapping]  = modules[id]
+                const [fn,mapping]  = modules[raletivePath]
 
                 //! 构造fn所需的三个参数 构建自己的module对象
-                //todo loaclRequire 通过相对路径获取id并执行require
+                //todo loaclRequire 通过相对路径获取绝对路径(id)并执行require
                 const loaclRequire =(relativePath)=>{
                     return  require(mapping[relativePath])
                 }
@@ -171,12 +199,19 @@ function bundleModules(modulesStr) {
             }
 
             //! 执行require(entry)入口模块
-             require(0)
-
+             require(${JSON.stringify(webpackConfig.entry)})
+            //! 开启热模块替换(是否添加代码)
+            ${pushedHotReplaceCode}
         })();
     `
+
+    //todo 生产模式进行代码压缩  默认不压缩
+    if (webpackConfig.mode === 'production') {
+        result = compress(result)
+    }
+
     //! ------------------------完成构建进度显示
-    renderProgressBar(changeColor(`√`, 92))
+    renderProgressBar(changeColor(`√`, 92), { done: true })
     console.log(changeColor(`构建完成,访问 ${changeColor(' http://localhost:8080', 96)} \n\n`, 92));
     return result
 }

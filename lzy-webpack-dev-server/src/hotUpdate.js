@@ -1,10 +1,8 @@
-
 const fs = require('fs')
 const path = require('path')
 const WebSocket = require('ws')
 const MemoryFileSystem = require("memory-fs");
 var memoFs = new MemoryFileSystem()
-
 
 //! 写一个bundle.js文件到内存中
 // function saveBundleToMemo(result) {
@@ -13,7 +11,6 @@ var memoFs = new MemoryFileSystem()
 //     // const res = memoFs.readFileSync("/memoStatic/bundle.js");
 //     // console.log(res);
 // }
-
 
 function hotUpdate(webpack) {
     //TODO 创建WebSocketServer到3001端口 (是一个独立的服务)
@@ -25,9 +22,11 @@ function hotUpdate(webpack) {
         const srcPath = path.resolve(webpack.config.entry, '..')
 
         //todo 热更新回调  发现文件变化执行热更新 (重新生成bundle代码 推送给客户端  客户端eval执行)
-        const hotUpdateCb = (path) => {
-            const newBundleCode = webpack.createBundleCode()
-            connection.send(newBundleCode);
+        const hotUpdateCb = (changedFilePath) => {
+            // const newBundleCode = webpack.createBundleCode()
+            // connection.send(newBundleCode);
+            const newModuleStr = webpack.createNewModuleStr(changedFilePath)
+            connection.send(newModuleStr);
             console.log('热更新结束');
         }
 
@@ -35,7 +34,6 @@ function hotUpdate(webpack) {
         watchFileChange(srcPath, hotUpdateCb)
     });
 }
-
 
 // 通过绝对路径监听文件内容变化
 let lastEditTime;
@@ -57,7 +55,7 @@ function watchFileChange(absolutePath, callback) {
         lastEditTime = editTime
 
         //! 执行代码
-        if ( filename) {
+        if (filename) {
             const filePath = path.join(absolutePath, filename)
             console.log(`${filePath}文件发生更新,启动热更新`)
             callback(filePath)
