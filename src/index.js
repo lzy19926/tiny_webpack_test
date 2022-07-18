@@ -1,2 +1,2 @@
-import info from './info.js'
-console.log(info);
+
+import { num99 } from './bundleSpeedTest/test_99.js'

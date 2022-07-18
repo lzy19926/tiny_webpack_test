@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "tbuild": "node lzy-webpack/src/index.js",
-    "tdev": "node lzy-webpack-dev-server/src/index.js",
+    "t-build": "node lzy-webpack/src/index.js",
+    "t-dev": "node lzy-webpack-dev-server/src/index.js",
+    "t-esbuild": "node lzy-esBuild/src/index.js",
     "build": "lzy-webpack",
-    "dev": "lzy-webpack-dev-server"
+    "dev": "lzy-webpack-dev-server",
+    "esbuild":"esbuild src/index.js --bundle --outfile=out.js"
   },
   "author": "",
   "license": "ISC",
