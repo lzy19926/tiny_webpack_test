@@ -1,11 +1,12 @@
 const fs = require('fs')
 const parser = require('@babel/parser');
 const nodePath = require('path');
-const webpackConfig = require('../../webpack.config')
+const webpackConfig = require('../../../webpack.config')
 // 因为使用了ESM export导出  使用require引入时需要.default
 const generate = require('@babel/generator').default; // AST转js代码
 const traverse = require('@babel/traverse').default // 遍历AST
 const t = require('@babel/types') // 用于创建AST节点
+const { run } = require('./worker/workerTest')
 
 // 维护的全局变量映射
 let varibleMap = new Map()
@@ -169,7 +170,6 @@ function handleExpVaribleConfilect(argAst) {
     }
 }
 
-
 // 生成out文件
 function createOut(code) {
     const res = `
@@ -204,21 +204,11 @@ function createOut(code) {
 }
 
 
-function bundle() {
-
-
-    console.time('create DepsList')
+async function workerBundle() {
     const assetsList = createAssetsList(webpackConfig.entry)
-    console.timeEnd('create DepsList')
-
-    console.time('bundle')
-    const resCode2 = budleAsstes(assetsList)
-    console.timeEnd('bundle')
-
-    createOut(resCode2)
-
+    const resCode = await run(assetsList).catch((err) => console.error(err));
+    createOut(resCode)
 }
 
 
-
-module.exports = { bundle }
+module.exports = { workerBundle, budleAsstes }

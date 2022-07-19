@@ -6,11 +6,11 @@
  function(require,module,exports){
             "use strict";
 
-var _info = _interopRequireDefault(require("./info"));
+var _info = require("./info.js");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+console.log(_info.info);
         } ,
- {"./info":"E:\\My_Webpack\\myWebpack\\src\\info"} 
+ {"./info.js":"E:\\My_Webpack\\myWebpack\\src\\info.js"} 
  ],
 "E:\\My_Webpack\\myWebpack\\src\\info.js":[
  function(require,module,exports){
@@ -19,13 +19,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = void 0;
+exports.info = void 0;
 
 var _constants = require("./constants.js");
 
-var _default = "\u59D3\u540D:".concat(_constants.name, ",\u6027\u522B:").concat(_constants.sex, ",\u5E74\u9F84:").concat(_constants.age);
-
-exports["default"] = _default;
+var info = "\u59D3\u540D:".concat(_constants.name, ",\u6027\u522B:").concat(_constants.sex, ",\u5E74\u9F84:").concat(_constants.age);
+exports.info = info;
         } ,
  {"./constants.js":"E:\\My_Webpack\\myWebpack\\src\\constants.js"} 
  ],
@@ -43,8 +42,6 @@ var age = 18;
 exports.age = age;
 var sex = '男';
 exports.sex = sex;
-var a = 1;
-console.log(a);
         } ,
  {} 
  ],
@@ -58,7 +55,7 @@ console.log(a);
 
                 //! 构造fn所需的三个参数 构建自己的module对象
                 //todo loaclRequire 通过相对路径获取绝对路径(id)并执行require
-                const loaclRequire =(relativePath)=>{
+                const loaclRequire =(relativePath)=>{                    
                     return  require(mapping[relativePath])
                 }
 

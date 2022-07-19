@@ -1,7 +1,7 @@
 const fs = require('fs')
 const parser = require('@babel/parser');
 const nodePath = require('path');
-const webpackConfig = require('../../webpack.config')
+const webpackConfig = require('../../../webpack.config')
 // 因为使用了ESM export导出  使用require引入时需要.default
 const generate = require('@babel/generator').default; // AST转js代码
 const traverse = require('@babel/traverse').default // 遍历AST

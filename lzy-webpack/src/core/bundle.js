@@ -14,16 +14,22 @@ class Webpack {
         this.fileID = -1
     }
 
+
+    //添加文件后缀.js
+    addSuffix(path) {
+        let newPath = path
+        const suffix = path.split('.').pop()
+        if (!suffix || suffix !== 'js') {
+            newPath = path + '.js'
+        }
+
+        return newPath
+    }
+
     // 构建文件资源数据
     createAssets(absolutePath) {
 
         renderProgressBar(`构建${absolutePath}`, { step: 8 }) //! ------------------------进度显示
-
-        //添加文件后缀.js
-        const suffix = absolutePath.split('.').pop()
-        if (!suffix || suffix === absolutePath) {
-            absolutePath = absolutePath + '.js'
-        }
 
         const fileContent = fs.readFileSync(absolutePath, 'utf-8')
         //! 使用babel/parser将index代码转换为AST语法树  (不支持模块化语法 需要进行配置)
@@ -33,15 +39,15 @@ class Webpack {
 
         //! 使用babel/traverse遍历AST语法树  将所有import的文件推入dependencise数组
         // 传入的配置对象为visitor,配置钩子函数 不同的钩子会返回不同的语句(import expresstion等)
-        // 遍历到对应的语句  就会执行钩子函数  返回语句的信息
-        //TODO  这里以  (import info from './info.js') 为例     (详见AST Exporer)
-
+        // 遍历到对应的语句  就会执行钩子函数  返回语句的信息 (详见AST Exporer)   
         const dependencies = []
 
         traverse(ast, {
             ImportDeclaration: (childAst, state) => {
                 const depRaletivePath = childAst.node.source.value
-                dependencies.push(depRaletivePath) //todo 每次遇到import语句  将其文件路径push到依赖数组
+                const nextDepRaletivePath = this.addSuffix(depRaletivePath)
+                childAst.node.source.value = nextDepRaletivePath //如果没有.js尾缀 自动添加
+                dependencies.push(nextDepRaletivePath) //todo 每次遇到import语句  将其文件路径push到依赖数组
             }
         })
 
@@ -82,6 +88,7 @@ class Webpack {
             renderProgressBar(`构建依赖${asset.filePath}`); //! ------------------------进度显示
 
             asset.dependencies.forEach(relativePath => {// 遍历文件依赖的文件(import)
+
                 const absolutePath = path.join(dirname, relativePath) // 获取import文件的绝对路径
                 const childAsset = this.createAssets(absolutePath) //! 通过绝对路径构建子文件资源
 
@@ -169,7 +176,7 @@ class Webpack {
 
                 //! 构造fn所需的三个参数 构建自己的module对象
                 //todo loaclRequire 通过相对路径获取绝对路径(id)并执行require
-                const loaclRequire =(relativePath)=>{
+                const loaclRequire =(relativePath)=>{                    
                     return  require(mapping[relativePath])
                 }
 

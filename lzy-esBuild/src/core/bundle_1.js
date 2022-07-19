@@ -1,13 +1,12 @@
 const fs = require('fs')
 const parser = require('@babel/parser');
 const nodePath = require('path');
-const webpackConfig = require('../../webpack.config')
+const webpackConfig = require('../../../webpack.config')
 // 因为使用了ESM export导出  使用require引入时需要.default
 const generate = require('@babel/generator').default; // AST转js代码
 const traverse = require('@babel/traverse').default // 遍历AST
 const t = require('@babel/types') // 用于创建AST节点
-const { run } = require('./worker/workerTest')
-
+const { changeColor } = require('./utils')
 // 维护的全局变量映射
 let varibleMap = new Map()
 
@@ -15,8 +14,8 @@ let varibleMap = new Map()
 function createAssetsList(entry) {
     let id = 0;
     const depQueue = []
-    const importCodeEXP = /(import).*?(\n)/g
-    const depPathEXP = /(').*?(')/g
+    const importCodeEXP = /(import).*['"]/g // 以import开头 '或"结尾的字符
+    const depPathEXP = /['"].*?['"]/g
 
     function readFileDeps(absolutePath) {
 
@@ -29,7 +28,8 @@ function createAssetsList(entry) {
         })
 
         //获取import语句 截取依赖文件路径  推入数组
-        const res = fileContent.match(importCodeEXP) || []
+        const res = `${fileContent}`.match(importCodeEXP) || []
+
         res.forEach((code) => {
             const path = code.match(depPathEXP)[0]
             const pathStr = path.slice(1, path.length - 1)
@@ -129,9 +129,9 @@ function handleAssets(asset) {
 
     es6Code.code =
         `
-    //${asset.filePath} ---id:${id}
-    ${es6Code.code}
-    `
+         //${asset.filePath} ---id:${id}
+         ${es6Code.code}
+        `
 
     return es6Code.code
 }
@@ -170,13 +170,15 @@ function handleExpVaribleConfilect(argAst) {
     }
 }
 
+
 // 生成out文件
 function createOut(code) {
+
     const res = `
-    (function(){
-        ${code}
-    })()
-    `
+(function(){
+    ${code}
+})()
+`
 
     const htmlTpl = `<!DOCTYPE html>
     <html lang="en">
@@ -204,11 +206,22 @@ function createOut(code) {
 }
 
 
-async function workerBundle() {
+function bundle() {
+
+
+    console.time(changeColor('构建依赖列表用时', 92))
     const assetsList = createAssetsList(webpackConfig.entry)
-    const resCode = await run(assetsList).catch((err) => console.error(err));
-    createOut(resCode)
+    console.timeEnd(changeColor('构建依赖列表用时', 92))
+
+    console.time(changeColor('打包整体用时', 93))
+    const resCode2 = budleAsstes(assetsList)
+    createOut(resCode2)
+    console.timeEnd(changeColor('打包整体用时', 93))
+
+    
+
 }
 
 
-module.exports = { workerBundle, budleAsstes }
+
+module.exports = { bundle }

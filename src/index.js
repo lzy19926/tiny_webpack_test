@@ -1,1 +1,3 @@
-import info from './info'
+import { info } from './info.js'
+
+console.log(info);
