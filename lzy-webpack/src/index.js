@@ -1,14 +1,10 @@
 #!/usr/bin/env node
-const Webpack = require('./bundle')
+const Webpack = require('./core/bundle')
 const webpackConfig = require('../../webpack.config')
-
-const webpack = new Webpack(webpackConfig)
-
-
-
 
 
 console.time('lzy-webpack bundle')
+const webpack = new Webpack(webpackConfig)
 webpack.bundle()
 console.timeEnd('lzy-webpack bundle')
 

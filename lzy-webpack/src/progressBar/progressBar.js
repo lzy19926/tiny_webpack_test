@@ -9,7 +9,6 @@ todo 使用方法
     pb.render({ completed: 1, total: 100 });
 */
 
-
 // 封装的 ProgressBar 工具
 class ProgressBar {
     constructor(description, bar_length) {
@@ -40,9 +39,6 @@ class ProgressBar {
 
         // 进度条后文本
         var afterText = opts.text
-
-        // 逐行输出
-        // console.log(cmdText + ' ' + afterText + '\n');
 
         // 在单行输出文本
         slog(cmdText + ' ' + afterText + '\n\n');

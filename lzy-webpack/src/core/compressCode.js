@@ -1,6 +1,6 @@
 const UglifyJS = require("uglify-js");
 
-//!  启动代码压缩
+//! 代码压缩相关
 
 // 压缩配置
 const options = {
