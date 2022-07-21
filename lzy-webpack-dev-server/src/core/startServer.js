@@ -1,7 +1,7 @@
 const Koa = require('koa');
 const path = require('path')
 const serve = require("koa-static")
-const Webpack = require('../../../lzy-webpack/src/core/bundle')
+const Webpack = require('../../../lzy-webpack/src/core/webpackCompiler')
 const { hotUpdate } = require('./hotUpdate')
 
 

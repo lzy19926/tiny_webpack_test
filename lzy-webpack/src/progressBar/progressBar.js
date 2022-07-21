@@ -41,13 +41,9 @@ class ProgressBar {
         var afterText = opts.text
 
         // 在单行输出文本
-        slog(cmdText + ' ' + afterText + '\n\n');
-
+        // slog(cmdText + ' ' + afterText + '\n\n');
 
     };
-
 }
 
-
-// 模块导出
 module.exports = ProgressBar;

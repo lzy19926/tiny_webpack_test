@@ -8,9 +8,13 @@
 
 var _info = require("./info.js");
 
+require("./css/index.css");
+
+require("./css/test.css");
+
 console.log(_info.info);
         } ,
- {"./info.js":"E:\\My_Webpack\\myWebpack\\src\\info.js"} 
+ {"./info.js":"E:\\My_Webpack\\myWebpack\\src\\info.js","./css/index.css":"E:\\My_Webpack\\myWebpack\\src\\css\\index.css","./css/test.css":"E:\\My_Webpack\\myWebpack\\src\\css\\test.css"} 
  ],
 "E:\\My_Webpack\\myWebpack\\src\\info.js":[
  function(require,module,exports){
@@ -75,27 +79,25 @@ exports.sex = sex;
 
             //! 执行require(entry)入口模块
              require("E:\\My_Webpack\\myWebpack\\src\\index.js")
-            //! 开启热模块替换(是否添加代码)
             
-    //todo 热模块替换代码  监听src下文件夹变化  重新生成bundle中的代码并传给客户端  使用eval执行代码
-    function hotModuleReplace() {
-        var ws = new WebSocket("ws://localhost:3001/");
-        //监听建立连接
-        ws.onopen = function (res) {
-            console.warn('websocket连接成功,热更新准备就绪');
-        }
-
-        //监听服务端发来modules 
-        ws.onmessage = function (res) {
-            const newModule = eval('(' + res.data + ')')
-            for (let key in newModule) { //替换本地的modules 重新执行require(entry) (重新执行bundle整体文件)
-                modules[key] = newModule[key]
-                require("E:\\My_Webpack\\myWebpack\\src\\index.js")
-            }
-        }
-    };
-
-    hotModuleReplace()
-
-        })();
-    
+        
+         //todo 热模块替换代码  监听src下文件夹变化  重新生成bundle中的代码并传给客户端  使用eval执行代码
+         function hotModuleReplace() {
+             var ws = new WebSocket("ws://localhost:3001/");
+             //监听建立连接
+             ws.onopen = function (res) {
+                 console.warn('websocket连接成功,热更新准备就绪');
+             }
+     
+             //监听服务端发来modules 
+             ws.onmessage = function (res) {
+                 const newModule = eval('(' + res.data + ')')
+                 for (let key in newModule) { //替换本地的modules 重新执行require(entry) (重新执行bundle整体文件)
+                     modules[key] = newModule[key]
+                     require("E:\\My_Webpack\\myWebpack\\src\\index.js")
+                 }
+             }
+         };
+     
+         hotModuleReplace()
+     })();
