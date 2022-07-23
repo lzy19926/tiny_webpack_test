@@ -1,7 +1,6 @@
 
 function cssLoader(source) {
-    console.log('执行loader',source);
-
+    console.log('执行cssloader');
     return source
 }
 

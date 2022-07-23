@@ -1,4 +1,4 @@
-class SyncHooks {
+class SyncWaterfallHook {
     constructor() {
         this.tasks = [];
     }
@@ -10,12 +10,12 @@ class SyncHooks {
     }
 
     call(...args) {
-        this.tasks.forEach((task) => {
-            if (typeof task === 'function') {
-                task(...args)
+        this.tasks.reduce((pre, next) => {
+            if (typeof next === 'function') {
+                return next(pre, ...args)
             }
         })
     }
 }
 
-module.exports = SyncHooks
+module.exports = SyncWaterfallHook

@@ -4,8 +4,8 @@ const fs = require('fs')
 
 
 class CssExtractPlugin {
-    constructor() {
-
+    constructor({ fileName }) {
+        this.fileName = fileName || 'index.css'
     }
 
     createCssAsset(absolutePath) {
@@ -30,8 +30,7 @@ class CssExtractPlugin {
             })
         });
 
-
-        const filePath = path.join(compiler.config.output, 'index.css')
+        const filePath = path.join(compiler.config.output, this.fileName)
         fs.writeFileSync(filePath, cssCode)
     }
 
