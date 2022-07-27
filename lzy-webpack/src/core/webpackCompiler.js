@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const babel = require('@babel/core')
 const parser = require('@babel/parser')
-const { compress, compressByUglify } = require('./compressCode')
+const { compressByUMinify, compressByUglify } = require('./compressCode')
 const { SyncHooks, SyncWaterfallHook } = require('../tapable/index')
 const traverse = require('@babel/traverse').default
 const { getProgressCount, renderProgressBar, changeColor } = require('../progressBar/renderProgressBar')
@@ -282,14 +282,16 @@ class Webpack {
 
     //! 处理代码后续配置
     async handleOptions(result) {
+
         //todo hot为true时进行热更新
         if (this.config.hot) {
             result = this.hotUpdate(result)
         }
+
         //todo 生产模式进行代码压缩  默认不压缩
         if (this.config.mode === 'production') {
-            // result = await compress(result)
-            result = compressByUglify(result)
+            // result = compressByUglify(result)
+            result = compressByUMinify(result)
         }
 
         return result

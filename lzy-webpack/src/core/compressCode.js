@@ -6,7 +6,7 @@ const { minify } = require("terser");
 //! 代码压缩相关
 
 
-async function compress(code) {
+async function compressByUMinify(code) {
     var result = await minify(code, {
         compress: {
             dead_code: true,
@@ -50,4 +50,4 @@ async function beautifly(code) {
 }
 
 
-module.exports = { compress, compressByUglify, beautifly }
+module.exports = { compressByUMinify, compressByUglify, beautifly }

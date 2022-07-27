@@ -8,11 +8,6 @@ class CssExtractPlugin {
         this.fileName = fileName || 'index.css'
     }
 
-    createCssAsset(absolutePath) {
-
-
-    }
-
     extractCSS(compiler) {
 
         let cssCode = ``
