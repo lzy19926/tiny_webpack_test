@@ -73,6 +73,16 @@ class Webpack {
                 if (/\.css$/.test(depRaletivePath)) {//todo 遇到css的引入 删除语句
                     path.remove()
                 }
+            },
+            CallExpression: (path, state) => {
+                const idName = path.node.callee?.name
+                if (idName === 'require') {   //todo 每次遇到require语句  将其文件路径push到依赖数组
+                    const depRaletivePath = path.node.arguments[0].value
+                    dependencies.push(depRaletivePath)
+                    if (/\.css$/.test(depRaletivePath)) {//todo 遇到css的引入 删除语句
+                        path.remove()
+                    }
+                }
             }
         })
 
