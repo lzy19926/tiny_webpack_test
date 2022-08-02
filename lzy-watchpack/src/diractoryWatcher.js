@@ -16,24 +16,22 @@ class Watcher extends EventEmitter {
         super();
         this.filePath = path;
         this.saveTime = 1;
-        this.watchers = directoryWatcher.watchers
         this.directoryWatcher = directoryWatcher
     }
 
-    checkTime() {
+    checkEvent() {
         fs.lstat(this.filePath, (err, state) => {
             if (!this.saveTime && !state) return console.error(`文件${this.filePath}不存在`)
 
+            let saveTime = Math.floor(state?.ctimeMs)
             //TODO 如果文件被删除  触发remove事件并删除该watcher
             if (this.filePath && !state) {
                 this.directoryWatcher.emit('remove', this.filePath, 'remove')
-                this.watchers.delete(this.filePath)
+                this.directoryWatcher.watchers.delete(this.filePath)
                 return
             }
-
-            const saveTime = Math.floor(state.ctimeMs)
             //TODO 文件添加
-            if (this.saveTime === 1 && this.directoryWatcher.scanTimes > 1) {
+            if (this.saveTime === 1 && this.directoryWatcher.scanTime > 1) {
                 this.directoryWatcher.emit('create', this.filePath, 'create')
             }
             //TODO 文件修改  触发change事件
@@ -41,10 +39,8 @@ class Watcher extends EventEmitter {
                 this.directoryWatcher.emit('change', this.filePath, 'change')
             }
             this.saveTime = saveTime
-
         })
     }
-
 }
 
 
@@ -53,34 +49,27 @@ class DirectoryWatcher extends EventEmitter {
         super();
         this.fileList = option.fileList || [];
         this.directoryList = option.directoryList || [];
-        this.watchers = new Map();[]
-        this.scanTimes = 0
+        this.watchers = new Map();
         this.pause = false;
         this.poll = (typeof option.poll === "number") ? option.poll : 5007;
         this.scanTimeout = undefined;
+        this.scanTime = 0
     }
 
-
-    //todo 收集所有文件夹？？？？
-    collectDiractories() {
-        for (let dir of this.directoryList) {
-
-        }
-    }
 
     //todo 递归收集文件夹下所有的文件
     collectFiles(pathList) {
         const files = []
 
         const cycleFn = (pathList) => {
-            pathList.forEach(absPath => {
-                const stat = fs.statSync(absPath)
+            pathList.forEach(p => {
+                const stat = fs.statSync(p)
                 if (stat.isFile()) {
-                    files.push(absPath)
+                    files.push(p)
                 }
                 if (stat.isDirectory()) {
-                    const childPathList = fs.readdirSync(absPath).map((chPath) => {
-                        return path.join(absPath, chPath)
+                    const childPathList = fs.readdirSync(p).map((childPath) => {
+                        return path.join(p, childPath)
                     })
                     cycleFn(childPathList)
                 }
@@ -99,43 +88,37 @@ class DirectoryWatcher extends EventEmitter {
         return needWatcherFiles
     }
 
-    createWatchers(fileList) {
-        fileList.forEach(filePath => {//! 传入this 因为继承了eventEmitter,this同时也是eventPool
-            this.watchers.set(filePath, new Watcher(this, filePath))
-        });
-    }
-
-    updateWatcher(path) {
-        this.watchers.delete(path)
-        this.watchers.set(path, new Watcher(this, filePath))
-    }
-
-    removeWatcher(path) {
-        this.watchers.delete(path)
+    //todo 更新watchers
+    updateWatchers() {
+        const needWatcherFiles = this.checkNeedWatcherFiles()
+        needWatcherFiles.forEach((path) => {
+            this.watchers.set(path, new Watcher(this, path))
+        })
     }
 
     doScan() {
         if (this.pause) return
-
-        this.scanInerval = setInterval(() => {
-            console.time('scan');
-            const needWatcherFiles = this.checkNeedWatcherFiles()
-            this.createWatchers(needWatcherFiles)
-            this.scanFiles()
-            this.scanTimes++
-            console.timeEnd('scan');
-        }, this.poll)
+        this.updateWatchers()
+        this.forEachWatchers()
+        this.scanTime++
     }
 
-    scanFiles() {
+    forEachWatchers() {
         this.watchers.forEach((w, key) => {
-            w.checkTime()
+            w.checkEvent()
         })
     }
 
+
     watch() {
         console.log('--------------正在监视--------------------');
-        this.doScan()
+        console.log(this.directoryList);
+        
+        this.scanInerval = setInterval(() => {
+            console.time('SCAN')
+            this.doScan()
+            console.timeEnd('SCAN')
+        }, this.poll)
     }
 
     stopWatch() {
