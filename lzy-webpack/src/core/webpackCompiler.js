@@ -12,6 +12,7 @@ class Webpack {
         this.config = webpackConfig
         this.fileID = -1
         this.Manifast = null // 细节图
+        this.dependenciesList = new Set() // 依赖列表
         this.hooks = { // 初始化生命周期钩子函数队列
             beforeCompileSync: new SyncHooks(),
             afterCompileSync: new SyncHooks(),
@@ -54,6 +55,7 @@ class Webpack {
         //非js文件不执行
         const isJSFile = /\.js$/.test(absolutePath)
         if (!isJSFile) return false
+        this.dependenciesList.add(absolutePath)
 
         renderProgressBar(`构建${absolutePath}`, { step: 8 }) //! ------------------------进度显示
         //! 使用babel/parser将index代码转换为AST语法树  (不支持模块化语法 需要进行配置)
@@ -244,30 +246,51 @@ class Webpack {
 
     // 热更新
     hotUpdate(result) {
-
         //todo 用于热更新的代码
         const hotReplaceCode = `
-             //todo 热模块替换代码  监听src下文件夹变化  重新生成bundle中的代码并传给客户端  使用eval执行代码
-             function hotModuleReplace() {
-                 var ws = new WebSocket("ws://localhost:3001/");
-                 //监听建立连接
-                 ws.onopen = function (res) {
-                     console.warn('websocket连接成功,热更新准备就绪');
-                 }
-         
-                 //监听服务端发来modules 
-                 ws.onmessage = function (res) {
-                     const newModule = eval('(' + res.data + ')')
-                     for (let key in newModule) { //替换本地的modules 重新执行require(entry) (重新执行bundle整体文件)
-                         modules[key] = newModule[key]
-                         require(${JSON.stringify(this.config.entry)})
-                     }
-                 }
-             };
-         
-             hotModuleReplace()
-         `
-
+        //todo 热模块替换代码  监听src下文件夹变化  重新生成bundle中的代码并传给客户端  使用eval执行代码
+        const hotUpdate = (newModule) => {
+            for (let key in newModule) { //替换本地的modules 重新执行require(entry) (重新执行bundle整体文件)
+                modules[key] = newModule[key]
+                require(${JSON.stringify(this.config.entry)})
+            }
+        }
+    
+        const hotCreate = (newModule) => {
+            for (let key in newModule) {
+                modules[key] = newModule[key]
+                require(${JSON.stringify(this.config.entry)})
+            }
+        }
+    
+        const hotDelete = (key) => {
+            delete modules[key]
+            require(${JSON.stringify(this.config.entry)})
+        }
+    
+        function hotModuleReplace() {
+            var ws = new WebSocket("ws://localhost:3001/");
+            //监听建立连接
+            ws.onopen = function (res) {
+                console.warn('websocket连接成功,热更新准备就绪');
+            }
+    
+            //监听服务端发来的事件和数据 执行不同的方法
+            ws.onmessage = function (res) {
+                const { event, data } = eval('(' + res.data + ')')
+                switch (event) {
+                    case 'update': hotUpdate(data)
+                        break;
+                    case 'delete': hotDelete(data)
+                        break;
+                    case 'create': hotCreate(data)
+                        break;
+                }
+            }
+        };
+    
+        hotModuleReplace()
+        `
         //插入热更新代码到result中
         const length = result.length - 5
         result = result.slice(0, length) + hotReplaceCode + result.slice(length)
@@ -275,10 +298,25 @@ class Webpack {
         return result
     }
 
+    // 构建单个Manifest模块 (热更新)
+    createManifestPart(entry) {
+        //构建文件资源
+        const asset = this.createAssets(entry)
+        const dirname = path.dirname(asset?.filePath) // 获取当前处理文件的绝对路径
+        asset.mapping = {} // 文件的依赖map
+
+        for (const relativePath of asset.dependencies) {// 遍历文件依赖的文件
+            const absolutePath = path.join(dirname, relativePath)
+            asset.mapping[relativePath] = absolutePath //通过相对路径和绝对路径匹配 构建资源依赖图
+        }
+
+        return [asset]
+    }
+
     // 创建新模块字符串(用于热更新)
     createNewModuleStr(entry) {
-        const newManifest = this.createManifest(entry)
-        return this.createModules(newManifest)
+        const manifestPart = this.createManifestPart(entry)
+        return this.createModules(manifestPart)
     }
 
     //! 构建模块 生成bundle代码
@@ -292,18 +330,15 @@ class Webpack {
 
     //! 处理代码后续配置
     async handleOptions(result) {
-
         //todo hot为true时进行热更新
         if (this.config.hot) {
             result = this.hotUpdate(result)
         }
-
         //todo 生产模式进行代码压缩  默认不压缩
         if (this.config.mode === 'production') {
             // result = compressByUglify(result)
             result = compressByUMinify(result)
         }
-
         return result
     }
 

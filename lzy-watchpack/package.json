@@ -1,6 +1,6 @@
 {
   "name": "lzy-watchpack",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,5 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "watchpack": "^2.4.0"
-  }
+  "dependencies": {}
 }

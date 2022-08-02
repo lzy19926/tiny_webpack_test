@@ -1,45 +1,23 @@
-let Watchpack = require("watchpack");
-let path = require('path')
-
-const absPath = path.join(__dirname, './testFile')
-
-var wp = new Watchpack({
-    aggregateTimeout: 15000,
-
-    poll: 10000,
-
-    followSymlinks: true,
-
-});
-
-wp.watch({
-    // files: listOfFiles,
-    directories: [absPath],
-    startTime: Date.now() - 10000
-});
+const path = require('path')
+const DirectoryWatcher = require('./diractoryWatcher')
 
 
-wp.on("change", function (filePath, mtime, explanation) {
-    console.log('change');
-});
+const dirPath = path.join(__dirname)
+const wp = new DirectoryWatcher({
+    directoryList: [dirPath],
+    poll: 3000
+})
 
-wp.on("remove", function (filePath, explanation) {
-
-});
-
-wp.on("aggregated", function (changes, removals) {
-
-});
-
-// wp.pause();
-
-// wp.close();
-
-// const { changes, removals } = wp.getAggregated();
-
-// wp.collectTimeInfoEntries(fileInfoEntries, directoryInfoEntries);
-
-// var fileTimes = wp.getTimeInfoEntries();
+wp.watch()
 
 
 
+wp.on('change', (arg) => {
+    console.log(arg, 'change');
+})
+wp.on('remove', (arg) => {
+    console.log(arg, 'remove');
+})
+wp.on('create', (arg) => {
+    console.log(arg, 'create');
+})

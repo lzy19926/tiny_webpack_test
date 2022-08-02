@@ -1,48 +1,7 @@
-const EventEmitter = require("events").EventEmitter;
-const fs = require("fs");
-const path = require("path");
-
-
-
-// 获取两个数组不同项
-function getArrDifference(arr1, arr2) {
-    return arr1.concat(arr2).filter(function (v, i, arr) {
-        return arr.indexOf(v) === arr.lastIndexOf(v);
-    });
-}
-
-class Watcher extends EventEmitter {
-    constructor(directoryWatcher, path) {
-        super();
-        this.filePath = path;
-        this.saveTime = 1;
-        this.directoryWatcher = directoryWatcher
-    }
-
-    checkEvent() {
-        fs.lstat(this.filePath, (err, state) => {
-            if (!this.saveTime && !state) return console.error(`文件${this.filePath}不存在`)
-
-            let saveTime = Math.floor(state?.ctimeMs)
-            //TODO 如果文件被删除  触发remove事件并删除该watcher
-            if (this.filePath && !state) {
-                this.directoryWatcher.emit('remove', this.filePath, 'remove')
-                this.directoryWatcher.watchers.delete(this.filePath)
-                return
-            }
-            //TODO 文件添加
-            if (this.saveTime === 1 && this.directoryWatcher.scanTime > 1) {
-                this.directoryWatcher.emit('create', this.filePath, 'create')
-            }
-            //TODO 文件修改  触发change事件
-            if (this.saveTime !== 1 && saveTime !== this.saveTime) {
-                this.directoryWatcher.emit('change', this.filePath, 'change')
-            }
-            this.saveTime = saveTime
-        })
-    }
-}
-
+const fs = require('fs')
+const path = require('path')
+const EventEmitter = require('events')
+const Watcher = require('./fileWatcher')
 
 class DirectoryWatcher extends EventEmitter {
     constructor(option) {
@@ -113,7 +72,6 @@ class DirectoryWatcher extends EventEmitter {
     watch() {
         console.log('--------------正在监视--------------------');
         console.log(this.directoryList);
-        
         this.scanInerval = setInterval(() => {
             console.time('SCAN')
             this.doScan()
@@ -127,38 +85,12 @@ class DirectoryWatcher extends EventEmitter {
 
 }
 
+// 获取两个数组不同项
+function getArrDifference(arr1, arr2) {
+    return arr1.concat(arr2).filter(function (v, i, arr) {
+        return arr.indexOf(v) === arr.lastIndexOf(v);
+    });
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-const dirPath = path.join(__dirname)
-
-const wp = new DirectoryWatcher({
-    directoryList: [dirPath],
-    poll: 3000
-})
-
-
-wp.watch()
-
-wp.on('change', (arg) => {
-    console.log(arg, 'change');
-})
-
-wp.on('remove', (arg) => {
-    console.log(arg, 'remove');
-})
-
-wp.on('create', (arg) => {
-    console.log(arg, 'create');
-})
+module.exports = DirectoryWatcher

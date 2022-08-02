@@ -9,11 +9,12 @@
     "t-esbuild": "node lzy-esBuild/src/index.js",
     "build": "lzy-webpack",
     "dev": "lzy-webpack-dev-server",
-    "esbuild":"esbuild src/index.js --bundle --outfile=out.js"
+    "esbuild": "esbuild src/index.js --bundle --outfile=out.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "lzy-watchpack": "^1.0.5",
     "lzy-webpack": "^1.0.9",
     "lzy-webpack-dev-server": "^1.1.0"
   }

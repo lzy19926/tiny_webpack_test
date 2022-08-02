@@ -1,25 +1,36 @@
-const EventEmitter = require("events").EventEmitter;
-const fs = require("fs");
-const path = require("path");
+const fs = require('fs')
+const EventEmitter = require('events')
 
-
-class WatchpackFileWatcher {
-    constructor(watchpack, watcher, files) {
-        this.files = Array.isArray(files) ? files : [files];
-        this.watcher = watcher;
-
-        
-        watcher.on("change", (mtime, type) => {
-            for (const file of this.files) {
-                watchpack._onChange(file, mtime, file, type);
-            }
-        });
-        watcher.on("remove", type => {
-            for (const file of this.files) {
-                watchpack._onRemove(file, file, type);
-            }
-        });
+class Watcher extends EventEmitter {
+    constructor(directoryWatcher, path) {
+        super();
+        this.filePath = path;
+        this.saveTime = 1;
+        this.directoryWatcher = directoryWatcher
     }
 
+    checkEvent() {
+        fs.lstat(this.filePath, (err, state) => {
+            if (!this.saveTime && !state) return console.error(`文件${this.filePath}不存在`)
 
-    
+            let saveTime = Math.floor(state?.ctimeMs)
+            //TODO 如果文件被删除  触发remove事件并删除该watcher
+            if (this.filePath && !state) {
+                this.directoryWatcher.emit('remove', this.filePath, 'remove')
+                this.directoryWatcher.watchers.delete(this.filePath)
+                return
+            }
+            //TODO 文件添加
+            if (this.saveTime === 1 && this.directoryWatcher.scanTime > 1) {
+                this.directoryWatcher.emit('create', this.filePath, 'create')
+            }
+            //TODO 文件修改  触发change事件
+            if (this.saveTime !== 1 && saveTime !== this.saveTime) {
+                this.directoryWatcher.emit('change', this.filePath, 'change')
+            }
+            this.saveTime = saveTime
+        })
+    }
+}
+
+module.exports = Watcher

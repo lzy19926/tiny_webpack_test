@@ -2,9 +2,11 @@ const fs = require('fs')
 const path = require('path')
 const WebSocket = require('ws')
 const MemoryFileSystem = require("memory-fs");
-var memoFs = new MemoryFileSystem()
+const { watchFiles } = require('./watchFiles')
+
 
 //! 写一个bundle.js文件到内存中
+// var memoFs = new MemoryFileSystem()
 // function saveBundleToMemo(result) {
 //     memoFs.mkdirpSync("/memoStatic");
 //     memoFs.writeFileSync("/memoStatic/bundle.js", result);
@@ -12,26 +14,21 @@ var memoFs = new MemoryFileSystem()
 //     // console.log(res);
 // }
 
+
+
+
 function hotUpdate(webpack) {
     //TODO 创建WebSocketServer到3001端口 (是一个独立的服务)
     const ws = new WebSocket.Server({ port: 3001 });
 
     //! 监听前后端链接事件  回调接收一个connection实例
-    ws.on('connection', function (connection) {
+    ws.on('connection', function (wsConnection) {
         console.log('websocket连接成功,热更新准备就绪');
-        const srcPath = path.resolve(webpack.config.entry, '..')
 
-        //todo 热更新回调  发现文件变化执行热更新 (重新生成bundle代码 推送给客户端  客户端eval执行)
-        const hotUpdateCb = (changedFilePath) => {
-            // const newBundleCode = webpack.createBundleCode()
-            // connection.send(newBundleCode);
-            const newModuleStr = webpack.createNewModuleStr(changedFilePath)
-            connection.send(newModuleStr);
-            console.log('热更新结束');
-        }
+        watchFiles(webpack, wsConnection)// 监听文件变化  执行对应回调  进行热更新
 
         //todo 监听某个文件/文件夹的变化 这里监听文件夹下所有文件的变化 执行回调
-        watchFileChange(srcPath, hotUpdateCb)
+        // watchFileChange(srcPath, hotUpdateCb)
     });
 }
 
