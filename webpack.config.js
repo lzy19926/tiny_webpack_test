@@ -2,6 +2,8 @@ const path = require('path')
 const HtmlPlugin = require('./webpackPlugin/htmlPlugin')
 const CssExtractPlugin = require('./webpackPlugin/cssExtractPlugin')
 const cssLoader = require('./webpackLoader/cssLoader')
+const lzyLoader = require('./lzy-loader/index')
+
 
 module.exports = {
     mode: 'development', // development|production
@@ -18,6 +20,10 @@ module.exports = {
         {
             test: /\.css$/,
             use: [cssLoader] //! CSS尾缀的文件会通过cssLoader处理
+        },
+        {
+            test: /\.lzy$/,
+            use: [lzyLoader] //! lzy文件经过lzyloader处理
         }
     ]
 }

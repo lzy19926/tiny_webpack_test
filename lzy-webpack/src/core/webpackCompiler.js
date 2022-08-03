@@ -46,15 +46,26 @@ class Webpack {
     }
 
 
+    addFileSuffix(path) {
+        var index = path.lastIndexOf(".");
+        var ext = path.substr(index + 1);
+
+        if (ext.length > 5) {
+            path = path + '.js'
+        }
+        return path
+    }
 
     // 构建文件资源数据
     createAssets(absolutePath) {
         //! 先调用用户的loader
+        absolutePath = this.addFileSuffix(absolutePath)
         const fileContent = this.useCustomLoader(absolutePath)
 
-        //非js文件不执行
+        //非js文件或者lzy不执行
         const isJSFile = /\.js$/.test(absolutePath)
-        if (!isJSFile) return false
+        const isLzyFile = /\.lzy$/.test(absolutePath)
+        if (!isJSFile && !isLzyFile) return false
         this.dependenciesList.add(absolutePath)
 
         renderProgressBar(`构建${absolutePath}`, { step: 8 }) //! ------------------------进度显示
@@ -70,7 +81,8 @@ class Webpack {
 
         traverse(ast, {
             ImportDeclaration: (path, state) => {
-                const depRaletivePath = path.node.source.value
+                const depRaletivePath = this.addFileSuffix(path.node.source.value)
+                path.node.source.value = depRaletivePath
                 dependencies.push(depRaletivePath) //todo 每次遇到import语句  将其文件路径push到依赖数组
                 if (/\.css$/.test(depRaletivePath)) {//todo 遇到css的引入 删除语句
                     path.remove()
@@ -135,7 +147,8 @@ class Webpack {
             const deps = asset.dependencies
             asset.mapping = {} // 文件的依赖map
 
-            for (const relativePath of deps) {// 遍历文件依赖的文件
+            for (let relativePath of deps) {// 遍历文件依赖的文件
+                relativePath = this.addFileSuffix(relativePath)
                 const absolutePath = path.join(dirname, relativePath)
                 asset.mapping[relativePath] = absolutePath //通过相对路径和绝对路径匹配 构建资源依赖图
 
@@ -169,7 +182,7 @@ class Webpack {
 
             const key = JSON.stringify(module.filePath)
             const mapping = JSON.stringify(module.mapping)
-            const code = `function(require,module,exports){
+            const code = `(require,module,exports)=>{
             ${module.code}
         } `
 
@@ -190,17 +203,28 @@ class Webpack {
         //todo 也就是模拟了node的require方法和生成模拟module对象
         let result = `
     // -------------------泽亚的webpack---------------------------
-        (function(){
+        (()=>{
             //todo 传入modules
             var modules = ${modulesStr}
 
-            //todo 创建require函数 获取modules的函数代码和mapping对象
-            function require(raletivePath){
 
-                const [fn,mapping]  = modules[raletivePath]
+            //TODO 无尾缀的添加尾缀
+            function addSuffix(path){
+                var index = path.lastIndexOf(".");
+                var ext = path.substr(index + 1);
+        
+                if (ext.length > 5) {
+                    path = path + '.js'
+                }
+                return path
+            }
+            //todo 创建require函数 获取modules的函数代码和mapping对象
+            function require(absolutePath){
+                const [fn,mapping]  = modules[absolutePath]
 
                 //! 构造fn所需的require函数(loaclRequire 通过相对路径获取绝对路径(id)并执行require)
-                const loaclRequire =(relativePath)=>{                    
+                const loaclRequire =(relativePath)=>{  
+                    relativePath = addSuffix(relativePath)                  
                     return  require(mapping[relativePath])
                 }
 
@@ -227,7 +251,7 @@ class Webpack {
         switch (tag) {
             case 'bundle':
                 renderProgressBar(changeColor(`√`, 92), { done: true })
-                console.log(changeColor(`构建完成`,92));
+                console.log(changeColor(`构建完成`, 92));
                 break;
             case 'serverBundle':
                 renderProgressBar(changeColor(`√`, 92), { done: true })
@@ -238,7 +262,7 @@ class Webpack {
                 break;
             default:
                 renderProgressBar(changeColor(`√`, 92), { done: true })
-                console.log(changeColor(`构建完成`,92));
+                console.log(changeColor(`构建完成`, 92));
                 break;
         }
 

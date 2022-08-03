@@ -2,7 +2,7 @@
 const WebpackDevServer = require('./core/WebpackDevServer')
 const webpackConfig = require('../../webpack.config')
 const Webpack = require('../../lzy-webpack/src/core/webpackCompiler')
-
+// const Webpack = require('lzy-webpack')
 
 
 const webpackCompiler = new Webpack(webpackConfig)

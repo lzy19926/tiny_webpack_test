@@ -1,7 +1,6 @@
-import { info } from './js/info.js';
-import './css/test1.css'
-import './css/test2.css'
+import { Demo, render } from './tinyReact/App.lzy'
+
+render(Demo, document.getElementById('root'))
 
 
 
-console.log(info);

@@ -1,10 +1,7 @@
-
-
-
 const path = require('path')
 const Koa = require('koa');
 const WebSocket = require('ws')
-const { DirectoryWatcher } = require('lzy-watchpack')
+const DirectoryWatcher = require('lzy-watchpack')
 const MemoryFileSystem = require("memory-fs");
 
 
@@ -30,17 +27,16 @@ class WebpackDevServer {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+    <div id="root"></div>
     <script>
     (function(){
         var ws = new WebSocket("ws://localhost:3001/");
 
-        ws.onconnection = function(){
-
-        }
-
         ws.onmessage = function ({data}) {
+                console.warn('devServer正在运行,监听文件变化,准备热更新')
                 if(typeof data ==='object'){
                     const reader = new FileReader()
                     reader.readAsText(data)
@@ -55,6 +51,7 @@ class WebpackDevServer {
     </script>
 </body>
 </html>`
+
         app.use(async (ctx) => {
             ctx.body = htmlStr
         })
@@ -105,7 +102,8 @@ class WebpackDevServer {
         //todo 热更新delete事件  
         this.watcher.on('delete', (path) => {
             if (isDep(path)) {
-                console.log(path + '删除,删除模块,重新打包后生效');
+                console.log(path + '删除,删除模块,重新打包');
+                this.initBundleCode()
             }
         })
 

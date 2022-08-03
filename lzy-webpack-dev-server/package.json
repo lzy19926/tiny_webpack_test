@@ -7,17 +7,15 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "lzy-webpack-dev-server": "./src/index.js" 
+    "lzy-webpack-dev-server": "./src/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "^7.18.5",
-    "@babel/parser": "^7.18.5",
-    "@babel/preset-env": "^7.18.2",
-    "@babel/traverse": "^7.18.5",
     "koa": "^2.13.4",
+    "lzy-watchpack": "^1.0.5",
+    "lzy-webpack": "^2.0.2",
     "memory-fs": "^0.5.0",
     "ws": "^8.8.0"
   }

@@ -114,6 +114,7 @@ function handleAssets(asset) {
         //todo 处理执行语句中的变量
         ExpressionStatement: (path, state) => {
             const args = path.node.expression.arguments
+            if (!Array.isArray(args)) return
             args.forEach((argAst) => {
                 handleExpVaribleConfilect(argAst)
             })
@@ -218,7 +219,7 @@ function bundle() {
     createOut(resCode2)
     console.timeEnd(changeColor('打包整体用时', 93))
 
-    
+
 
 }
 
