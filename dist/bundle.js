@@ -39,7 +39,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.sex = exports.name = exports.age = void 0;
 var name = '张三';
 exports.name = name;
-var age = 33;
+var age = 888812121;
 exports.age = age;
 var sex = '男';
 exports.sex = sex;
@@ -75,47 +75,4 @@ exports.sex = sex;
             //! 执行require(entry)入口模块
              require("E:\\My_Webpack\\myWebpack\\src\\index.js")
             
-        
-        //todo 热模块替换代码  监听src下文件夹变化  重新生成bundle中的代码并传给客户端  使用eval执行代码
-        const hotUpdate = (newModule) => {
-            for (let key in newModule) { //替换本地的modules 重新执行require(entry) (重新执行bundle整体文件)
-                modules[key] = newModule[key]
-                require("E:\\My_Webpack\\myWebpack\\src\\index.js")
-            }
-        }
-    
-        const hotCreate = (newModule) => {
-            for (let key in newModule) {
-                modules[key] = newModule[key]
-                require("E:\\My_Webpack\\myWebpack\\src\\index.js")
-            }
-        }
-    
-        const hotDelete = (key) => {
-            delete modules[key]
-            require("E:\\My_Webpack\\myWebpack\\src\\index.js")
-        }
-    
-        function hotModuleReplace() {
-            var ws = new WebSocket("ws://localhost:3001/");
-            //监听建立连接
-            ws.onopen = function (res) {
-                console.warn('websocket连接成功,热更新准备就绪');
-            }
-    
-            //监听服务端发来的事件和数据 执行不同的方法
-            ws.onmessage = function (res) {
-                const { event, data } = eval('(' + res.data + ')')
-                switch (event) {
-                    case 'update': hotUpdate(data)
-                        break;
-                    case 'delete': hotDelete(data)
-                        break;
-                    case 'create': hotCreate(data)
-                        break;
-                }
-            }
-        };
-    
-        hotModuleReplace()
         })();

@@ -1,23 +1,14 @@
 const fs = require('fs')
 const path = require('path')
 const WebSocket = require('ws')
-const MemoryFileSystem = require("memory-fs");
 const { watchFiles } = require('./watchFiles')
 
-
-//! 写一个bundle.js文件到内存中
-// var memoFs = new MemoryFileSystem()
-// function saveBundleToMemo(result) {
-//     memoFs.mkdirpSync("/memoStatic");
-//     memoFs.writeFileSync("/memoStatic/bundle.js", result);
-//     // const res = memoFs.readFileSync("/memoStatic/bundle.js");
-//     // console.log(res);
-// }
 
 
 
 
 function hotUpdate(webpack) {
+
     //TODO 创建WebSocketServer到3001端口 (是一个独立的服务)
     const ws = new WebSocket.Server({ port: 3001 });
 

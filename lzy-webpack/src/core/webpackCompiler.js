@@ -3,7 +3,7 @@ const path = require('path')
 const babel = require('@babel/core')
 const parser = require('@babel/parser')
 const { compressByUMinify, compressByUglify } = require('./compressCode')
-const { SyncHooks, SyncWaterfallHook } = require('../tapable/index')
+const { SyncHooks } = require('../tapable/index')
 const traverse = require('@babel/traverse').default
 const { getProgressCount, renderProgressBar, changeColor } = require('../progressBar/renderProgressBar')
 
@@ -11,7 +11,7 @@ class Webpack {
     constructor(webpackConfig) {
         this.config = webpackConfig
         this.fileID = -1
-        this.Manifast = null // 细节图
+        this.manifest = null // 细节图
         this.dependenciesList = new Set() // 依赖列表
         this.hooks = { // 初始化生命周期钩子函数队列
             beforeCompileSync: new SyncHooks(),
@@ -182,7 +182,7 @@ class Webpack {
     }
 
     // 实现CMD 生成输出到bundle.js的代码
-    createOutputCode(modulesStr) {
+    createOutputCode(modulesStr, tag) {
 
         // 构建的结果是一个立即执行函数   将modules传进去
         // module中包含了 fn函数(将模块代码包裹并执行的函数) 和模块依赖的mapping 
@@ -224,8 +224,24 @@ class Webpack {
         })();`
 
         //! ------------------------完成构建进度显示
-        renderProgressBar(changeColor(`√`, 92), { done: true })
-        console.log(changeColor(`构建完成,访问 ${changeColor(' http://localhost:8080', 96)} \n\n`, 92));
+        switch (tag) {
+            case 'bundle':
+                renderProgressBar(changeColor(`√`, 92), { done: true })
+                console.log(changeColor(`构建完成`,92));
+                break;
+            case 'serverBundle':
+                renderProgressBar(changeColor(`√`, 92), { done: true })
+                console.log(changeColor(`构建完成,访问 ${changeColor(' http://localhost:8080', 96)} \n\n`, 92));
+                break;
+            case 'hotUpdate':
+                console.log(changeColor(`热模块替换完成`));
+                break;
+            default:
+                renderProgressBar(changeColor(`√`, 92), { done: true })
+                console.log(changeColor(`构建完成`,92));
+                break;
+        }
+
         return result
     }
 
@@ -244,64 +260,10 @@ class Webpack {
         console.log(`打包成功 请查看${coloredPath}文件夹`)
     }
 
-    // 热更新
-    hotUpdate(result) {
-        //todo 用于热更新的代码
-        const hotReplaceCode = `
-        //todo 热模块替换代码  监听src下文件夹变化  重新生成bundle中的代码并传给客户端  使用eval执行代码
-        const hotUpdate = (newModule) => {
-            for (let key in newModule) { //替换本地的modules 重新执行require(entry) (重新执行bundle整体文件)
-                modules[key] = newModule[key]
-                require(${JSON.stringify(this.config.entry)})
-            }
-        }
-    
-        const hotCreate = (newModule) => {
-            for (let key in newModule) {
-                modules[key] = newModule[key]
-                require(${JSON.stringify(this.config.entry)})
-            }
-        }
-    
-        const hotDelete = (key) => {
-            delete modules[key]
-            require(${JSON.stringify(this.config.entry)})
-        }
-    
-        function hotModuleReplace() {
-            var ws = new WebSocket("ws://localhost:3001/");
-            //监听建立连接
-            ws.onopen = function (res) {
-                console.warn('websocket连接成功,热更新准备就绪');
-            }
-    
-            //监听服务端发来的事件和数据 执行不同的方法
-            ws.onmessage = function (res) {
-                const { event, data } = eval('(' + res.data + ')')
-                switch (event) {
-                    case 'update': hotUpdate(data)
-                        break;
-                    case 'delete': hotDelete(data)
-                        break;
-                    case 'create': hotCreate(data)
-                        break;
-                }
-            }
-        };
-    
-        hotModuleReplace()
-        `
-        //插入热更新代码到result中
-        const length = result.length - 5
-        result = result.slice(0, length) + hotReplaceCode + result.slice(length)
-
-        return result
-    }
-
     // 构建单个Manifest模块 (热更新)
-    createManifestPart(entry) {
+    createManifestPart(p) {
         //构建文件资源
-        const asset = this.createAssets(entry)
+        const asset = this.createAssets(p)
         const dirname = path.dirname(asset?.filePath) // 获取当前处理文件的绝对路径
         asset.mapping = {} // 文件的依赖map
 
@@ -310,20 +272,37 @@ class Webpack {
             asset.mapping[relativePath] = absolutePath //通过相对路径和绝对路径匹配 构建资源依赖图
         }
 
-        return [asset]
+        return asset
     }
 
-    // 创建新模块字符串(用于热更新)
-    createNewModuleStr(entry) {
-        const manifestPart = this.createManifestPart(entry)
-        return this.createModules(manifestPart)
+    // 替换单个manifest模块(热更新)
+    updateManifest(manifestPart) {
+        const target = this.manifest.find((part) => {
+            return manifestPart.filePath === part.filePath
+        })
+        target.code = manifestPart.code
+        target.dependencies = manifestPart.dependencies
+        target.mapping = manifestPart.mapping
+    }
+
+    // 根据变更的文件 替换新manifest模块 并生成新的bundle文件(热更新)
+    createNewBundle(pathList) {
+        pathList.forEach((changedFile) => {
+            const manifestPart = this.createManifestPart(changedFile)
+            this.updateManifest(manifestPart)
+        })
+        const modulesStr = this.createModules(this.manifest)
+        const bundleCode = this.createOutputCode(modulesStr, 'hotUpdate')
+
+        return bundleCode
     }
 
     //! 构建模块 生成bundle代码
-    buildModules() {
+    buildModules(tag) {
         const manifest = this.createManifest(this.config.entry)  // 创建文件依赖图(Manifest)
+        this.manifest = manifest
         const modules = this.createModules(manifest) // 生成modules
-        let result = this.createOutputCode(modules)// 打包模块生成bundle代码
+        const result = this.createOutputCode(modules, tag)// 打包模块生成bundle代码
 
         return result
     }
@@ -332,7 +311,7 @@ class Webpack {
     async handleOptions(result) {
         //todo hot为true时进行热更新
         if (this.config.hot) {
-            result = this.hotUpdate(result)
+
         }
         //todo 生产模式进行代码压缩  默认不压缩
         if (this.config.mode === 'production') {
@@ -348,7 +327,7 @@ class Webpack {
         getProgressCount(this.config.entry) // 计算进度条
 
         this.callBeforeCompileSyncHooks() //!执行生命中周期钩子
-        const outputCode = this.buildModules(this.config.entry)
+        const outputCode = this.buildModules(this.config.entry, 'bundle')
         this.callAfterCompileSyncHooks() //!执行生命中周期钩子
 
         const nextResult = await this.handleOptions(outputCode)

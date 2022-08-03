@@ -1,5 +1,12 @@
 #!/usr/bin/env node
-const { startServer } = require('./core/startServer')
+const WebpackDevServer = require('./core/WebpackDevServer')
 const webpackConfig = require('../../webpack.config')
+const Webpack = require('../../lzy-webpack/src/core/webpackCompiler')
 
-startServer(webpackConfig)
+
+
+const webpackCompiler = new Webpack(webpackConfig)
+const devServe = new WebpackDevServer(webpackCompiler)
+
+
+devServe.run()
