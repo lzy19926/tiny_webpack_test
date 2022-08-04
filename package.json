@@ -4,19 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "t-build": "node lzy-webpack/src/run.js",
-    "t-dev": "node lzy-webpack-dev-server/src/run.js",
-    "t-esbuild": "node lzy-esBuild/src/index.js",
-    "build": "lzy-webpack",
-    "dev": "lzy-webpack-dev-server",
+    "t-build": "node ./my_node_modules/lzy-webpack/lib/run/runBuild.js",
+    "t-dev": "node ./my_node_modules/lzy-webpack/lib/run/runDev.js",
+    "t-esbuild": "node ./my_node_modules/lzy-esBuild/src/run.js",
+    
+    "build": "lzy-webpack-build",
+    "dev": "lzy-webpack-dev",
     "esbuild": "esbuild src/index.js --bundle --outfile=out.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "esbuild": "^0.14.53",
-    "lzy-watchpack": "^1.0.5",
-    "lzy-webpack": "^1.0.9",
-    "lzy-webpack-dev-server": "^1.1.0"
+    "lzy-watchpack": "^1.3.1",
+    "lzy-webpack": "^2.1.5"
   }
 }
