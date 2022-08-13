@@ -1,4 +1,4 @@
-import { myUseState, myUseEffect, render } from '../../my_node_modules/lzy-React/lzy-react-develpoment'
+import { myUseState, myUseEffect } from '../../my_node_modules/lzy-React/lzy-react-develpoment'
 import './Demo.css'
 
 function Demo(props) {
@@ -42,8 +42,7 @@ function Demo(props) {
 
     return (
         <LZY-TEMPLATE>
-            <h1> Demo  dev测试版</h1>
-
+            <h1>迷你React测试Demo</h1>
             <div className='red'>简单适配了bootStarp组件库</div>
             <button type="button" class="btn btn-primary" onClick={addNum}>增加Num</button>
             <button type="button" class="btn btn-secondary" onClick={addAge}>增加Age和Num</button>
@@ -53,7 +52,7 @@ function Demo(props) {
             <h3 className="blue">当前Num:${num}</h3>
             <h3 className='blue'>当前Age:${age}</h3>
 
-            <h4 className='red'>列表渲染测试</h4>
+            <h4 className='red'>map列表渲染测试</h4>
 
             {(
                 arr.map((item) => {
@@ -65,4 +64,4 @@ function Demo(props) {
     )
 }
 
-export { Demo, render }
+export { Demo }

@@ -2,7 +2,6 @@ import { myUseState, myUseEffect, render } from '../../my_node_modules/lzy-React
 
 function Test({ id }) {
 
-    console.log(id);
     return (
         <LZY-TEMPLATE>
             <div>子组件</div>
