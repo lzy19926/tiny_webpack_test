@@ -1,8 +1,8 @@
-import { myUseState, myUseEffect } from '../../my_node_modules/lzy-React/lzy-react-develpoment'
+import { myUseState, myUseEffect } from '../../my_node_modules/lzy-React/lib/index'
 import './Demo.css'
 
-function Demo(props) {
 
+function Demo(props) {
     console.log('组件props', props);
 
     const [age, setAge] = myUseState(18)
@@ -29,7 +29,6 @@ function Demo(props) {
     }
     function addAge() {
         setAge(age + 1)
-        setNum(num + 1)
     }
     function addArr() {
         setArr([...arr, 'item'])
@@ -37,7 +36,7 @@ function Demo(props) {
     function minArr() {
         setArr(arr.splice(1))
     }
-
+ 
 
 
     return (
@@ -50,7 +49,7 @@ function Demo(props) {
             <button type="button" class="btn btn-warning" onClick={minArr}>减少Arr</button>
 
             <h3 className="blue">当前Num:${num}</h3>
-            <h3 className='blue'>当前Age:${age}</h3>
+            <h3 className='yellow'>当前Age:${age}</h3>
 
             <h4 className='red'>map列表渲染测试</h4>
 

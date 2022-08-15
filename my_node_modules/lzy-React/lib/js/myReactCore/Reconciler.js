@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.reconcileFiberNode = void 0;
+exports.reconcileUseEffect = exports.reconcileFiberNode = void 0;
 const GlobalFiber_1 = require("./GlobalFiber");
 //! 更新事件
 function reconcileEvent(workInProgressFiber, currentFiber) {
@@ -20,6 +20,7 @@ function reconcileUseEffect(workInProgressFiber, currentFiber) {
         pushEffectList('UseEffect', workInProgressFiber);
     }
 }
+exports.reconcileUseEffect = reconcileUseEffect;
 //! 计算Props
 function reconcileProps(workInProgressFiber, currentFiber) {
     pushEffectList('Update', workInProgressFiber);
@@ -87,7 +88,6 @@ function reconcileFiberNode(workInProgressFiber, currentFiber) {
     reconcilePlacement(workInProgressFiber, currentFiber);
     let needDiff = true;
     if (workInProgressFiber && !currentFiber) {
-        // reconcilePlacement(workInProgressFiber, currentFiber)
         needDiff = false;
     }
     else if (!workInProgressFiber && currentFiber) {

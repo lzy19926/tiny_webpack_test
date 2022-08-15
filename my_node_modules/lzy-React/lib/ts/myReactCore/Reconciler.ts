@@ -106,9 +106,9 @@ function reconcileFiberNode(workInProgressFiber: FiberNode, currentFiber: FiberN
 
     //TODO 开始先进行删除和添加的diff计算  (需要在最先进行 因为之后的就不需要进行了)
     reconcilePlacement(workInProgressFiber, currentFiber)
+
     let needDiff = true
     if (workInProgressFiber && !currentFiber) {
-        // reconcilePlacement(workInProgressFiber, currentFiber)
         needDiff = false
     } else if (!workInProgressFiber && currentFiber) {
         reconcileDeletion(workInProgressFiber, currentFiber)
@@ -118,15 +118,11 @@ function reconcileFiberNode(workInProgressFiber: FiberNode, currentFiber: FiberN
     }
 
 
-
     if (needDiff) {
-
         // TODO 进行text的判断 生成Effect
         reconcileText(workInProgressFiber, currentFiber)
-
         //TODO 有事件更新事件
         reconcileEvent(workInProgressFiber, currentFiber)
-
         //TODO 判断是否使用了useEffect
         reconcileUseEffect(workInProgressFiber, currentFiber)
     }
@@ -134,4 +130,4 @@ function reconcileFiberNode(workInProgressFiber: FiberNode, currentFiber: FiberN
 }
 
 
-export { reconcileFiberNode }
+export { reconcileFiberNode, reconcileUseEffect }

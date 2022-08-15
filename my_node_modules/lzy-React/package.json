@@ -1,8 +1,8 @@
 {
   "name": "lzy-react",
-  "version": "2.4.2",
+  "version": "2.4.3",
   "description": "",
-  "main": "index.js",
+  "main": "./lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
