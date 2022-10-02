@@ -1,0 +1,14 @@
+import Demo from './Demo.lzy'
+import { render } from '../../my_node_modules/lzy-React/out/index_V2'
+import * as LzyReact from '../../my_node_modules/lzy-React/out/index_V2' // 因为export default的功能不完善 需要这样进行引入
+
+
+function App() {
+    return (
+        <LZY-TEMPLATE>
+            <Demo />
+        </LZY-TEMPLATE>
+    )
+}
+
+render(App, document.getElementById('root'))
