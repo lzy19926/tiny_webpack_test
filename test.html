@@ -10,147 +10,104 @@
 
 <body>
     <div id="root"></div>
-  
-  
-  
-  
-  <script>
 
-        // 本文件提供了时间切片和concurrent模式的方法实现
-        //! react会定义每一帧的工作时间 默认5s (每16.6ms会执行5ms的React任务,剩下的时间交给浏览器,防止卡顿)
-        //! shouldYieldToHost在外部执行workLoop时(render时)  判断是否让出主线程
 
-        let getCurrentTime = () => performance.now();
-        let yieldInterval = 5 // 每一帧留给react的工作时间
-        let deadLine = 0 // 本帧react应该停止的时间
-        let isMessageChannelRunnig = false // 本帧react的任务是否在执行
-        let shouldYieldToHost = () => getCurrentTime() >= deadLine // 超过deadLine时让出主线程
-        let scheduledHostCallBack = null // 已经计算过的用户事件(workLoop)
 
-        // 建立通信
-        // port用来发布任务
-        // 当port1收到消息时会执行react渲染短任务
-        const channel = new MessageChannel()
-        const port = channel.port2
-        channel.port1.onmessage = performWorkUntilDeadline
 
-        // 如果用户任务未执行  执行channel中的用户任务(传入workLoop)
-        function requestHostCallback(cb) {
-            scheduledHostCallBack = cb
-            if (!isMessageChannelRunnig) {
-                isMessageChannelRunnig = true
-                port.postMessage(null)
+
+    <script>
+
+        function concurrentWhile(getCondition, handler, yieldInterval) {
+            // 判断环境
+            if (typeof window === 'undefined') {
+                throw new Error('请在浏览器环境下使用')
             }
-        }
-
-        // 执行每5ms的高频工作
-        function performWorkUntilDeadline() {
-
-            // 如果没有用户任务  状态直接改为false
-            if (!scheduledHostCallBack) {
-                isMessageChannelRunnig = false
+            if (!MessageChannel) {
+                throw new Error('本工具仅兼容所有人类使用的浏览器(请不要使用IE谢谢)')
             }
-            // 如果有用户任务
-            if (scheduledHostCallBack !== null) {
-                currentTime = getCurrentTime()
-                deadLine = currentTime + yieldInterval // 停止react任务的时间
-                const shouldContinue = true
 
-                try {
-                    const hasMoreWork = scheduledHostCallBack(shouldContinue, currentTime) // 执行workLoop
 
-                    // 如果执行完毕  初始化工作环境
-                    if (!hasMoreWork) {
-                        isMessageChannelRunnig = false
-                        scheduledHostCallBack = null
-                    }
-                    // 如果此帧的处理时间已过>5ms  则再发起一个宏任务 继续执行
-                    if (hasMoreWork) {
-                        port.postMessage(null)
-                    }
-                } catch (error) {
-                    port.postMessage(null);
-                    throw error;
+            let getCurrentTime = () => performance.now();
+            let deadLine = 0                       // 本帧react应该停止的时间
+            let isMessageChannelRunnig = false     // 本帧react的任务是否在执行
+            let scheduledHostCallBack = null       // 已经计算过的用户事件(workLoop)
+            let shouldYieldToHost = () => getCurrentTime() >= deadLine   // 超过deadLine时让出JS主线程给用户
+            let channel = new MessageChannel()     // 建立通信 port用来发布任务
+            let port = channel.port2               // 当port1收到消息时会执行react渲染短任务
+
+
+            // 如果用户任务未执行  执行channel中的用户任务(传入workLoop)
+            const requestHostCallback = (cb) => {
+                scheduledHostCallBack = cb
+                if (!isMessageChannelRunnig) {
+                    isMessageChannelRunnig = true
+                    port.postMessage(null)
                 }
-
-
             }
+
+            // 执行单次切片的逻辑
+            const performWorkUntilDeadline = () => {
+                console.log(`-----${yieldInterval}ms切片-----`);
+                // 如果没有用户任务  状态直接改为false
+                if (!scheduledHostCallBack) {
+                    isMessageChannelRunnig = false
+                }
+                // 如果有用户任务
+                if (scheduledHostCallBack !== null) {
+                    let currentTime = getCurrentTime()
+                    deadLine = currentTime + yieldInterval // 停止react任务的时间
+                    const shouldContinue = true
+
+                    try {
+                        const hasMoreWork = scheduledHostCallBack(shouldContinue, currentTime) // 执行workLoop
+                        // 如果执行完毕  初始化工作环境
+                        if (!hasMoreWork) {
+                            isMessageChannelRunnig = false
+                            scheduledHostCallBack = null
+                        }
+                        // 如果此帧的处理时间已过>5ms  则再发起一个宏任务 继续执行
+                        if (hasMoreWork) {
+                            port.postMessage(null)
+                        }
+                    } catch (error) {
+                        port.postMessage(null);
+                        throw error;
+                    }
+                }
+            }
+
+            // 初始化工作环境
+            yieldInterval = yieldInterval || 5 // 每一帧留给react的工作时间
+            channel.port1.onmessage = performWorkUntilDeadline
+
+
+            // 创建whild循环体
+            let workLoop = () => {
+                while (!shouldYieldToHost() && getCondition()) {
+                    handler()
+                }
+                return getCondition()
+            }
+
+            requestHostCallback(workLoop);
+        }
+
+        function test() {
+            let a = 0
+            const getCondition = () => a < 10000
+            concurrentWhile(getCondition, () => {
+                console.log('执行');
+                a++
+            })
         }
 
 
-
-
-
-
-
-        let workIndex = 0;
-        let taskTotal = 5000; // 任务数量
-        const start = Date.now();
-        function handleWork() {
-
-            console.log('执行');
-            const root = document.getElementById('root')
-            const newBtn = document.createElement('button')
-            newBtn.innerHTML = '按钮' + workIndex
-            root.appendChild(newBtn)
-            workIndex++;
-
-            if (workIndex < taskTotal) {
-                handleWork()
-            }
-            else if (workIndex >= taskTotal) {
-                console.log(`任务调度完成，用时：`, Date.now() - start, 'ms!');
-            }
-        }
-
-
-        // 放入requestHostCallBack中的基本单元  可以将其中的逻辑进行拆分
-        function reactRenderWorkLoop(shouldContinue, initialTime) {
-            while (!shouldYieldToHost() && workIndex < taskTotal) {
-                handleWork();
-            }
-
-            // 如果未完成工作  则开启下一个宏任务继续执行
-            if (workIndex < taskTotal) {
-                console.log(`每帧执行的5ms长任务片段`);
-                return true
-            }
-            else {
-                return false
-            }
-        }
-
-        requestHostCallback(reactRenderWorkLoop);
-
+        concurrentWhile('循环条件', '循环体')
 
     </script>
 
 
 
-
-    <!-- <script>
-        let workIndex = 0;
-        let taskTotal = 5000; // 任务数量
-        const start = Date.now();
-        function handleWork() {
-            for (let j = 0; j < 4000; j++) {
-                // DOM 操作严重影响程序执行效率
-                const btn1Attr = document.getElementById('btn1').attributes;
-                const btn2Attr = document.getElementById('btn2').attributes;
-                const btn3Attr = document.getElementById('btn3').attributes;
-                const btn4Attr = document.getElementById('btn4').attributes;
-            }
-            workIndex++;
-            if (workIndex >= taskTotal) {
-                console.log(`任务调度完成，用时：`, Date.now() - start, 'ms!');
-            }
-        }
-
-        while (workIndex < taskTotal) {
-            handleWork();
-        }
-
-    </script> -->
 
 </body>
 

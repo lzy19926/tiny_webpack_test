@@ -1,19 +1,48 @@
 import Demo from './Demo.lzy'
 import LongList from './LongList.lzy'
-import { render } from '../../my_node_modules/lzy-React/out/index_V2'
+import { render_concurrent, render } from '../../my_node_modules/lzy-React/out/index_V2'
 import * as LzyReact from '../../my_node_modules/lzy-React/out/index_V2' // 因为export default的功能不完善 需要这样进行引入
 
 
 function UseStateTest() {
     const [num, setNum] = LzyReact.myUseState(0)
-    return <button onClick={() => { setNum(num + 1) }}>num:{num}</button>
+    return (
+        <div>
+            <button onClick={() => { setNum(num + 1) }}>num:{num}</button>
+            <button onClick={() => { setNum(num + 1) }}>num:{num}</button>
+            <button onClick={() => { setNum(num + 1) }}>num:{num}</button>
+            <button onClick={() => { setNum(num + 1) }}>num:{num}</button>
+            <button onClick={() => { setNum(num + 1) }}>num:{num}</button>
+            <button onClick={() => { setNum(num + 1) }}>num:{num}</button>
+            <button onClick={() => { setNum(num + 1) }}>num:{num}</button>
+            <button onClick={() => { setNum(num + 1) }}>num:{num}</button>
+            <button onClick={() => { setNum(num + 1) }}>num:{num}</button>
+            <button onClick={() => { setNum(num + 1) }}>num:{num}</button>
+            <button onClick={() => { setNum(num + 1) }}>num:{num}</button>
+            <button onClick={() => { setNum(num + 1) }}>num:{num}</button>
+            <button onClick={() => { setNum(num + 1) }}>num:{num}</button>
+            <button onClick={() => { setNum(num + 1) }}>num:{num}</button>
+            <button onClick={() => { setNum(num + 1) }}>num:{num}</button>
+            <button onClick={() => { setNum(num + 1) }}>num:{num}</button>
+            <button onClick={() => { setNum(num + 1) }}>num:{num}</button>
+            <button onClick={() => { setNum(num + 1) }}>num:{num}</button>
+            <button onClick={() => { setNum(num + 1) }}>num:{num}</button>
+            <button onClick={() => { setNum(num + 1) }}>num:{num}</button>
+            <button onClick={() => { setNum(num + 1) }}>num:{num}</button>
+            <button onClick={() => { setNum(num + 1) }}>num:{num}</button>
+            <button onClick={() => { setNum(num + 1) }}>num:{num}</button>
+            <button onClick={() => { setNum(num + 1) }}>num:{num}</button>
+        </div>
+    )
 }
 
 
 function App() {
     return (
-        <LongList />
+        <div>
+            <LongList />
+        </div>
     )
 }
 
-render(App, document.getElementById('root'))
+render_concurrent(App, document.getElementById('root'))

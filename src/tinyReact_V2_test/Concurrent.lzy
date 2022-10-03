@@ -1,6 +1,6 @@
-import { myUseState } from '../../my_node_modules/lzy-React/out/index_V2'
-import * as LzyReact from '../../my_node_modules/lzy-React/out/index_V2' // 因为export default的功能不完善 需要这样进行引入
 
+import { render_concurrent, myUseState } from '../../my_node_modules/lzy-React/out/index_V3_concurrent'
+import * as LzyReact from '../../my_node_modules/lzy-React/out/index_V3_concurrent' // 因为export default的功能不完善 需要这样进行引入
 
 function Group({ num }) {
     return (
@@ -18,8 +18,6 @@ function Group({ num }) {
         </LZY-TEMPLATE>
     )
 }
-
-
 function Group2({ num }) {
     return (
         <LZY-TEMPLATE>
@@ -36,7 +34,6 @@ function Group2({ num }) {
         </LZY-TEMPLATE>
     )
 }
-
 function Group3({ num }) {
     return (
         <LZY-TEMPLATE>
@@ -53,17 +50,32 @@ function Group3({ num }) {
         </LZY-TEMPLATE>
     )
 }
-
 function LongList() {
     const [num, setNum] = myUseState(0)
     return (
         <LZY-TEMPLATE>
-            <h2>组件数:1000</h2>
+            <h2>组件数:10000</h2>
             <button onClick={() => { setNum(num + 1) }}>点击+1</button>
+            <Group3 num={num} />
+            <Group3 num={num} />
+            <Group3 num={num} />
+            <Group3 num={num} />
+            <Group3 num={num} />
+            <Group3 num={num} />
+            <Group3 num={num} />
+            <Group3 num={num} />
+            <Group3 num={num} />
             <Group3 num={num} />
         </LZY-TEMPLATE>
     )
 }
 
+function Concurrent() {
+    return (
+        <div>
+            <LongList />
+        </div>
+    )
+}
 
-export default LongList
+render_concurrent(Concurrent, document.getElementById('root'))
