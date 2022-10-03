@@ -4,12 +4,15 @@ import { render } from '../../my_node_modules/lzy-React/out/index_V2'
 import * as LzyReact from '../../my_node_modules/lzy-React/out/index_V2' // 因为export default的功能不完善 需要这样进行引入
 
 
+function UseStateTest() {
+    const [num, setNum] = LzyReact.myUseState(0)
+    return <button onClick={() => { setNum(num + 1) }}>num:{num}</button>
+}
+
 
 function App() {
     return (
-        <LZY-TEMPLATE>
-            <LongList />
-        </LZY-TEMPLATE>
+        <LongList />
     )
 }
 

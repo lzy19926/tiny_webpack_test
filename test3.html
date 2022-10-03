@@ -14,41 +14,19 @@
     <script>
 
 
-
-        const rootFiber = {
-            tag: 'div',
-            sibling: undefined,
-            child: {
-                tag: 'span1',
-                sibling: {
-                    tag: 'span2', child: undefined,
-                    sibling: { tag: 'span3', child: undefined, sibling: undefined }
-                },
-                child: undefined
+        function concurrentWhile(condition, handler) {
+            while (condition) {
+                handler()
             }
         }
 
 
-        function traversalFiber(rootFiber) {
-            const res = []
-            const stack = []
+        let a = 0
+        concurrentWhile(a < 10, () => {
+            console.log('执行');
+        })
+        
 
-            if (root) stack.push(root)
-
-            while (stack.length) {
-                const n = stack.pop()
-                // n为此时遍历到的fiber
-
-                // 执行处理逻辑
-                if (n.child) stack.push(n.child)
-                if (n.sibling) stack.push(n.sibling)
-            }
-
-            return res
-        }
-
-
-        traversalFiber(rootFiber)
     </script>
 </body>
 
