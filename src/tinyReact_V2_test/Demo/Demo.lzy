@@ -23,7 +23,7 @@ function Demo(props) {
     })
 
     myUseEffect(() => {
-        setNum(num + 1)
+        // setNum(num + 1)
         console.log('监听age,age改变时执行');
     }, [age])
 
@@ -75,6 +75,6 @@ function Demo(props) {
 }
 
 
-render(Demo, document.getElementById('root'))
+render(<Demo />, document.getElementById('root'))
 
 

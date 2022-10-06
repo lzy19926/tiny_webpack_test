@@ -5,12 +5,13 @@ import { myUseState, render } from '../../../my_node_modules/lzy-React/out/index
 //! Demo组件
 function Test(props) {
 
-
+    const [arr, setArr] = myUseState([1, 2, 3])
+    console.log(arr);
     return (
         <LZY-TEMPLATE>
-            <div>1</div>
-            <div>2</div>
-            <div>3</div>
+            <button onClick={() => { setArr([...arr, 0]) }}>添加</button>
+            <button onClick={() => { setArr(arr.splice(1)) }}>删除</button>
+            {arr.map((item, index) => <div key={index}>{item}</div>)}
         </LZY-TEMPLATE>
     )
 }
@@ -18,10 +19,3 @@ function Test(props) {
 
 render(<Test />, document.getElementById('root'))
 
-
-
-// {/* <button onClick={() => { setArr(arr.splice(1)) }}>减少Arr</button> */ }
-// {
-//     arr.map(() => <div>item</div>)
-// }
-// <button onClick={() => { setArr([...arr, 'item']) }}>增加Arr</button>
