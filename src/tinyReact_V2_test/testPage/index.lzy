@@ -1,0 +1,27 @@
+
+import * as LzyReact from '../../../my_node_modules/lzy-React/out/index_V2' // 因为export default的功能不完善 需要这样进行引入
+import { myUseState, render } from '../../../my_node_modules/lzy-React/out/index_V2' // 需要引入
+
+//! Demo组件
+function Test(props) {
+
+
+    return (
+        <LZY-TEMPLATE>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+        </LZY-TEMPLATE>
+    )
+}
+
+
+render(<Test />, document.getElementById('root'))
+
+
+
+// {/* <button onClick={() => { setArr(arr.splice(1)) }}>减少Arr</button> */ }
+// {
+//     arr.map(() => <div>item</div>)
+// }
+// <button onClick={() => { setArr([...arr, 'item']) }}>增加Arr</button>
