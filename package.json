@@ -6,18 +6,17 @@
   "scripts": {
     "t-build": "node ./my_node_modules/lzy-webpack/lib/run/runBuild.js",
     "t-dev": "node ./my_node_modules/lzy-webpack/lib/run/runDev.js",
-    "t-esbuild": "node ./my_node_modules/lzy-esBuild/src/run.js",
-    "build": "lzy-webpack-build",
-    "dev": "lzy-webpack-dev",
-    "esbuild": "esbuild src/index.js --bundle --outfile=out.js"
+    "t-esbuild": "node ./my_node_modules/lzy-esBuild/src/run.js"
   },
-  "author": "",
+  "author": "lzy19926",
   "license": "ISC",
   "devDependencies": {
     "@babel/preset-react": "^7.18.6"
   },
   "dependencies": {
-    "lzy-watchpack": "^1.3.1",
-    "lzy-webpack": "^2.1.5"
+    "lzy-esbuild": "file:my_node_modules/lzy-esBuild",
+    "lzy-react": "file:my_node_modules/lzy-React",
+    "lzy-watchpack": "file:my_node_modules/lzy-watchpack",
+    "lzy-webpack": "file:my_node_modules/lzy-webpack"
   }
 }

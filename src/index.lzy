@@ -1,0 +1,14 @@
+// 引入基本库
+// 需要引入
+// 说明  因为export default的功能不完善 需要这样进行引入
+// 直接从node_module中引入文件功能不完善  暂时不支持其他的库   (开发中)
+import { render } from '../my_node_modules/lzy-React/out/index_V3'
+import * as LzyReact from '../my_node_modules/lzy-React/out/index_V3'
+
+// 三个测试页面
+import Demo from './tinyReact_V3_test/Demo/Demo.lzy'
+import Test from './tinyReact_V3_test/testPage/test.lzy'
+import Concurrent from './tinyReact_V3_test/Concurrent/Concurrent.lzy'
+
+
+render(<Demo />, document.getElementById('root'))

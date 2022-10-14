@@ -67,7 +67,7 @@ function Group4({ num }) {
         </LZY-TEMPLATE>
     )
 }
-function LongList() {
+export default function LongList() {
     const [num, setNum] = myUseState(0)
     const arr = new Array(10000).fill('item')
     return (
@@ -88,7 +88,3 @@ function LongList() {
         </LZY-TEMPLATE>
     )
 }
-
-
-
-render(<LongList />, document.getElementById('root'))

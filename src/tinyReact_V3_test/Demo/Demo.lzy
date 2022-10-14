@@ -3,7 +3,7 @@ import { myUseState, myUseEffect, render } from '../../../my_node_modules/lzy-Re
 import './Demo.css'
 
 //! Demo组件
-function Demo(props) {
+export default function Demo(props) {
 
     console.log('获取到的props', props);
 
@@ -47,8 +47,9 @@ function Demo(props) {
 
     return (
         <LZY-TEMPLATE>
-            <h1> Demo</h1>
+            <h1> Demo1111111</h1>
 
+            <div>222222</div>
             <div class="alert alert-success" role="alert">
                 简单适配了bootStarp组件库
             </div>
@@ -75,7 +76,6 @@ function Demo(props) {
     )
 }
 
-render(<Demo props={{ msg: '成功获取props' }} />, document.getElementById('root'))
 
 
 
