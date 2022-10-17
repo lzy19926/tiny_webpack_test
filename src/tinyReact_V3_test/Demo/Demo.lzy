@@ -23,7 +23,7 @@ export default function Demo(props) {
     })
 
     myUseEffect(() => {
-        // setNum(num + 1)
+        setNum(num + 1)
         console.log('监听age,age改变时执行');
     }, [age])
 
@@ -47,9 +47,7 @@ export default function Demo(props) {
 
     return (
         <LZY-TEMPLATE>
-            <h1> Demo1111111</h1>
-
-            <div>222222</div>
+            <h1> Demo</h1>
             <div class="alert alert-success" role="alert">
                 简单适配了bootStarp组件库
             </div>
