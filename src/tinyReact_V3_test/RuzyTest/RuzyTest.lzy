@@ -1,0 +1,32 @@
+import * as LzyReact from '../../../my_node_modules/lzy-React/out/index_V3' // 因为export default的功能不完善 需要这样进行引入
+import { render, myUseState } from '../../../my_node_modules/lzy-React/out/index_V3'
+import store from './store'
+
+//! ------适配lzyReact的全局状态管理器测试------
+
+// 子组件通过store.useState使用全局状态
+function Child_FC() {
+    const { name, age } = store.useState('name', 'age')
+    return (
+        <LZY-TEMPLATE>
+            <div>子组件</div>
+            <div>age:{age} name:{name}</div>
+        </LZY-TEMPLATE>
+    )
+}
+
+
+//! 父组件通过store.setState改变全局状态
+export default function RuzyTest() {
+    const { name, age } = store.useState('name', 'age')
+    return (
+        <LZY-TEMPLATE>
+            <div>RuzyTest</div>
+            <button onClick={() => { store.setState({ age: age + 1 }) }}>全局age++</button>
+
+            <Child_FC/>
+            <Child_FC/>
+            <Child_FC/>
+        </LZY-TEMPLATE>
+    )
+}
