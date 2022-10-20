@@ -11,5 +11,6 @@ import Demo from './tinyReact_V3_test/Demo/Demo.lzy'                   //Demo
 import Test from './tinyReact_V3_test/testPage/test.lzy'                
 import Concurrent from './tinyReact_V3_test/Concurrent/Concurrent.lzy' //时间切片测试
 import RuzyTest from './tinyReact_V3_test/RuzyTest/RuzyTest.lzy'   //适配lzyReact的全局状态管理器测试
+import RouterTest from './tinyReact_V3_test/RouterTest/RouterTest.lzy'
 
-render(<RuzyTest />, document.getElementById('root'))
+render(<Demo />, document.getElementById('root'))

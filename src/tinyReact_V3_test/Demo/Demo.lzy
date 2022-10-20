@@ -2,6 +2,11 @@ import * as LzyReact from '../../../my_node_modules/lzy-React/out/index_V3' // �
 import { myUseState, myUseEffect, render } from '../../../my_node_modules/lzy-React/out/index_V3' // 需要引入
 import './Demo.css'
 
+function Parent(props, children) {
+    return (<div>{children}</div>)
+}
+
+
 //! Demo组件
 export default function Demo(props) {
 
@@ -35,7 +40,6 @@ export default function Demo(props) {
     }
     function addAge() {
         setAge(age + 1)
-        setNum(num + 1)
     }
     function addArr() {
         setArr([...arr, 'item'])
@@ -60,6 +64,15 @@ export default function Demo(props) {
 
             <h3 className="blue">当前Num:{num}</h3>
             <h3 className='blue'>当前Age:{age}</h3>
+
+
+
+            <div class="alert alert-success" role="alert">
+                提供了组件children功能
+            </div>
+            <Parent>
+                <div>Parent双标签内的子组件</div>
+            </Parent>
 
             <div class="alert alert-primary" role="alert">
                 <p> 提供array.map列表渲染功能</p>

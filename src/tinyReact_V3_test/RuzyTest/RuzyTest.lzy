@@ -5,7 +5,7 @@ import store from './store'
 //! ------适配lzyReact的全局状态管理器测试------
 
 // 子组件通过store.useState使用全局状态
-function Child_FC() {
+function Child() {
     const { name, age } = store.useState('name', 'age')
     return (
         <LZY-TEMPLATE>
@@ -21,12 +21,12 @@ export default function RuzyTest() {
     const { name, age } = store.useState('name', 'age')
     return (
         <LZY-TEMPLATE>
-            <div>RuzyTest</div>
+            <h2>Ruzy全局状态管理器测试</h2>
             <button onClick={() => { store.setState({ age: age + 1 }) }}>全局age++</button>
-
-            <Child_FC/>
-            <Child_FC/>
-            <Child_FC/>
+            <button onClick={() => { store.setState({ name: '李四' }) }}>全局name改变</button>
+            <Child/>
+            <Child/>
+            <Child/>
         </LZY-TEMPLATE>
     )
 }
