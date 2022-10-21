@@ -1,7 +1,4 @@
-
-import { render, myUseState } from '../../../my_node_modules/lzy-React/out/index_V3'
-import * as LzyReact from '../../../my_node_modules/lzy-React/out/index_V3'
-
+import LzyReact, { myUseState } from '../../../my_node_modules/lzy-React/out/index_V3'
 
 function Group({ num }) {
     return (
@@ -68,10 +65,11 @@ function Group4({ num }) {
     )
 }
 export default function LongList() {
-    const [num, setNum] = myUseState(0)
+    const [num, setNum] = myUseState(1)
     const arr = new Array(10000).fill('item')
     return (
         <LZY-TEMPLATE>
+            <h1>Concurrent模式  切片渲染测试页面</h1>
             <h2>组件数:100000</h2>
             <button onClick={() => { setNum(num + 1) }}>点击+1</button>
 

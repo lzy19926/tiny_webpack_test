@@ -1,5 +1,4 @@
-import * as LzyReact from '../../../my_node_modules/lzy-React/out/index_V3' // 因为export default的功能不完善 需要这样进行引入
-import { myUseState, myUseEffect, render } from '../../../my_node_modules/lzy-React/out/index_V3' // 需要引入
+import LzyReact, { myUseState, myUseEffect } from '../../../my_node_modules/lzy-React/out/index_V3'
 import './Demo.css'
 
 function Parent(props, children) {
