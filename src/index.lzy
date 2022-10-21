@@ -5,12 +5,7 @@
 import { render } from '../my_node_modules/lzy-React/out/index_V3'
 import * as LzyReact from '../my_node_modules/lzy-React/out/index_V3'
 
-
-// 测试页面
-import Demo from './tinyReact_V3_test/Demo/Demo.lzy'                   //Demo
-import Test from './tinyReact_V3_test/testPage/test.lzy'                
-import Concurrent from './tinyReact_V3_test/Concurrent/Concurrent.lzy' //时间切片测试
-import RuzyTest from './tinyReact_V3_test/RuzyTest/RuzyTest.lzy'   //适配lzyReact的全局状态管理器测试
+// 测试页面(路由测试页面)
 import RouterTest from './tinyReact_V3_test/RouterTest/RouterTest.lzy'
 
-render(<Demo />, document.getElementById('root'))
+render(<RouterTest />, document.getElementById('root'))

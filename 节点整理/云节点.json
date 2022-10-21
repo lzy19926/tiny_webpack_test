@@ -1,0 +1,39 @@
+--------------------------阿里云节点-------------------------------
+华东 1 oss-cn-hangzhou.aliyuncs.com
+华东 2 oss-cn-shanghai.aliyuncs.com
+华北 1 oss-cn-qingdao.aliyuncs.com
+华北 2 oss-cn-beijing.aliyuncs.com
+华北 3 oss-cn-zhangjiakou.aliyuncs.com
+华北 5 oss-cn-huhehaote.aliyuncs.com
+华南 1 oss-cn-shenzhen.aliyuncs.com
+香港 oss-cn-hongkong.aliyuncs.com
+美国西部 1 （硅谷） oss-us-west-1.aliyuncs.com
+美国东部 1 （弗吉尼亚） oss-us-east-1.aliyuncs.com
+亚太东南 1 （新加坡） oss-ap-southeast-1.aliyuncs.com
+亚太东南 2 （悉尼） oss-ap-southeast-2.aliyuncs.com
+亚太东南 3 （吉隆坡） oss-ap-southeast-3.aliyuncs.com
+亚太东南 5 （雅加达） oss-ap-southeast-5.aliyuncs.com
+亚太南部 1 （孟买） oss-ap-south-1.aliyuncs.com
+亚太东北 1 （日本） oss-ap-northeast-1.aliyuncs.com
+中东东部 1 （迪拜） oss-me-east-1.aliyuncs.com
+欧洲中部 1 （法兰克福） oss-eu-central-1.aliyuncs.com
+英国 1 （伦敦） oss-eu-west-1.aliyuncs.com
+
+
+
+----------------------------腾讯云节点-----------------------------------
+北京（华北）	ap-beijing	140.249.68.149	http://cos.ap-beijing.myqcloud.com
+上海（华东）	ap-shanghai	58.217.230.58	http://cos.ap-shanghai.myqcloud.com
+广州（华南）	ap-guangzhou	14.119.113.22	http://cos.ap-guangzhou.myqcloud.com
+成都（西南）	ap-chengdu	182.140.199.13	http://cos.ap-chengdu.myqcloud.com
+重庆（西南）	ap-chongqing	183.66.97.159	http://cos.ap-chongqing.myqcloud.com
+香港	ap-hongkong	119.28.80.58	http://cos.ap-hongkong.myqcloud.com
+新加坡	ap-singapore	150.109.0.191	http://cos.ap-singapore.myqcloud.com
+多伦多	na-toronto	45.113.69.73	http://cos.na-toronto.myqcloud.com
+法兰克福	eu-frankfurt	49.51.129.251	http://cos.eu-frankfurt.myqcloud.com
+孟买	ap-mumbai	119.28.242.179	http://cos.ap-mumbai.myqcloud.com
+首尔	ap-seoul	119.28.147.117	http://cos.ap-seoul.myqcloud.com
+硅谷	na-siliconvalley	49.51.66.233	http://cos.na-siliconvalley.myqcloud.com
+弗吉尼亚	na-ashburn	49.51.77.119	http://cos.na-ashburn.myqcloud.com
+曼谷	ap-bangkok	150.109.165.64	http://cos.ap-bangkok.myqcloud.com
+莫斯科	eu-moscow	162.62.3.46	http://cos.eu-moscow.myqcloud.com

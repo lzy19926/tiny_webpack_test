@@ -1,14 +1,39 @@
 import * as LzyReact from '../../../my_node_modules/lzy-React/out/index_V3' // 因为export default的功能不完善 需要这样进行引入
-import { render, myUseState } from '../../../my_node_modules/lzy-React/out/index_V3'
-import { Link, RouteContainer } from '../../../my_node_modules/lzy-React-Router/lib/index.lzy'
+import { Link, RouteContainer, Route } from '../../../my_node_modules/lzy-React-Router/lib/index.lzy'
+
+
+// 测试页面
+import Demo from '../../tinyReact_V3_test/Demo/Demo.lzy'                   //Demo
+import Test from '../../tinyReact_V3_test/testPage/test.lzy'                //Test
+import Concurrent from '../../tinyReact_V3_test/Concurrent/Concurrent.lzy'  //时间切片测试
+import RuzyTest from '../../tinyReact_V3_test/RuzyTest/RuzyTest.lzy'        //适配lzyReact的全局状态管理器测试
+
+
 //! Demo组件
-export default function Test() {
+export default function RouterTest() {
+
+
+    window.onhashchange = () => {
+        alert('change')
+        return false
+    }
+
     return (
         <LZY-TEMPLATE>
-            <RouteContainer>
-               <div>children</div>
-               <div>children</div>
+
+            <Link to="/demo" title='跳转到demo页面' id="container1" />
+            <Link to="/ruzyTest" title='跳转到ruzyTest页面' id="container1" />
+            <Link to="/concurrent" title='跳转到concurrent页面' id="container1" />
+            <Link to="/test" title='跳转到Test页面' id="container1" />
+
+
+            <RouteContainer id="container1">
+                <Route path="/demo" component={<Demo />} />
+                <Route path="/test" component={<Test />} />
+                <Route path="/concurrent" component={<Concurrent />} />
+                <Route path="/ruzyTest" component={<RuzyTest />} />
             </RouteContainer>
+
         </LZY-TEMPLATE>
     )
 }
