@@ -1,0 +1,41 @@
+
+
+import LzyReact, { myUseEffect } from '../../../../my_node_modules/lzy-React/out/index_V3'
+import { According, Button, TabContainer, CodeBlock, Block } from '../../../../my_node_modules/lzy-LzyUI/lib/index'
+
+
+export default function Build() {
+
+
+    const code1 =
+        `   npm run t-build              // 打包
+   npm run t-dev                // 运行`;
+    const code2 =
+        `   lzy-webpack      //手写的打包器(集成了devServer功能)
+   lzy-watchpack    //devServer的文件监视系统
+   lzy-React        //lzy-react核心库
+   lzy-React-Router // 适配的路由(仅实现history模式 非常不完善)
+   lzy-Ruzy         // 适配的全局状态管理器`
+
+
+
+    return (
+        <LZY-TEMPLATE>
+            <h2>构建与打包说明</h2>
+            <div>项目使用手写的lzy-webpack进行构建和打包,同时提供了dev-Server功能</div>
+            <div>(注意此功能暂时不完善,仅能在文件发生修改时自动打包,在添加,引入新文件后无法自动构建,此时需要重新运行t-dev命令)</div>
+            <CodeBlock codeStr={code1} lang="JSX" style={'width:100%'} />
+
+            <Block />
+
+            <h2>依赖文件说明</h2>
+            <div>本人手写的相关工具库存放在根目录下的my_mode_modules里,暂时没有发布npm包,用于及时进行修复</div>
+            <div>请大家引用的时候注意  其他的npm包可以正常安装和引用(大概把,可能有坑)</div>
+
+            <Block />
+
+            <h2>提供相关工具</h2>
+            <CodeBlock codeStr={code2} lang="JSX" style={'width:100%'} />
+        </LZY-TEMPLATE>
+    )
+}

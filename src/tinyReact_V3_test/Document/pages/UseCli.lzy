@@ -1,0 +1,30 @@
+
+import LzyReact, { myUseEffect } from '../../../../my_node_modules/lzy-React/out/index_V3'
+import { According, Button, TabContainer, CodeBlock, Block } from '../../../../my_node_modules/lzy-LzyUI/lib/index'
+
+
+
+export default function UseCli() {
+
+
+    const code1 =
+        `    npm i lzy-react-cli  -g    //全局安装脚手架
+    lzy-react -v               // 查看版本号`;
+    const code2 =
+        `    lzy-react create <projectName> // 对应目录下创建项目
+    npm install                    // 项目中安装依赖包`
+
+
+
+    return (
+        <LZY-TEMPLATE>
+            <h2>脚手架安装</h2>
+            <CodeBlock codeStr={code1} lang="JSX" />
+
+            <Block />
+
+            <h2>使用脚手架生成项目</h2>
+            <CodeBlock codeStr={code2} lang="JSX" />
+        </LZY-TEMPLATE>
+    )
+}

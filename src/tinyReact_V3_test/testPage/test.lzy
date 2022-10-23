@@ -1,4 +1,19 @@
-import LzyReact, { myUseState } from '../../../my_node_modules/lzy-React/out/index_V3' // 因为export default的功能不完善 需要这样进行引入
+import LzyReact, { myUseEffect, myUseState } from '../../../my_node_modules/lzy-React/out/index_V3' // 因为export default的功能不完善 需要这样进行引入
+
+
+function Effect() {
+    myUseEffect(() => {
+        console.log('执行1');
+    }, [1])
+    return <div>1</div>
+}
+
+function Effect2() {
+    myUseEffect(() => {
+        console.log('执行2');
+    }, [2])
+    return <div>2</div>
+}
 
 
 //! Demo组件
@@ -8,23 +23,9 @@ export default function Test() {
     const [arr, setArr] = myUseState([1, 2, 3, 4])
     return (
         <LZY-TEMPLATE>
-            <h1>UseState测试页面</h1>
 
-            <div>
-                <button onClick={() => { setArr([...arr, 4]) }}>列表+1</button>
-                <button onClick={() => { setArr(arr.splice(1)) }}>列表-1</button>
-                <button onClick={() => { setStyle('456') }}>变更class</button>
-            </div>
-
-            {arr.map((num, index) => <div key={index + 1}>{num}</div>)}
-
-
-            <div class={style}>----------------</div>
-
-
-            {/* <button onClick={() => { setNum(num + 1) }}>增加num:{num}</button> */}
-
-
+            <Effect />
+            <Effect2 />
         </LZY-TEMPLATE>
     )
 }

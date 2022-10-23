@@ -1,80 +1,225 @@
 <!DOCTYPE html>
-<html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <style>
+        #cnblogs_post_body .cnblogs_code {
+            /* background-color: rgba(152, 147, 147, 0.28); */
+            /* border: 1px solid rgba(255, 251, 251, 0); */
+            border-radius: 4px;
+            color: #000;
+            font-family: Courier New !important;
+            font-size: 13px !important;
+            margin: 5px 0;
+            overflow: auto;
+            padding: 5px;
+        }
 
-    <link rel="stylesheet" href="./bootstrap.css">
-    <script src="./bootstrap.bundle.js"></script>
+        .hljs-built_in,
+        .hljs-keyword,
+        .hljs-name,
+        .hljs-selector-tag,
+        .hljs-tag {
+            color: #332870 !important;
+        }
+
+        .hljs-emphasis,
+        .hljs-strong {
+            color: #a8a8a2 !important;
+        }
+
+        .hljs-built_in,
+        .hljs-keyword,
+        .hljs-name,
+        .hljs-selector-tag,
+        .hljs-tag {
+            color: #bababa !important;
+        }
+
+        .hljs-bullet,
+        .hljs-link,
+        .hljs-literal,
+        .hljs-number,
+        .hljs-quote,
+        .hljs-regexp {
+            color: #B5CEA8 !important;
+        }
+
+        .hljs-code,
+        .hljs-selector-class {
+            color: #eeff00 !important;
+        }
+
+        .hljs-emphasis {
+            font-style: italic !important;
+        }
+
+        .hljs-attribute,
+        .hljs-keyword,
+        .hljs-name,
+        .hljs-section,
+        .hljs-selector-tag,
+        .hljs-variable {
+            color: #bd7db8 !important;
+        }
+
+        .hljs-attr,
+        .hljs-params {
+            color: #b9b9b9 !important;
+        }
+
+        .hljs-string {
+            color: #CE8B55 !important;
+        }
+
+        .hljs-addition,
+        .hljs-built_in,
+        .hljs-builtin-name,
+        .hljs-selector-attr,
+        .hljs-selector-id,
+        .hljs-selector-pseudo,
+        .hljs-subst,
+        .hljs-symbol,
+        .hljs-template-tag,
+        .hljs-template-variable,
+        .hljs-title,
+        .hljs-type {
+            color: #dfe231 !important;
+        }
+
+        .hljs-comment,
+        .hljs-deletion {
+            color: #008839 !important;
+        }
+
+        .hljs-meta {
+            color: #00ff0d !important;
+        }
+
+        #cnblogs_post_body .toc ul {
+            max-height: 550px;
+            overflow-y: auto;
+        }
+
+        .cnblogs-markdown .hljs {
+            display: block;
+            overflow-x: auto;
+            padding: 0.5em !important;
+            background: #2b2b2b !important;
+            font-size: 14px !important;
+            color: #bababa !important;
+            font-family: Source Code Pro, Consolas, Menlo, Monaco, Courier New,
+                monospace !important;
+        }
+
+        #cnblogs_post_body h1::before {
+            content: "H1";
+            margin-right: 10px;
+            color: gainsboro;
+        }
+
+        #cnblogs_post_body h2::before {
+            content: "H2";
+            margin-right: 10px;
+            color: gainsboro;
+        }
+
+        #cnblogs_post_body h3::before {
+            content: "H3";
+            margin-right: 10px;
+            color: gainsboro;
+        }
+
+        #mainContent #post_detail #cnblogs_post_body h4::before {
+            content: "h4";
+            margin-right: 10px;
+            color: gainsboro;
+        }
+
+        #cnblogs_post_body h5::before {
+            content: "h5";
+            margin-right: 10px;
+            color: gainsboro;
+        }
+
+        #cnblogs_post_body h6::before {
+            content: "h6";
+            margin-right: 10px;
+            color: gainsboro;
+        }
+
+        #cnblogs_post_body td.hljs-ln-numbers {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+
+            text-align: center;
+            color: #ccc;
+            border-right: 1px solid #ccc;
+            vertical-align: top;
+            padding-right: 5px;
+
+            /* your custom style here */
+        }
+
+        #cnblogs_post_body .hljs td {
+            border-collapse: inherit;
+            min-width: unset;
+            padding-left: 20px;
+            padding-right: 10px;
+        }
+    </style>
 </head>
 
 <body>
 
+    <div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+        <pre>
+            <code class="language-JS" id="JSCode">
+                const a = 1
 
-    <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                    aria-expanded="true" aria-controls="collapseOne">
-                    Accordion Item #1
-                </button>
-            </h2>
-            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse
-                    plugin adds the appropriate classes that we use to style each element. These classes control the
-                    overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of
-                    this with custom CSS or overriding our default variables. It's also worth noting that just about any
-                    HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                </div>
-            </div>
-        </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingTwo">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    Accordion Item #2
-                </button>
-            </h2>
-            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    <strong>This is the second item's accordion body.</strong> It is hidden by default, until the
-                    collapse plugin adds the appropriate classes that we use to style each element. These classes
-                    control the overall appearance, as well as the showing and hiding via CSS transitions. You can
-                    modify any of this with custom CSS or overriding our default variables. It's also worth noting that
-                    just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit
-                    overflow.
-                </div>
-            </div>
-        </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingThree">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    Accordion Item #3
-                </button>
-            </h2>
-            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    <strong>This is the third item's accordion body.</strong> It is hidden by default, until the
-                    collapse plugin adds the appropriate classes that we use to style each element. These classes
-                    control the overall appearance, as well as the showing and hiding via CSS transitions. You can
-                    modify any of this with custom CSS or overriding our default variables. It's also worth noting that
-                    just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit
-                    overflow.
-                </div>
-            </div>
-        </div>
+                
+            </code>
+        </pre>
     </div>
 
+
+
+    <div class='code'>...</div>
+
+    <div>
+        <script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+        <script
+            src="https://cdn.bootcdn.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+        <script type="text/javascript">
+            hljs.initHighlightingOnLoad();
+
+            hljs.initLineNumbersOnLoad();
+
+
+            // first, find all the div.code blocks
+            document.querySelectorAll('div.code').forEach(el => {
+                // then highlight each
+                hljs.highlightElement(el);
+            });
+            
+
+            $(document).ready(function () {
+                $("code.hljs").each(function (i, block) {
+                    hljs.lineNumbersBlock(block);
+                });
+            });
+        </script>
+
+        <script>
+            let dom = document.getElementById('JSCode')
+
+
+            dom.innerText = `
+                <div>text</div>
+            `
+        </script>
+    </div>
 </body>
-
-
-
-</html>

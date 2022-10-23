@@ -1,37 +1,35 @@
-import LzyReact from '../../../my_node_modules/lzy-React/out/index_V3'
-
-function ToggleAccording() {
-    return (
-        <LZY-TEMPLATE>
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                        aria-expanded="true" aria-controls="collapseOne">
-                        Accordion Item #1
-                    </button>
-                </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                    data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse
-                        plugin adds the appropriate classes that we use to style each element. These classes control the
-                        overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of
-                        this with custom CSS or overriding our default variables. It's also worth noting that just about any
-                        HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                    </div>
-                </div>
-            </div>
-        </LZY-TEMPLATE>
-    )
-}
-
+import LzyReact, { myUseEffect } from '../../../my_node_modules/lzy-React/out/index_V3'
+import { According, Button, TabContainer, CodeBlock } from '../../../my_node_modules/lzy-LzyUI/lib/index'
+import LzyUIPage from './pages/LzyUI.lzy'
+import UseCli from './pages/UseCli.lzy'
+import Build from './pages/Build.lzy'
+import Description from './pages/Description.lzy'
 
 //! Demo组件
 export default function Document() {
 
+
+
+
+    const tabsData = [
+        { title: '介绍', key: 'about', render: () => <Description /> },
+        { title: '脚手架安装', key: 'start', render: () => <UseCli /> },
+        { title: '构建与打包', key: 'run', render: () => <Build /> },
+
+        { title: '使用jsx', key: 'jsx', render: () => <div>使用jsx内容</div> },
+        { title: 'hooks功能', key: 'hooks', render: () => <div>提供hooks功能</div> },
+        { title: '组件之间的通信', key: 'message', render: () => <div>组件之间的通信</div> },
+        { title: 'concurrent切片渲染', key: 'concurrent', render: () => <div>concurrent切片渲染介绍</div> },
+
+        { title: 'lzyReact-router路由', key: 'router', render: () => <div>lzyReact-router路由</div> },
+        { title: 'ruzy全局状态管理', key: 'ruzy', render: () => <div>ruzy全局状态管理器</div> },
+        { title: 'lzyUI组件库', key: 'lzyui', render: () => <LzyUIPage /> }
+    ]
+
+
     return (
         <LZY-TEMPLATE>
-            <ToggleAccording />
+            <TabContainer dataSorce={tabsData} style="height:calc(100vh - 220px)" />
         </LZY-TEMPLATE>
     )
 }

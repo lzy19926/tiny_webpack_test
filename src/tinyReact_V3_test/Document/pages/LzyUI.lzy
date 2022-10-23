@@ -1,0 +1,36 @@
+
+import LzyReact, { myUseEffect } from '../../../../my_node_modules/lzy-React/out/index_V3'
+import { According, Button, TabContainer, CodeBlock } from '../../../../my_node_modules/lzy-LzyUI/lib/index'
+
+
+
+export default function LzyUIPage() {
+
+
+    const code = `var data = 1;
+        <div></div>
+    `;
+
+    return (
+        <LZY-TEMPLATE>
+            <Button type="primary">Primary</Button>
+            <Button type="Success">Success</Button>
+            <Button type="Danger">Danger</Button>
+            <Button type="Warning">Warning</Button>
+            <Button type="Info">Info</Button>
+            <Button type="Light">Light</Button>
+            <Button type="Dark">Dark</Button>
+            <Button type="Link">Link</Button>
+
+
+            <According title="标题1">
+                <div>内容(通过children注入)</div>
+            </According>
+
+
+
+            <CodeBlock codeStr={code} lang="JSX" />
+            
+        </LZY-TEMPLATE>
+    )
+}

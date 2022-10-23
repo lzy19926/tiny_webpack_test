@@ -1,6 +1,6 @@
 import LzyReact from '../../../my_node_modules/lzy-React/out/index_V3'
 import { Link, RouteContainer, Route } from '../../../my_node_modules/lzy-React-Router/lib/index.lzy'
-
+import './index.css'
 
 // 测试页面
 import Demo from '../Demo/Demo.lzy'                   //Demo
@@ -14,15 +14,16 @@ export default function RouterTest() {
 
     return (
         <LZY-TEMPLATE>
-            <h2>路由测试</h2>
-            <Link to="/demo" title='跳转到demo页面' id="container1" />
-            <Link to="/ruzyTest" title='跳转到ruzyTest页面' id="container1" />
-            <Link to="/concurrent" title='跳转到concurrent页面' id="container1" />
-            <Link to="/test" title='跳转到Test页面' id="container1" />
-            <Link to="/" title='跳转到文档页面' id="container1" />
 
-            <div>--------------------------------------------------------------------------------------------------------------------------------------------------</div>
-            <div>--------------------------------------------------------------------------------------------------------------------------------------------------</div>
+            <div class='mainPage-top'>
+                <h2>LzyReact文档</h2>
+                <Link to="/demo" title='demo' id="container1" />
+                <Link to="/ruzyTest" title='ruzyTest' id="container1" />
+                <Link to="/concurrent" title='concurrent' id="container1" />
+                <Link to="/test" title='Test' id="container1" />
+                <Link to="/" title='文档' id="container1" />
+            </div>
+
 
             <RouteContainer id="container1">
                 <Route path="/" component={<Document />} />

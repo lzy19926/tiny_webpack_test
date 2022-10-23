@@ -2,6 +2,7 @@
 import LzyReact, { render } from '../my_node_modules/lzy-React/out/index_V3'
 // 测试页面(路由测试页面)
 import RouterTest from './tinyReact_V3_test/RouterTest/RouterTest.lzy'
-
+import Test from './tinyReact_V3_test/testPage/test.lzy'
 
 render(<RouterTest />, document.getElementById('root'))
+
