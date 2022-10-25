@@ -1,23 +1,30 @@
 
 import LzyReact from '../../../../my_node_modules/lzy-React/out/index_V3'
-import { CodeBlock, Block } from '../../../../my_node_modules/lzy-LzyUI/lib/index'
+import { Block } from '../../../../my_node_modules/lzy-LzyUI/lib/index'
 
 
 
 export default function Description() {
-
-
-    const code1 =
-        `    npm i lzy-react-cli  -g    //全局安装脚手架
-    lzy-react -v               // 查看版本号`;
-    const code2 =
-        `    lzy-react create <projectName> // 对应目录下创建项目
-    npm install                    // 项目中安装依赖包`
-
-
-
     return (
         <LZY-TEMPLATE>
+
+            <h2>项目简介</h2>
+            <br></br>
+            <h5>--全原生TS手写的简易版React,提供了相似的功能,函数式组件,JSX,Hook,concurrent切片渲染等功能</h5>
+            <br></br>
+            <h5>--全原生TS手写的简易版Webpack,提供了类似与webpack的功能,devServer,plugin,loader等</h5>
+            <br></br>
+            <p>提供了手写的htmlLoader和CSS打包器,已预装在lzy-webpack中</p>
+            <p>脚手架安装项目  提供lzy-react-cli</p>
+            <p></p>
+            <p>为了适配框架,手写了适配的如下工具库</p>
+            <p>Ruzy:全局状态管理器</p>
+            <p>lzy-React-Router:适配的路由组件</p>
+            <p>lzyUI: 适配的UI库(开发中)</p>
+            <br></br>
+            <p>注: 本网站全部由lzy-React全家桶和lzy-webpack进行开发</p>
+            <Block />
+
             <h2>开发(学习)者的话</h2>
             <h5>大家好这里是阳九: 一个本着"万物皆可手写"为原则的前端码农</h5>
             <p> React是我上手的第二个前端框架,(小白第一个是VUE),在我莫名其妙入了react的坑后,便一发不可收拾.</p>
@@ -52,20 +59,7 @@ export default function Description() {
             <Block />
 
 
-            <h2>项目简介</h2>
-            <p></p>
-            <p>--全原生TS手写的简易版React,提供了相似的功能,函数式组件,JSX,Hook,concurrent切片渲染等功能</p>
-            <p>--项目运行在原生TS手写的lzy-webpack中(简易版webpack),提供了类似与webpack的功能,devServer,plugin,loader等</p>
-            <p>提供了手写的htmlLoader和CSS打包器,已预装在lzy-webpack中</p>
-            <p>脚手架安装项目  提供lzy-react-cli</p>
-            <p></p>
-            <p>为了适配框架,手写了适配的如下工具库</p>
-            <p>Ruzy:全局状态管理器</p>
-            <p>lzy-React-Router:适配的路由组件</p>
-            <p>lzyUI: 适配的UI库(开发中)</p>
 
-            <p>-------------注: 本网站全部由lzy-React全家桶和lzy-webpack进行开发----------------</p>
-            <Block />
 
 
 

@@ -1,0 +1,57 @@
+import LzyReact from '../../../../my_node_modules/lzy-React/out/index_V3'
+import { CodeBlock, Block } from '../../../../my_node_modules/lzy-LzyUI/lib/index'
+
+
+export default function Communication() {
+
+    const code1 =
+        `import LzyReact from '../../../../my_node_modules/lzy-React/out/index_V3'
+
+function Child(props){
+    const {id,obj} = props  // 接收到上层传递的数据
+    return <div></div>
+}
+
+function Parent(){
+
+    const obj = {name:"张三",age:18}
+
+    return (
+       <LZY--TEMPLATE>
+          <Child id={1} msg={obj} />  // 通过标签传递数据给子组件
+       </LZY--TEMPLATE>
+    )
+}`
+
+    const code2 =
+        `import LzyReact from '../../../../my_node_modules/lzy-React/out/index_V3'
+
+function Card(props,children){
+return <div>{children}</div>    // 使用children渲染组件标签内容
+}
+
+function App(){
+return (
+  <Card>
+    <div>Children内容</div>     //  双标签组件内的html结构会作为children传递给组件
+  </Card>
+)
+}`
+
+    return (
+        <LZY-TEMPLATE>
+            <h2>props进行组件通信</h2>
+            <p>提供了与原生React相同的props进行通信,具体使用方式基本相同</p>
+            <p>使用props从父组件向子组件传递数据,同时也可以子组件注册事件进行事件冒泡,向上进行传递</p>
+            <CodeBlock codeStr={code1} />
+            <Block />
+
+            <h2>渲染Children</h2>
+            <p>提供了与原生React相同的children渲染逻辑,具体使用方式基本相同</p>
+            <CodeBlock codeStr={code2} />
+            <Block />
+
+            <p style={'color:red'}>可以在tab栏的demo中试一试</p>
+        </LZY-TEMPLATE>
+    )
+}

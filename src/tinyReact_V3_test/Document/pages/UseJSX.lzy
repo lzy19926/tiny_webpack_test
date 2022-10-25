@@ -1,0 +1,53 @@
+
+
+import LzyReact from '../../../../my_node_modules/lzy-React/out/index_V3'
+import { CodeBlock, Block } from '../../../../my_node_modules/lzy-LzyUI/lib/index'
+
+
+export default function UseJSX() {
+
+    const code1 =
+        `  function App(){
+        let num = 1     
+        return (
+            <LZY--TEMPLATE>
+                <div>{num}</div>
+            </LZY--TEMPLATE>
+        )
+  }`
+
+    const code2 =
+        `  function App(){
+    let arr = [1,2,3]     
+    return (
+        <LZY--TEMPLATE>
+            {arr.map((item,index)=>{
+                return <div key={index}>{item}</div>
+            })}
+        </LZY--TEMPLATE>
+    )
+}`
+
+    return (
+        <LZY-TEMPLATE>
+            <h2>JSX</h2>
+            <p>使用与原版React一样的JSX语法,(使用babel进行编译)</p>
+            <p>详细使用方法请参考JSX文档谢谢</p>
+            <Block />
+
+            <h3>LZY-TEMPLATE标签</h3>
+            <p>为了进行内部优化,请在大型组件的最外层包一个LZY-TEMPLATE标签,该标签会编译成一个div</p>
+            <p>小型组件可以不添加</p>
+            <p>由于该页面也由lzyReact进行开发,所以文档内的标签多了一个-,用于区别</p>
+            <Block />
+
+            <h3>使用大括号书写表达式</h3>
+            <CodeBlock lang="JSX" codeStr={code1} />
+            <Block />
+
+            <h3>map遍历渲染列表</h3>
+            <CodeBlock lang="JSX" codeStr={code2} />
+
+        </LZY-TEMPLATE>
+    )
+}

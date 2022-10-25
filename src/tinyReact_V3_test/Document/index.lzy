@@ -1,35 +1,37 @@
-import LzyReact, { myUseEffect } from '../../../my_node_modules/lzy-React/out/index_V3'
-import { According, Button, TabContainer, CodeBlock } from '../../../my_node_modules/lzy-LzyUI/lib/index'
+import LzyReact from '../../../my_node_modules/lzy-React/out/index_V3'
+import { TabContainer } from '../../../my_node_modules/lzy-LzyUI/lib/index'
 import LzyUIPage from './pages/LzyUI.lzy'
-import UseCli from './pages/UseCli.lzy'
-import Build from './pages/Build.lzy'
+import Start from './pages/Start.lzy'
+import LzyWebpack from './pages/LzyWebpack.lzy'
 import Description from './pages/Description.lzy'
-
+import UseJSX from './pages/UseJSX.lzy'
+import Hooks from './pages/Hooks.lzy'
+import Communication from './pages/Communication.lzy'
+import Concurrent from './pages/Concurrent.lzy'
+import Router from './pages/Router.lzy'
+import Ruzy from './pages/Ruzy.lzy'
 //! Demo组件
 export default function Document() {
 
-
-
-
     const tabsData = [
         { title: '介绍', key: 'about', render: () => <Description /> },
-        { title: '脚手架安装', key: 'start', render: () => <UseCli /> },
-        { title: '构建与打包', key: 'run', render: () => <Build /> },
+        { title: '开始', key: 'start', render: () => <Start /> },
 
-        { title: '使用jsx', key: 'jsx', render: () => <div>使用jsx内容</div> },
-        { title: 'hooks功能', key: 'hooks', render: () => <div>提供hooks功能</div> },
-        { title: '组件之间的通信', key: 'message', render: () => <div>组件之间的通信</div> },
-        { title: 'concurrent切片渲染', key: 'concurrent', render: () => <div>concurrent切片渲染介绍</div> },
+        { title: '使用jsx', key: 'jsx', render: () => <UseJSX /> },
+        { title: 'hooks功能', key: 'hooks', render: () => <Hooks /> },
+        { title: '组件之间的通信', key: 'message', render: () => <Communication /> },
+        { title: 'concurrent切片渲染', key: 'concurrent', render: () => <Concurrent /> },
 
-        { title: 'lzyReact-router路由', key: 'router', render: () => <div>lzyReact-router路由</div> },
-        { title: 'ruzy全局状态管理', key: 'ruzy', render: () => <div>ruzy全局状态管理器</div> },
-        { title: 'lzyUI组件库', key: 'lzyui', render: () => <LzyUIPage /> }
+        { title: 'lzyReact-router路由', key: 'router', render: () => <Router /> },
+        { title: 'ruzy全局状态管理', key: 'ruzy', render: () => <Ruzy /> },
+        { title: 'lzyUI组件库', key: 'lzyui', render: () => <LzyUIPage /> },
+        { title: 'lzy-Webpack', key: 'webpack', render: () => <LzyWebpack /> },
     ]
 
 
     return (
         <LZY-TEMPLATE>
-            <TabContainer dataSorce={tabsData} style="height:calc(100vh - 220px)" />
+            <TabContainer dataSorce={tabsData} style="height:calc(100vh -60px)" />
         </LZY-TEMPLATE>
     )
 }

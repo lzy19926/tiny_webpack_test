@@ -1,18 +1,70 @@
-
-import LzyReact, { myUseEffect } from '../../../../my_node_modules/lzy-React/out/index_V3'
-import { According, Button, TabContainer, CodeBlock } from '../../../../my_node_modules/lzy-LzyUI/lib/index'
-
+import LzyReact from '../../../../my_node_modules/lzy-React/out/index_V3'
+import { According, Button, CodeBlock, Block } from '../../../../my_node_modules/lzy-LzyUI/lib/index'
 
 
 export default function LzyUIPage() {
 
+    const code1 =
+        `
+    import LzyReact from '../../../../my_node_modules/lzy-React/out/index_V3'
+    import { Button } from '../../../../my_node_modules/lzy-LzyUI/lib/index'
 
-    const code = `var data = 1;
-        <div></div>
-    `;
+    const Buttons = () => {
+        return (
+            <LZY--TEMPLATE>
+                <Button type="primary">Primary</Button>
+                <Button type="Success">Success</Button>
+                <Button type="Danger">Danger</Button>
+                <Button type="Warning">Warning</Button>
+                <Button type="Info">Info</Button>
+                <Button type="Light">Light</Button>
+                <Button type="Dark">Dark</Button>
+                <Button type="Link">Link</Button>
+            </LZY--TEMPLATE>
+        )
+    }
+    `
+
+    const code2 =
+        `
+import LzyReact from '../../../../my_node_modules/lzy-React/out/index_V3'
+import { According } from '../../../../my_node_modules/lzy-LzyUI/lib/index'
+
+const Buttons = () => {
+    return (
+        <LZY--TEMPLATE>
+           <h4>下拉展示</h4>
+           <According title="标题1" id='According'>
+               <div>内容(通过children注入)</div>
+           </According>
+        </LZY--TEMPLATE>
+    )
+}
+`
+
+    const code3 =
+        `
+import LzyReact from '../../../../my_node_modules/lzy-React/out/index_V3'
+import { CodeBlock } from '../../../../my_node_modules/lzy-LzyUI/lib/index'
+
+const Buttons = () => {
+    const codeStr = "var data = 1"
+    return (
+        <LZY--TEMPLATE>
+           <h4>代码块</h4>
+           <CodeBlock codeStr={codeStr} lang="JSX" />
+        </LZY--TEMPLATE>
+    )
+}
+`
 
     return (
         <LZY-TEMPLATE>
+            <h2>LzyUI组件库</h2>
+            <p>通过二次封装bootstarp开发的组件库,还是那句话,玩具而已,凑合用把</p>
+
+            <br />
+            <h4>按钮组</h4>
             <Button type="primary">Primary</Button>
             <Button type="Success">Success</Button>
             <Button type="Danger">Danger</Button>
@@ -21,16 +73,34 @@ export default function LzyUIPage() {
             <Button type="Light">Light</Button>
             <Button type="Dark">Dark</Button>
             <Button type="Link">Link</Button>
+            <br />
+            <br />
+            <According title="Show Code" id='ButtonCode'>
+                <CodeBlock codeStr={code1} lang="JSX" />
+            </According>
+            <Block />
 
-
-            <According title="标题1">
+            <h4>下拉展示</h4>
+            <According title="标题1" id='2'>
                 <div>内容(通过children注入)</div>
             </According>
+            <br />
+            <According title="Show Code" id='AccordingCode'>
+                <CodeBlock codeStr={code2} lang="JSX" />
+            </According>
+            <Block />
+
+            <h4>代码块</h4>
+            <CodeBlock codeStr={`var data = 1`} lang="JSX" />
+            <br />
+            <According title="Show Code" id='CodeBlockCode'>
+                <CodeBlock codeStr={code3} lang="JSX" />
+            </According>
+            <Block />
 
 
 
-            <CodeBlock codeStr={code} lang="JSX" />
-            
+            <h4>其他的组件,有空再封把</h4>
         </LZY-TEMPLATE>
     )
 }

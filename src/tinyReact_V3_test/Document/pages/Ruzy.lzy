@@ -1,0 +1,67 @@
+import LzyReact from '../../../../my_node_modules/lzy-React/out/index_V3'
+import { CodeBlock, Block } from '../../../../my_node_modules/lzy-LzyUI/lib/index'
+
+
+export default function Ruzy() {
+
+
+    const code1 =
+        `// store.js
+import Ruzy from '../../../my_node_modules/lzy-Ruzy/out/index'
+
+    const store = new Ruzy()
+    
+    store.initStates({ // 定义初始状态
+        name:'张三',
+        age:18
+    })
+    
+    export default store
+    `
+
+    const code2 =
+        `import LzyReact from '../../../../my_node_modules/lzy-React/out/index_V3'
+import store from './store.js'
+
+
+function Child(){
+    // 通过store.useState()传入状态的key使用状态
+    const {name,age} = store.useState("name","age") 
+    return <div>姓名:{name},年龄:{age}</div>
+}
+
+
+function App(){
+    return (
+        <LZY--TEMPLATE>
+            // 通过store.setState改变全局状态,更新所有使用了该状态的组件
+            <button onClick={() => { store.setState({ age: age + 1 }) }}>全局age++</button>
+            <button onClick={() => { store.setState({ name: '李四' }) }}>全局name改变</button>
+            <Child/>
+            <Child/>
+            <Child/>
+        </LZY--TEMPLATE>
+    )
+}`
+
+    return (
+        <LZY-TEMPLATE>
+            <h2>Ruzy全局状态管理器</h2>
+            <br />
+            <p>采用了极为简化的API设计</p>
+            <p>内部结合了Redux的dispatch 和React-Query的client-observer设计模式</p>
+            <p>内部还提供了手写的简易React-Query请求管理器,详细请参考Ruzy的README</p>
+            <p style={'color:red'}>可以通过tab栏的ruzyTest页面进行测试</p>
+            <Block />
+
+            <h4>创建一个Store</h4>
+            <CodeBlock codeStr={code1} />
+            <Block />
+
+            <h4>使用store</h4>
+            <p>提供了store.useState , store.setState两个主要API</p>
+            <CodeBlock codeStr={code2} />
+            <Block />
+        </LZY-TEMPLATE>
+    )
+}
