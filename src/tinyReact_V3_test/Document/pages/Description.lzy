@@ -14,6 +14,8 @@ export default function Description() {
             <br></br>
             <h5>--全原生TS手写的简易版Webpack,提供了类似与webpack的功能,devServer,plugin,loader等</h5>
             <br></br>
+            <h6 style={'color:red'}>--注: 本网站全部由lzy-React全家桶和lzy-webpack进行开发</h6>
+            <br></br>
             <p>提供了手写的htmlLoader和CSS打包器,已预装在lzy-webpack中</p>
             <p>脚手架安装项目  提供lzy-react-cli</p>
             <p></p>
@@ -21,8 +23,6 @@ export default function Description() {
             <p>Ruzy:全局状态管理器</p>
             <p>lzy-React-Router:适配的路由组件</p>
             <p>lzyUI: 适配的UI库(开发中)</p>
-            <br></br>
-            <p>注: 本网站全部由lzy-React全家桶和lzy-webpack进行开发</p>
             <Block />
 
             <h2>开发(学习)者的话</h2>
