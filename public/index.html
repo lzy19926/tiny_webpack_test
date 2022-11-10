@@ -5,16 +5,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Lzy-React-App</title>
 </head>
 
 <body>
-    <div id="root"></div>
+    <!-- Lzy-React-App -->
     <!-- 注: link和script的 src,href属性  会发起对应的请求,如果是绝对路径会发起网络请求请求数据,绝对路径则会去本地找文件内容
     如果跑在服务器上,则会向服务器对应路径发请求 -->
     <!-- 例子: 如下标签在devServer中打开时  <script src="./bundle.js"></script> 会发请求到localhost:8080/bundle.js -->
     <!-- 例子: 如果是静态打开html标签  则会去系统盘中查找文件 -->
-    <script src="./startServer.js"></script>
+    <div id="root"></div>
+
+    <script src="./script/startServer.js"></script>
     <link rel="stylesheet" href="./bundle.css">
     <script src="./bundle.js"></script>
 </body>

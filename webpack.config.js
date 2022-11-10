@@ -10,7 +10,15 @@ module.exports = {
     rootPath: __dirname, // 项目根路径
     entry: path.join(__dirname, '/src/index.lzy'), //配置打包入口
     output: path.join(__dirname, '/dist'), // 出口
-    hot: true,// 启动热更新
+
+
+    devServer: {
+        port: 8000,// 端口
+        hot: true,// 启动热更新
+        cors:true,// 配置是否能跨域
+        staticPath: './public',// 静态资源托管目录
+        publicPath:   ''         // 读取静态资源的目录
+    },
 
     plugins: [
         new HtmlPlugin({ fileName: 'index.html' }),   //! 打包生成html文件插件
