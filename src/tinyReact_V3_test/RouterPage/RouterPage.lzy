@@ -20,7 +20,6 @@ function importStatic(path) {
 importStatic('../../../public/img/github.jpg')
 //! Demo组件
 export default function RouterTest() {
-
     return (
         <LZY-TEMPLATE>
 

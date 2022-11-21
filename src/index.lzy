@@ -3,5 +3,6 @@ import LzyReact, { render } from '../my_node_modules/lzy-React/out/index_V3'
 // 路由页面
 import RouterPage from './tinyReact_V3_test/RouterPage/RouterPage.lzy'
 
+
 render(<RouterPage />, document.getElementById('root'))
 
