@@ -31,7 +31,7 @@ export default function Document() {
 
     return (
         <LZY-TEMPLATE>
-            <TabContainer dataSorce={tabsData} style="height:calc(100vh -60px)" />
+            <TabContainer dataSorce={tabsData} defaultActiveKey='about' style="height:calc(100vh -60px)" />
         </LZY-TEMPLATE>
     )
 }

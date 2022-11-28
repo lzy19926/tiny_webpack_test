@@ -11,24 +11,17 @@ render(<Document />, document.getElementById('root'))
 
 
 
-function Child(props, children, fiber) {
-    console.log(fiber);
-    const [num, setNum] = myUseState(0)
-    return (
-        <button onClick={() => { setNum(num + 1) }}>里层</button>
-    )
-}
+
 
 
 
 function App() {
 
-    const tabsData = [1, 2, 3]
-    const [num, setNum] = myUseState(0)
+    const [color, setColor] = myUseState("red")
     return (
         <div>
-            <button onClick={() => { setNum(num + 1) }}>外层</button>
-            <Child dataSorce={tabsData} />
+            <button onClick={() => { setColor('blue') }}>切换</button>
+            <div class={color}>1111</div>
         </div>
     )
 }
