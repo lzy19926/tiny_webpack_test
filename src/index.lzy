@@ -1,8 +1,34 @@
 // 引入基本库
-import LzyReact, { render } from '../my_node_modules/lzy-React/out/index_V3'
+import LzyReact, { render, myUseState } from '../my_node_modules/lzy-React/out/index_V3'
 // 路由页面
 import RouterPage from './tinyReact_V3_test/RouterPage/RouterPage.lzy'
 
 
-render(<RouterPage />, document.getElementById('root'))
+import Document from './tinyReact_V3_test/Document/index.lzy'
 
+render(<Document />, document.getElementById('root'))
+
+
+
+
+function Child(props, children, fiber) {
+    console.log(fiber);
+    const [num, setNum] = myUseState(0)
+    return (
+        <button onClick={() => { setNum(num + 1) }}>里层</button>
+    )
+}
+
+
+
+function App() {
+
+    const tabsData = [1, 2, 3]
+    const [num, setNum] = myUseState(0)
+    return (
+        <div>
+            <button onClick={() => { setNum(num + 1) }}>外层</button>
+            <Child dataSorce={tabsData} />
+        </div>
+    )
+}
