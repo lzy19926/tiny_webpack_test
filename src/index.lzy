@@ -1,18 +1,12 @@
 // 引入基本库
-import LzyReact, { render, myUseState } from '../my_node_modules/lzy-React/out/index_V3'
+import LzyReact, { render, myUseState, useStatic } from '../my_node_modules/lzy-React/out/index_V3'
 // 路由页面
 import RouterPage from './tinyReact_V3_test/RouterPage/RouterPage.lzy'
 
 
-import Document from './tinyReact_V3_test/Document/index.lzy'
+const imgSrc = requireStatic('/public/img/github.jpg')
 
-render(<Document />, document.getElementById('root'))
-
-
-
-
-
-
+render(<App />, document.getElementById('root'))
 
 
 function App() {
@@ -22,6 +16,8 @@ function App() {
         <div>
             <button onClick={() => { setColor('blue') }}>切换</button>
             <div class={color}>1111</div>
+
+            <img src={imgSrc} />
         </div>
     )
 }

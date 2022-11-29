@@ -18,7 +18,6 @@ module.exports = {
         hot: true,// 启动热更新
         cors: true,// 配置是否能跨域
         staticPath: './public',// 静态资源托管目录
-        publicPath: ''         // 读取静态资源的目录
     },
 
     plugins: [
