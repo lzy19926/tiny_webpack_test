@@ -4,7 +4,7 @@ import LzyReact, { render, myUseState, useStatic } from '../my_node_modules//lzy
 import RouterPage from './tinyReact_V3_test/RouterPage/RouterPage.lzy'
 
 
-const imgSrc = requireStatic('../public/img/github.jpg')
+const imgSrc = importStatic('../public/img/github.jpg')
 
 
 function App() {
@@ -17,5 +17,5 @@ function App() {
     )
 }
 
-render(<App />, document.getElementById('root'))
+render(<RouterPage />, document.getElementById('root'))
 

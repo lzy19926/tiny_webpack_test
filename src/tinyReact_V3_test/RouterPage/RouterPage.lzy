@@ -9,15 +9,8 @@ import Concurrent from '../Concurrent/Concurrent.lzy'  //时间切片测试
 import RuzyTest from '../RuzyTest/RuzyTest.lzy'        //适配lzyReact的全局状态管理器测试
 import Document from '../Document/index.lzy'
 
+const githubImg = importStatic('/public/img/gitHub2.webp')
 
-function importStatic(path) {
-    const res = path.lastIndexOf('public')
-    const p = path.slice(res + 6)
-    console.log(p);
-}
-
-
-importStatic('../../../public/img/github.jpg')
 //! Demo组件
 export default function RouterTest() {
     return (
@@ -33,10 +26,8 @@ export default function RouterTest() {
                 <img
                     style={'height:60px; cursor:pointer;'}
                     onClick={() => { window.open("https://github.com/lzy19926/tiny_webpack_test", "_blank") }}
-                    src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.longtask.net%2Fcss%2Fpics%2F2017-12-05-github.png&refer=http%3A%2F%2Fwww.longtask.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1669217381&t=7d0e31aff95a55ae2182a62065dc34dc"></img>
+                    src={githubImg} />
             </div>
-
-            <img src="../../../public/img/github.jpg" />
 
             <RouteContainer id="container1">
                 <Route path="/" component={<Document />} />
