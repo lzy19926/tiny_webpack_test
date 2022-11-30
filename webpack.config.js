@@ -17,7 +17,8 @@ module.exports = {
         socketPort: 3001,// 使用的webSocket的端口
         hot: true,// 启动热更新
         cors: true,// 配置是否能跨域
-        staticPath: './public',// 静态资源托管目录
+        staticPath: './public',// 静态资源托管文件夹
+        publicPath: 'http://localhost:8000'         // 读取静态资源的地址(比如localhost:8000) 默认为本服务的端口
     },
 
     plugins: [
