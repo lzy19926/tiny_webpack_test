@@ -1,13 +1,24 @@
 // 引入基本库
 import LzyReact, { render, myUseState, useStatic } from '../my_node_modules//lzy-React/out/index_V3'
-// 路由页面
-import RouterPage from './tinyReact_V3_test/RouterPage/RouterPage.lzy'
+// lzyReact文档
+import LzyReactDocument from './lzyReact_Document/RouterPage/RouterPage.lzy'
+// lzyWebpack文档
+import LzyWebpackDocument from './lzyWebpack_Document/Document/index.lzy'
+
+// 
+import MainPage from './mainPage/index.lzy'
 
 
-const imgSrc = importStatic('../public/img/github.jpg')
+
+
+render(<MainPage />, document.getElementById('root'))
+
 
 
 function App() {
+
+    const imgSrc = importStatic('../public/img/github.jpg')
+
     return (
         <div>
             <p class="blue">这是红p</p>
@@ -16,6 +27,3 @@ function App() {
         </div>
     )
 }
-
-render(<RouterPage />, document.getElementById('root'))
-

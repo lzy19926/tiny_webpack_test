@@ -1,0 +1,26 @@
+.lzy-dropStart {
+    width: 3px;
+    height: 150px;
+    position: fixed !important;
+    bottom: 2px;
+    left: 2px;
+    white-space: break-word;
+    z-index: 9;
+}
+
+
+.lzy-dropStart-active {
+    position: absolute;
+    inset: 0px 0px auto auto;
+    margin: 0px;
+    transform: translate3d(1595.79px, 86px, 0px);
+}
+
+
+.lzy-dropMenu {
+    z-index: 8 !important;
+}
+
+a {
+    text-decoration: none !important;
+}

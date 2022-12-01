@@ -1,0 +1,77 @@
+
+
+import LzyReact from '../../../my_node_modules/lzy-React/out/index_V3'
+import { CodeBlock, Block } from '../../../my_node_modules/lzy-LzyUI/lib/index'
+
+
+export default function Webpack() {
+
+    const code1 =
+        `const path = require('path')
+const HtmlPlugin = require('./my_node_modules/webpackPlugin/htmlPlugin')
+const CssExtractPlugin = require('./my_node_modules/webpackPlugin/cssExtractPlugin')
+const cssLoader = require('./my_node_modules/webpackLoader/lzy-cssLoader/cssLoader')
+const lzyLoader = require('./my_node_modules/webpackLoader/lzy-loader/index')
+
+
+module.exports = {
+    //模式选择 development开发模式 不会进行代码压缩  production:生产模式,会进行代码压缩
+    mode: 'development', 
+    //配置项目根路径
+    rootPath: __dirname, // 项目根路径
+    //配置打包入口
+    entry: path.join(__dirname, '/src/index.lzy'), 
+    //配置打包输出目录
+    output: path.join(__dirname, '/dist'), 
+
+    //devServer配置
+    devServer: {
+        //端口
+        port: 8000,
+        //使用的webSocket的端口
+        socketPort: 3001,
+        //启动热更新
+        hot: true,
+        //配置是否能跨域
+        cors: true,
+        ,//静态资源托管文件夹
+        staticPath: './public'
+        //读取静态资源的地址(比如localhost:8000) 默认为本服务的端口
+        publicPath: 'http://localhost:8000'         
+    },
+
+
+    // 配置插件
+    plugins: [
+        new HtmlPlugin({ fileName: 'index.html' }),   //! 打包生成html文件插件
+        new CssExtractPlugin({ fileName: 'index.css' }) //! 打包CSS插件
+    ],
+
+    // 配置loader
+    rules: [
+        {
+            test: /\.css$/,
+            use: [cssLoader] //! CSS尾缀的文件会通过cssLoader处理
+        },
+        {
+            test: /\.lzy$/,
+            use: [lzyLoader] //! lzy文件经过lzyloader处理
+        }
+    ]
+}
+    `
+
+
+    return (
+        <LZY-TEMPLATE>
+            <h2>配置</h2>
+            <Block />
+            <p>项目根目录创建webpack.config.js文件进行配置</p>
+            <p>以下是当前所有功能的配置项</p>
+            <p>不熟悉的朋友可以去翻一翻webpack文档</p>
+            <Block />
+
+            <CodeBlock codeStr={code1} />
+        </LZY-TEMPLATE>
+    )
+}

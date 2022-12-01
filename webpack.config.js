@@ -6,7 +6,7 @@ const lzyLoader = require('./my_node_modules/webpackLoader/lzy-loader/index')
 
 
 module.exports = {
-    mode: 'development', // development|production
+    mode: 'production', // development|production
     rootPath: __dirname, // 项目根路径
     entry: path.join(__dirname, '/src/index.lzy'), //配置打包入口
     output: path.join(__dirname, '/dist'), // 出口

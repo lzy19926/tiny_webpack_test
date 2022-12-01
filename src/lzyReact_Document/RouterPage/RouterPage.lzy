@@ -17,12 +17,12 @@ export default function RouterTest() {
         <LZY-TEMPLATE>
 
             <div class='mainPage-top'>
-                <h2>LzyReact1文档</h2>
+                <h2>LzyReact文档</h2>
                 <Link to="/demo" title='demo' id="container1" />
                 <Link to="/ruzyTest" title='ruzyTest' id="container1" />
                 <Link to="/concurrent" title='concurrent' id="container1" />
                 <Link to="/test" title='Test' id="container1" />
-                <Link to="/" title='文档' id="container1" />
+                <Link to="/lzyReact" title='文档' id="container1" />
                 <img
                     style={'height:60px; cursor:pointer;'}
                     onClick={() => { window.open("https://github.com/lzy19926/tiny_webpack_test", "_blank") }}
@@ -31,6 +31,7 @@ export default function RouterTest() {
 
             <RouteContainer id="container1">
                 <Route path="/" component={<Document />} />
+                <Route path="/lzyReact" component={<Document />} />
                 <Route path="/demo" component={<Demo />} />
                 <Route path="/test" component={<Test />} />
                 <Route path="/concurrent" component={<Concurrent />} />

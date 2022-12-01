@@ -1,0 +1,53 @@
+import LzyReact from '../../../my_node_modules//lzy-React/out/index_V3'
+import { Link } from '../../../my_node_modules/lzy-React-Router/lib/index.lzy'
+import { TabContainer } from '../../../my_node_modules/lzy-LzyUI/lib/index'
+
+import Config from '../pages/Config.lzy'
+import Build from '../pages/Build.lzy'
+import Mode from '../pages/Mode.lzy'
+import DevServer from '../pages/DevServer.lzy'
+import Public from '../pages/Public.lzy'
+import Plugin from '../pages/Plugin.lzy'
+import Loader from '../pages/Loader.lzy'
+import './index.css'
+
+
+const githubImg = importStatic('/public/img/gitHub2.webp')
+
+//! Demo组件
+export default function RouterPage() {
+
+
+    const openGitHub = () => {
+        window.open("https://github.com/lzy19926/tiny_webpack_test", "_blank")
+    }
+
+    return (
+        <LZY-TEMPLATE>
+
+            <div class='mainPage-top'>
+                <h2>LzyWebpack文档</h2>
+                <Link to="/lzyWebpack" title='文档' id="container2" />
+                <img class="gitHubImg" onClick={openGitHub} src={githubImg} />
+            </div>
+
+            <TabContainer
+                defaultActiveKey='build'
+                style="height:calc(100vh -60px)"
+                sideWidth={240}
+                dataSorce={[
+                    { title: '打包与构建', key: 'build', render: () => <Build /> },
+                    { title: '开发模式', key: 'mode', render: () => <Mode /> },
+                    { title: '配置', key: 'config', render: () => <Config /> },
+                    { title: 'devServer', key: 'devServer', render: () => <DevServer /> },
+                    { title: '静态资源托管', key: 'public', render: () => <Public /> },
+                    { title: '插件plugin', key: 'plugin', render: () => <Plugin /> },
+                    { title: 'loader', key: 'loader', render: () => <Loader /> },
+                ]} />
+        </LZY-TEMPLATE>
+    )
+}
+
+
+
+

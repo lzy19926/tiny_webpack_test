@@ -1,0 +1,38 @@
+import LzyReact, { myUseRef, myUseEffect } from '../../my_node_modules/lzy-React/out/index_V3'
+import { Link, RouteContainer, Route } from '../../my_node_modules/lzy-React-Router/lib/index.lzy'
+
+
+// lzyReact文档
+import LzyReactDocument from '../lzyReact_Document/RouterPage/RouterPage.lzy'
+// lzyWebpack文档
+import LzyWebpackDocument from '../lzyWebpack_Document/Document/index.lzy'
+
+import './index.css'
+// 测试页面
+
+
+//! Demo组件
+export default function DropStart() {
+
+    return (
+        <LZY-TEMPLATE>
+            <div class="dropend lzy-dropStart" onMouseover={() => { console.log(1); }}>
+                <button type="button" class="btn btn-secondary dropdown-toggle lzy-dropStart" data-bs-toggle="dropdown" aria-expanded="false">
+                </button>
+                <ul class="dropdown-menu lzy-dropMenu">
+                    <li class="dropdown-item"><Link to="/lzyReact" title='lzyReact文档' id="container2" /></li>
+                    <li class="dropdown-item"><Link to="/lzyWebpack" title='lzyWebpack文档' id="container2" /></li>
+                </ul>
+            </div >
+
+
+            <RouteContainer id="container2">
+                <Route path="/" component={<LzyReactDocument />} />
+                <Route path="/lzyReact" component={<LzyReactDocument />} />
+                <Route path="/lzyWebpack" component={<LzyWebpackDocument />} />
+            </RouteContainer>
+
+
+        </LZY-TEMPLATE>
+    )
+}
