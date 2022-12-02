@@ -1,0 +1,78 @@
+import LzyReact, { renderRoute } from '../my_node_modules//lzy-React/out/index_V3'
+
+
+
+// 渲染逻辑
+export function changeView() {
+
+    if (!window.$$routerMap) return console.warn('请创建对应的路由容器RouteContainer')
+
+    // 寻找注册的组件
+    const path = '/' + location.hash
+    const routeObj = window.$$routerMap[path]
+
+    if (!routeObj) return console.warn(`路由${path}未注册`)
+
+    // 渲染组件到对应的container上
+    const component = routeObj.component
+    const containerFiber = routeObj.containerFiber._child
+    debugger
+    renderRoute(component, containerFiber)
+
+}
+
+// 路由注册器
+export function RouteRegister(_, children, fiber) {
+
+    // 批量注册Route
+    children.forEach((child) => {
+        if (child.tag === 'Route') {
+            const { path, component } = child.props
+            if (!window.$$routerMap[path]) {
+                window.$$routerMap[path] = {
+                    containerFiber: fiber,
+                    component: component
+                }
+            } else {
+                console.error(`路由:${path}已被注册`);
+            }
+
+        }
+    })
+
+    return <div>{children}</div>
+}
+
+// 定义注册路由节点
+export function Route(props, children, fiber) {
+    const { path, component } = props
+
+    return <span></span>
+}
+
+// Link组件
+export function Link(props, children, fiber) {
+
+    const { to, title, id, style } = props
+    return (<a href={to} style={style}>{title}</a>)
+}
+
+// 路由容器
+export function HashRouter(props, children, fiber) {
+
+    // 创建并挂载容器到全局
+    if (!window.$$routerMap) {
+        window.$$routerMap = {}
+    }
+
+    window.$$routerMap = {
+        containerFiber: fiber
+    }
+
+    // 注册window路由事件
+    // window.addEventListener('load', changeView)
+    window.addEventListener('DOMContentLoaded', changeView)
+    window.addEventListener('hashchange', changeView)
+
+    return <div>{children}</div>
+}

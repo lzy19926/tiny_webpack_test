@@ -1,5 +1,6 @@
 import LzyReact from '../../../my_node_modules/lzy-React/out/index_V3'
 import { TabContainer } from '../../../my_node_modules/lzy-LzyUI/lib/index'
+import BaseLayout from '../BaseLayout/BaseLayout.lzy'
 import LzyUIPage from './pages/LzyUI.lzy'
 import Start from './pages/Start.lzy'
 import LzyWebpack from './pages/LzyWebpack.lzy'
@@ -30,12 +31,12 @@ export default function Document() {
 
 
     return (
-        <LZY-TEMPLATE>
+        <BaseLayout>
             <TabContainer dataSorce={tabsData}
                 defaultActiveKey='about'
                 sideWidth={240}
                 style="height:calc(100vh -60px)" />
-        </LZY-TEMPLATE>
+        </BaseLayout>
     )
 }
 

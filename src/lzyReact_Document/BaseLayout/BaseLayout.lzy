@@ -1,0 +1,31 @@
+import LzyReact from '../../../my_node_modules/lzy-React/out/index_V3'
+import { Link } from '../../../my_node_modules/lzy-React-Router/lib/index.lzy'
+import './index.css'
+
+
+
+const githubImg = importStatic('/public/img/gitHub2.webp')
+
+//! Demo组件
+export default function BaseLayout(_, children) {
+    return (
+        <LZY-TEMPLATE>
+
+            <div class='mainPage-top'>
+                <h2>LzyReact文档</h2>
+                <Link to="/#demo" title='demo' />
+                <Link to="/#ruzyTest" title='ruzyTest' />
+                <Link to="/#concurrent" title='concurrent' />
+                <Link to="/#test" title='Test' />
+                <Link to="/#lzyReact" title='文档' />
+                <img
+                    style={'height:60px; cursor:pointer;'}
+                    onClick={() => { window.open("https://github.com/lzy19926/tiny_webpack_test", "_blank") }}
+                    src={githubImg} />
+            </div>
+
+            {children}
+
+        </LZY-TEMPLATE>
+    )
+}

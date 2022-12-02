@@ -1,0 +1,24 @@
+import LzyReact from '../../my_node_modules/lzy-React/out/index_V3'
+import { Link } from '../../my_node_modules/lzy-React-Router/lib/index.lzy'
+import './index.css'
+
+//! Demo组件
+export default function DropStart() {
+
+    return (
+        <LZY-TEMPLATE>
+            <div class="dropend lzy-dropStart" onMouseover={() => { console.log(1); }}>
+                <button type="button" class="btn btn-secondary dropdown-toggle lzy-dropStart" data-bs-toggle="dropdown" aria-expanded="false">
+                </button>
+                <ul class="dropdown-menu lzy-dropMenu">
+                    <li class="dropdown-item">
+                        <Link to="/#lzyReact" title='lzyReact文档' id="container2" />
+                    </li>
+                    <li class="dropdown-item">
+                        <Link to="/#lzyWebpack" title='lzyWebpack文档' id="container2" />
+                    </li>
+                </ul>
+            </div >
+        </LZY-TEMPLATE>
+    )
+}

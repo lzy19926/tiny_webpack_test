@@ -27,7 +27,7 @@ export default function RouterPage() {
 
             <div class='mainPage-top'>
                 <h2>LzyWebpack文档</h2>
-                <Link to="/lzyWebpack" title='文档' id="container2" />
+                <Link to="/#lzyWebpack" title='文档' id="container2" />
                 <img class="gitHubImg" onClick={openGitHub} src={githubImg} />
             </div>
 

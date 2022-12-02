@@ -1,4 +1,5 @@
 import LzyReact, { myUseState, myUseEffect } from '../../../my_node_modules/lzy-React/out/index_V3'
+import BaseLayout from '../BaseLayout/BaseLayout.lzy'
 import './Demo.css'
 
 function Parent(props, children) {
@@ -49,7 +50,7 @@ export default function Demo(props) {
 
 
     return (
-        <LZY-TEMPLATE>
+        <BaseLayout>
             <h1> Demo</h1>
             <div class="alert alert-success" role="alert">
                 简单适配了bootStarp组件库
@@ -82,7 +83,7 @@ export default function Demo(props) {
                 arr.map((i, index) => <div key={index}>{i}</div>)
             }
 
-        </LZY-TEMPLATE>
+        </BaseLayout>
     )
 }
 

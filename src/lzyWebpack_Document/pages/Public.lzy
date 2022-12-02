@@ -22,8 +22,8 @@ publicPath: 'http://localhost:8000'
 },`
 
     const code3 =
-        `// requireStatic是一个内置函数,不需要引入,类似node的require
-const imgSrc = requireStatic('../../public/img.jpg')
+        `// importStatic是一个内置函数,不需要引入,类似node的require
+const imgSrc = importStatic('../../public/img.jpg')
 
 function App(){
     return (
@@ -54,7 +54,7 @@ function App(){
 
             <h2>调用静态资源</h2>
             <br />
-            <p>因为配置会产生路径问题,提供了requireStatic函数进行静态资源引入</p>
+            <p>因为配置会产生路径问题,提供了importStatic函数进行静态资源引入</p>
             <p>例子</p>
             <CodeBlock codeStr={code3} />
             <Block />

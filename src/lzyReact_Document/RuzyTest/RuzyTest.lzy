@@ -1,4 +1,5 @@
 import LzyReact from '../../../my_node_modules/lzy-React/out/index_V3'
+import BaseLayout from '../BaseLayout/BaseLayout.lzy'
 import store from './store'
 
 //! ------适配lzyReact的全局状态管理器测试------
@@ -19,13 +20,13 @@ function Child() {
 export default function RuzyTest() {
     const { name, age } = store.useState('name', 'age')
     return (
-        <LZY-TEMPLATE>
+        <BaseLayout>
             <h1>Ruzy全局状态管理器测试</h1>
             <button onClick={() => { store.setState({ age: age + 1 }) }}>全局age++</button>
             <button onClick={() => { store.setState({ name: '李四' }) }}>全局name改变</button>
             <Child />
             <Child />
             <Child />
-        </LZY-TEMPLATE>
+        </BaseLayout>
     )
 }

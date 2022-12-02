@@ -1,29 +1,54 @@
 // 引入基本库
-import LzyReact, { render, myUseState, useStatic } from '../my_node_modules//lzy-React/out/index_V3'
-// lzyReact文档
-import LzyReactDocument from './lzyReact_Document/RouterPage/RouterPage.lzy'
-// lzyWebpack文档
-import LzyWebpackDocument from './lzyWebpack_Document/Document/index.lzy'
+import LzyReact, { render } from '../my_node_modules//lzy-React/out/index_V3'
+// 路由页面
+import RoutePage from './RoutePage/RoutePage.lzy'
 
-// 
-import MainPage from './mainPage/index.lzy'
+
+import DropStart from './DropStart/index.lzy'
 
 
 
+// 测试路由
+// import { HashRouter, Route, Link, RouteRegister } from './Route.lzy'
 
-render(<MainPage />, document.getElementById('root'))
 
+function Page1() {
+    return <div>page1</div>
+}
+
+function Page2() {
+    return <div>page2</div>
+}
+
+function RouteTest() {
+    return (
+        <div>
+            <HashRouter></HashRouter>
+
+            <Link to="/#1" title='页面1' />
+            <Link to="/#2" title='页面2' />
+
+            <RouteRegister>
+                <Route path="/#1" component={<Page1 />} />
+                <Route path="/#2" component={<Page2 />} />
+            </RouteRegister>
+        </div>
+    )
+}
 
 
 function App() {
 
-    const imgSrc = importStatic('../public/img/github.jpg')
-
     return (
-        <div>
-            <p class="blue">这是红p</p>
-            <p class="blue">这是蓝p</p>
-            <img src={imgSrc} />
+        <div id='app'>
+            <RoutePage />
+            <DropStart />
         </div>
     )
 }
+
+
+render(
+    <App />
+    , document.getElementById('root')
+)

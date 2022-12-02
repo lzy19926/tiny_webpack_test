@@ -1,88 +1,36 @@
 import LzyReact, { myUseState } from '../../../my_node_modules/lzy-React/out/index_V3'
+import BaseLayout from '../BaseLayout/BaseLayout.lzy'
 
-function Group({ num }) {
+
+
+function Child({ num }) {
     return (
         <LZY-TEMPLATE>
-            <div>num:{num}</div>
-            <div>num:{num}</div>
-            <div>num:{num}</div>
-            <div>num:{num}</div>
-            <div>num:{num}</div>
-            <div>num:{num}</div>
-            <div>num:{num}</div>
-            <div>num:{num}</div>
-            <div>num:{num}</div>
             <div>num:{num}</div>
         </LZY-TEMPLATE>
     )
 }
-function Group2({ num }) {  // 100
-    return (
-        <LZY-TEMPLATE>
-            <Group num={num} />
-            <Group num={num} />
-            <Group num={num} />
-            <Group num={num} />
-            <Group num={num} />
-            <Group num={num} />
-            <Group num={num} />
-            <Group num={num} />
-            <Group num={num} />
-            <Group num={num} />
-        </LZY-TEMPLATE>
-    )
-}
-function Group3({ num }) {  // 1000
-    return (
-        <LZY-TEMPLATE>
-            <Group2 num={num} />
-            <Group2 num={num} />
-            <Group2 num={num} />
-            <Group2 num={num} />
-            <Group2 num={num} />
-            <Group2 num={num} />
-            <Group2 num={num} />
-            <Group2 num={num} />
-            <Group2 num={num} />
-            <Group2 num={num} />
-        </LZY-TEMPLATE>
-    )
-}
-function Group4({ num }) {
-    return (
-        <LZY-TEMPLATE>
-            <Group3 num={num} />
-            <Group3 num={num} />
-            <Group3 num={num} />
-            <Group3 num={num} />
-            <Group3 num={num} />
-            <Group3 num={num} />
-            <Group3 num={num} />
-            <Group3 num={num} />
-            <Group3 num={num} />
-            <Group3 num={num} />
-        </LZY-TEMPLATE>
-    )
-}
+
 export default function LongList() {
     const [num, setNum] = myUseState(1)
+    const [count, setCount] = myUseState(10)
     const arr = new Array(10000).fill('item')
     return (
-        <LZY-TEMPLATE>
+        <BaseLayout>
             <h1>Concurrent模式  切片渲染测试页面</h1>
-            <h2>组件数:100000</h2>
+            <h2>组件数:10000</h2>
+
+            {/* <h3>设置组件数量</h3>
+
+            <button onClick={() => { setCount(10) }}>10</button>
+            <button onClick={() => { setCount(100) }}>100</button>
+            <button onClick={() => { setCount(1000) }}>1000</button>
+            <button onClick={() => { setCount(10000) }}>10000</button> */}
+
             <button onClick={() => { setNum(num + 1) }}>点击+1</button>
 
-            <Group4 num={num} />
-            <Group4 num={num} />
-            <Group4 num={num} />
-            <Group4 num={num} />
-            <Group4 num={num} />
-            <Group4 num={num} />
-            <Group4 num={num} />
-            <Group4 num={num} />
-            <Group4 num={num} />
-            <Group4 num={num} />
-        </LZY-TEMPLATE>
+            {arr.map(() => <Child num={num} />)}
+
+        </BaseLayout>
     )
 }
