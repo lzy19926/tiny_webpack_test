@@ -18,12 +18,16 @@ export default function RoutePage() {
         <HashRouter>
             <Routes>
                 <Route path="/" component={<LzyReactDocument />} />
-                <Route path="/#lzyReact" component={<LzyReactDocument />} />
+
+                <Route path="/#lzyReact" component={<LzyReactDocument />} >
+                    <Route path="/#demo" component={<Demo />} />
+                    <Route path="/#test" component={<Test />} />
+                    <Route path="/#concurrent" component={<Concurrent />} />
+                    <Route path="/#ruzyTest" component={<RuzyTest />} />
+                </Route >
+
                 <Route path="/#lzyWebpack" component={<LzyWebpackDocument />} />
-                <Route path="/#demo" component={<Demo />} />
-                <Route path="/#test" component={<Test />} />
-                <Route path="/#concurrent" component={<Concurrent />} />
-                <Route path="/#ruzyTest" component={<RuzyTest />} />
+
             </Routes>
         </HashRouter>
     )
