@@ -1,22 +1,42 @@
-import LzyReact from '../../my_node_modules/lzy-React/out/index_V3'
+import LzyReact, { myUseState } from '../../my_node_modules/lzy-React/out/index_V3'
 import { Link } from '../../my_node_modules/lzy-React-Router/lib/index.lzy'
+import { Button } from '../../my_node_modules/lzy-LzyUI/lib/index'
 import './index.css'
 
 //! Demo组件
-export default function DropStart() {
+export default function DropStart(props) {
+
+    const { dataSorce } = props
+    const [show, setShow] = myUseState(false)
+
+
+    if (dataSorce) {
+        if (!Array.isArray(dataSorce)) {
+            console.warn('dataSorce 应是一个数组')
+        }
+    }
 
     return (
         <LZY-TEMPLATE>
-            <div class="dropend lzy-dropStart" onMouseover={() => { console.log(1); }}>
-                <button type="button" class="btn btn-secondary dropdown-toggle lzy-dropStart" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="dropend lzy-dropStart"
+                onMouseover={() => { setShow(true) }}
+                onMouseout={() => { setShow(false) }}
+            >
+                <button type="button" class="btn btn-secondary dropdown-toggle lzy-dropStart" data-bs-toggle="dropdown">
                 </button>
-                <ul class="dropdown-menu lzy-dropMenu">
-                    <li class="dropdown-item">
-                        <Link to="/#lzyReact" title='lzyReact文档' id="container2" />
+                <ul class={show ? "lzy-dropdown-menu lzy-dropdown-menu-active" : "lzy-dropdown-menu"}>
+
+                    <li class="lzy-dropdown-item">
+                        <Link to="/#lzyReact" title='lzyReact文档' />
                     </li>
-                    <li class="dropdown-item">
-                        <Link to="/#lzyWebpack" title='lzyWebpack文档' id="container2" />
+                    <li class="lzy-dropdown-item">
+                        <Link to="/#lzyWebpack" title='lzyWebpack文档' />
                     </li>
+                    <li class="lzy-dropdown-item">
+                        <Link to="/#lzyQiankun" title='lzyQiankun文档' />
+                    </li>
+
+                    
                 </ul>
             </div >
         </LZY-TEMPLATE>

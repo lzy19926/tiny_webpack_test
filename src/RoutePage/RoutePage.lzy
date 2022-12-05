@@ -6,6 +6,8 @@ import { HashRouter, Routes, Route } from '../../my_node_modules/lzy-React-Route
 // 页面
 import LzyReactDocument from '../lzyReact_Document/Document/index.lzy'
 import LzyWebpackDocument from '../lzyWebpack_Document/Document/index.lzy'
+import LzyQiankunDocument from '../lzyQiankun_Document/Document/index.lzy'
+
 import Demo from '../lzyReact_Document/Demo/Demo.lzy'                   //Demo
 import Test from '../lzyReact_Document/testPage/test.lzy'                //Test
 import Concurrent from '../lzyReact_Document/Concurrent/Concurrent.lzy'  //时间切片测试
@@ -28,6 +30,7 @@ export default function RoutePage() {
 
                 <Route path="/#lzyWebpack" component={<LzyWebpackDocument />} />
 
+                <Route path="/#lzyQiankun" component={<LzyQiankunDocument />} />
             </Routes>
         </HashRouter>
     )

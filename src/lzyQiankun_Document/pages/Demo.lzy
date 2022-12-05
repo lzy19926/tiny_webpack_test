@@ -1,0 +1,55 @@
+
+
+import LzyReact from '../../../my_node_modules/lzy-React/out/index_V3'
+import { Button, Block } from '../../../my_node_modules/lzy-LzyUI/lib/index'
+import { registerMicroApps, start } from '../../../my_node_modules/lzy-Qiankun/out/index';
+import { Link, to } from '../../../my_node_modules/lzy-React-Router/lib/index.lzy'
+import './index.css'
+
+// 注册子应用
+function registeMicroApps() {
+
+    registerMicroApps([
+        {
+            name: 'react app1',
+            entry: '//localhost:3000',
+            container: '#microApp_1',// 挂载点的id (挂载到哪个div中)
+            activeRule: '/#lzyQiankun/#microApp_1',// 微前端的路由
+        },
+        {
+            name: 'react app2',
+            entry: '//localhost:3005',
+            container: '#microApp_1',
+            activeRule: '/#lzyQiankun/#microApp_2',
+        },
+    ]);
+
+    start();
+}
+
+
+export default function Demo() {
+
+    const code1 = ` npm run t-build`
+    registeMicroApps()
+
+    return (
+        <LZY-TEMPLATE>
+            <h2>试一试</h2>
+            <Block />
+
+
+            <Button type="primary" onClick={() => { to('/#lzyQiankun/#microApp_1') }}>
+                微前端1
+            </Button>
+            <Button type="Success" onClick={() => { to('/#lzyQiankun/#microApp_2') }}>
+                微前端2
+            </Button>
+
+            <div class="microApps_container">
+                <div id='microApp_1' class="scale"></div>
+                <div id='microApp_2' class="scale"></div>
+            </div>
+        </LZY-TEMPLATE>
+    )
+}

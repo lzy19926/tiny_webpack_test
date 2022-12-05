@@ -16,7 +16,7 @@ export function changeView() {
     // 渲染组件到对应的container上
     const component = routeObj.component
     const containerFiber = routeObj.containerFiber._child
-    debugger
+    
     renderRoute(component, containerFiber)
 
 }

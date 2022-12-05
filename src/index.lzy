@@ -1,54 +1,22 @@
 // 引入基本库
-import LzyReact, { render } from '../my_node_modules//lzy-React/out/index_V3'
-// 路由页面
+import LzyReact, { render } from '../my_node_modules/lzy-React/out/index_V3'
+import { registerMicroApps, start } from '../my_node_modules/lzy-Qiankun/out/index';
+
+// 
+import DropStart from './DropStart/index.lzy'
 import RoutePage from './RoutePage/RoutePage.lzy'
 
 
-import DropStart from './DropStart/index.lzy'
-
-
-
-// 测试路由
-// import { HashRouter, Route, Link, RouteRegister } from './Route.lzy'
-
-
-function Page1() {
-    return <div>page1</div>
-}
-
-function Page2() {
-    return <div>page2</div>
-}
-
-function RouteTest() {
-    return (
-        <div>
-            <HashRouter></HashRouter>
-
-            <Link to="/#1" title='页面1' />
-            <Link to="/#2" title='页面2' />
-
-            <RouteRegister>
-                <Route path="/#1" component={<Page1 />} />
-                <Route path="/#2" component={<Page2 />} />
-            </RouteRegister>
-        </div>
-    )
-}
-
-
+// 启动基座项目
 function App() {
-
     return (
-        <div id='app'>
+        <div className="App">
             <RoutePage />
             <DropStart />
         </div>
-    )
+
+    );
 }
 
 
-render(
-    <App />
-    , document.getElementById('root')
-)
+render(<App />, document.getElementById('root'))
