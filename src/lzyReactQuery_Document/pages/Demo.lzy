@@ -1,0 +1,53 @@
+// query测试
+import LzyReact from '../../../my_node_modules/lzy-React/out/index_V3'
+import LzyQuery from '../../../my_node_modules/lzy-React-Query/out/index'
+// 延迟函数
+function sleep(timeout) {
+    return new Promise((resolve, _reject) => {
+        setTimeout(resolve, timeout)
+    })
+}
+// 请求函数
+let queryCount = 0
+const queryFnSuccess = async () => {
+    queryCount++
+    await sleep(1000)
+    return Promise.resolve('后端返回的数据')
+}
+const queryFnUnsuccess = async () => {
+    queryCount++
+    await sleep(1000)
+    return Promise.reject('rejected')
+}
+const queryAfterSuccess = async () => {
+    await sleep(1000)
+    if (queryCount === 0) {
+        queryCount++
+        return Promise.reject('rejected')
+    }
+    else {
+        queryCount++
+        return Promise.resolve('后端返回的数据')
+    }
+}
+const queryFnUndefined = async () => {
+    queryCount++
+    await sleep(1000)
+    return Promise.resolve(undefined)
+}
+
+
+//! 因为react在判断空字符串时,不会生成对应的fiber, diff时生成的新element未添加到dom树中
+//! 原因: reconcile遍历的是fiber而不是element,需要placement节点(新ele?)
+// 故这里使用空格作为初始值
+const queryStore = new LzyQuery({
+    Query_1: { fn: undefined, initData: ' ' },
+    Query_2: { fn: undefined, initData: ' ' },
+})
+
+
+
+export default function Query() {
+    const result = queryStore.useQuery(['Query_1'], queryAfterSuccess)
+    return <div>数据:{result.data}  状态:{result.status}</div>
+}

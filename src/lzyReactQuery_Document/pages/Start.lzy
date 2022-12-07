@@ -1,0 +1,53 @@
+
+
+import LzyReact from '../../../my_node_modules/lzy-React/out/index_V3'
+import { CodeBlock, Block } from '../../../my_node_modules/lzy-LzyUI/lib/index'
+
+
+export default function Start() {
+
+    const code1 =
+        `import LzyQuery from '../../../my_node_modules/lzy-React-Query/out/index'
+
+export default new LzyQuery({
+    Query_1: { fn: undefined, initData: undefined },
+    Query_2: { fn: undefined, initData: undefined },
+})`
+
+    const code2 =
+        `import queryStore from './queryStore.lzy'
+
+// 定义一个返回promise的查询函数
+const queryFn = axios("GET","http://localhost:8080/api/user")
+
+export default function Query() {
+    // 使用useQuery,传入QueryKey,queryFn 和options(可选)
+    const result = queryStore.useQuery(['Query_1'], queryFn)
+    return <div>数据:{result.data}  状态:{result.status}</div>
+}`
+
+    return (
+        <LZY-TEMPLATE>
+            <h2>基本使用</h2>
+            <br />
+            <p>原生TS手写的类react-Query工具</p>
+            <p>提供了与原版类似的useQuery API,和其他配置</p>
+            <p>原理相似,但使用了不同的架构</p>
+
+            <Block />
+
+            <h3>创建一个Store</h3>
+            <p>创建store并初始化一些数据</p>
+            <p>定义一个数据的key,初始请求函数fn(可选),initData(可选)</p>
+            <CodeBlock codeStr={code1} />
+            <Block />
+
+            <h3>使用Query</h3>
+            <br />
+            <p>useQuery方法会持续轮询请求数据</p>
+            <CodeBlock codeStr={code2} />
+            <Block />
+
+        </LZY-TEMPLATE>
+    )
+}

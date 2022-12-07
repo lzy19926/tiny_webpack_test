@@ -1,0 +1,44 @@
+import LzyReact from '../../../my_node_modules//lzy-React/out/index_V3'
+import { Link } from '../../../my_node_modules/lzy-React-Router/lib/index.lzy'
+import { TabContainer } from '../../../my_node_modules/lzy-LzyUI/lib/index'
+
+import Demo from '../pages/Demo.lzy'
+import Start from '../pages/Start.lzy'
+import State from '../pages/State.lzy'
+import './index.css'
+
+
+const githubImg = importStatic('/public/img/gitHub2.webp')
+
+//! Demo组件
+export default function RouterPage() {
+
+    const openGitHub = () => {
+        window.open("https://github.com/lzy19926/tiny_webpack_test", "_blank")
+    }
+
+    return (
+        <LZY-TEMPLATE>
+
+            <div class='mainPage-top'>
+                <h2>Lzy-React-Query文档</h2>
+                <Link to="/#lzyReactQuery" title='文档' />
+                <img class="gitHubImg" onClick={openGitHub} src={githubImg} />
+            </div>
+
+            <TabContainer
+                defaultActiveKey='demo'
+                style="height:calc(100vh -60px)"
+                sideWidth={240}
+                dataSorce={[
+                    { title: 'Demo', key: 'demo', render: () => <Demo /> },
+                    { title: '基本使用', key: 'start', render: () => <Start /> },
+                    { title: '请求状态与新鲜时间', key: 'state', render: () => <State /> }
+                ]} />
+        </LZY-TEMPLATE>
+    )
+}
+
+
+
+

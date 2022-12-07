@@ -7,6 +7,7 @@ import { HashRouter, Routes, Route } from '../../my_node_modules/lzy-React-Route
 import LzyReactDocument from '../lzyReact_Document/Document/index.lzy'
 import LzyWebpackDocument from '../lzyWebpack_Document/Document/index.lzy'
 import LzyQiankunDocument from '../lzyQiankun_Document/Document/index.lzy'
+import LzyReactQueryDocument from '../lzyReactQuery_Document/Document/index.lzy'
 
 import Demo from '../lzyReact_Document/Demo/Demo.lzy'                   //Demo
 import Test from '../lzyReact_Document/testPage/test.lzy'                //Test
@@ -31,6 +32,8 @@ export default function RoutePage() {
                 <Route path="/#lzyWebpack" component={<LzyWebpackDocument />} />
 
                 <Route path="/#lzyQiankun" component={<LzyQiankunDocument />} />
+
+                <Route path="/#lzyReactQuery" component={<LzyReactQueryDocument />} />
             </Routes>
         </HashRouter>
     )

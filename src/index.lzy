@@ -1,6 +1,5 @@
 // 引入基本库
 import LzyReact, { render } from '../my_node_modules/lzy-React/out/index_V3'
-import { registerMicroApps, start } from '../my_node_modules/lzy-Qiankun/out/index';
 
 // 
 import DropStart from './DropStart/index.lzy'
@@ -20,3 +19,6 @@ function App() {
 
 
 render(<App />, document.getElementById('root'))
+
+
+

@@ -1,0 +1,72 @@
+import LzyReact from '../../../my_node_modules/lzy-React/out/index_V3'
+import { CodeBlock, Block } from '../../../my_node_modules/lzy-LzyUI/lib/index'
+
+export default function State() {
+
+    const code1 =
+        `
+export default function Query() {
+    const {data,status,fetchStatus,error} = queryStore.useQuery(['Query_1'], queryFn)
+
+    return (
+      <div>
+        <p>数据:{data}</p>
+        <p>请求状态:{status}</p>
+        <p>查询状态:{fetchStatus}</p>
+        <p>错误:{error}</p>
+      </div>
+        )
+}`
+
+    const code2 =
+        `
+        const options = {
+            onSuccess?: ()=>{},
+            onFail?:    ()=>{},
+            onError?:   ()=>{},
+        }
+        const result = queryStore.useQuery(['Query_1'], queryFn,options)
+        `
+
+    const code3 =
+        `
+        const options = {
+            staleTime?: 1000*30,//数据新鲜时间ms
+            cacheTime?: 1000*60*5,//数据缓存过期时间
+        }
+        const result = queryStore.useQuery(['Query_1'], queryFn,options)
+        `
+    return (
+        <LZY-TEMPLATE>
+            <h2>状态查询</h2>
+            <br />
+            <Block />
+
+            <h3>请求状态和查询状态</h3>
+            <p>请求状态分为三种: 'loading' | 'error' | 'success'</p>
+            <p>分别为请求中,请求失败,请求成功</p>
+
+            <p>查询状态分为三种: 'fetching' | 'paused' | 'idle'</p>
+            <p>分别为查询中,暂停查询,空闲</p>
+
+            <p>可在结果对象中查看状态</p>
+            <CodeBlock codeStr={code1} />
+            <Block />
+
+            <h3>查询回调</h3>
+            <br />
+            <p>可配置查询结束后的回调</p>
+            <CodeBlock codeStr={code2} />
+            <Block />
+
+            <h3>新鲜时间与缓存时间</h3>
+            <br />
+            <p>后端数据有过期时间,这个时间被成为新鲜时间</p>
+            <p>在新鲜时间内,query不会去重复请求,会直接从缓存中获取数据</p>
+            <p>前端数据缓存过期时间,过期后会自动删除这个Query</p>
+            <p>可进行配置</p>
+            <CodeBlock codeStr={code3} />
+            <Block />
+        </LZY-TEMPLATE>
+    )
+}

@@ -1,0 +1,14 @@
+
+// isStale: () => boolean
+// refetch: () => any
+// remove: () => any
+
+
+
+// retry?: number | false, //失败是否重复请求(请求次数)
+// retryDelay?: number,//失败重复请求延迟
+// autoFetchInterval?: number | false,//轮询时间
+// enable?: boolean //请求是否可用
+// onSuccess?: Function,// 请求完成回调
+// onFail?: Function,
+// onError?: Function

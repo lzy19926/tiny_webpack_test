@@ -1,6 +1,5 @@
 import LzyReact, { myUseState } from '../../my_node_modules/lzy-React/out/index_V3'
 import { Link } from '../../my_node_modules/lzy-React-Router/lib/index.lzy'
-import { Button } from '../../my_node_modules/lzy-LzyUI/lib/index'
 import './index.css'
 
 //! Demo组件
@@ -29,14 +28,19 @@ export default function DropStart(props) {
                     <li class="lzy-dropdown-item">
                         <Link to="/#lzyReact" title='lzyReact文档' />
                     </li>
+
                     <li class="lzy-dropdown-item">
                         <Link to="/#lzyWebpack" title='lzyWebpack文档' />
                     </li>
+
                     <li class="lzy-dropdown-item">
                         <Link to="/#lzyQiankun" title='lzyQiankun文档' />
                     </li>
 
-                    
+                    <li class="lzy-dropdown-item">
+                        <Link to="/#lzyReactQuery" title='lzyReactQuery文档' />
+                    </li>
+
                 </ul>
             </div >
         </LZY-TEMPLATE>
