@@ -44,7 +44,7 @@ export default function Query() {
 
             <h3>使用Query</h3>
             <br />
-            <p>useQuery方法会持续轮询请求数据</p>
+            <p>提供useQueryAPI</p>
             <CodeBlock codeStr={code2} />
             <Block />
 

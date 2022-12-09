@@ -1,14 +1,54 @@
-
-// isStale: () => boolean
-// refetch: () => any
-// remove: () => any
+import LzyReact from '../../../my_node_modules/lzy-React/out/index_V3'
+import { CodeBlock, Block } from '../../../my_node_modules/lzy-LzyUI/lib/index'
 
 
+export default function Retry() {
 
-// retry?: number | false, //失败是否重复请求(请求次数)
-// retryDelay?: number,//失败重复请求延迟
-// autoFetchInterval?: number | false,//轮询时间
-// enable?: boolean //请求是否可用
-// onSuccess?: Function,// 请求完成回调
-// onFail?: Function,
-// onError?: Function
+    const code1 =
+        `
+const options = {
+    retry?: 3, // 请求失败后重复请求次数,多次失败后状态改为error(默认为3)
+    retryDelay?: 100, //失败重复请求延迟ms
+}
+const result = queryStore.useQuery(['Query_1'], queryFn,options)
+`
+
+    const code2 =
+        `const {data,refetch} = queryStore.useQuery(['Query_1'], queryFn,options)
+// 提供refetch方法执行手动请求        
+refetch()
+        `
+
+    const code3 =
+        `const options = {
+    autoFetchInterval:1000*10 // 每隔10s自动请求数据
+}
+const result = queryStore.useQuery(['Query_1'], queryFn,options)
+`
+    return (
+        <LZY-TEMPLATE>
+            <h2>重复请求</h2>
+            <br />
+            <p>与原版一样,提供了重复请求机制(通过调用内部retryer实现重复请求)</p>
+            <Block />
+
+            <h3>失败重复</h3>
+            <CodeBlock codeStr={code1} />
+            <Block />
+
+            <h3>手动更新</h3>
+            <br />
+            <p>每次页面渲染,且超过新鲜时间后,会重新请求数据</p>
+            <p>也提供了手动更新的方法</p>
+            <CodeBlock codeStr={code2} />
+            <Block />
+
+            <h3>自动更新</h3>
+            <br />
+            <p>可通过配置设置自动轮询更新</p>
+            <CodeBlock codeStr={code3} />
+            <Block />
+
+        </LZY-TEMPLATE>
+    )
+}

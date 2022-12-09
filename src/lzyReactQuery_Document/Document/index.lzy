@@ -5,6 +5,7 @@ import { TabContainer } from '../../../my_node_modules/lzy-LzyUI/lib/index'
 import Demo from '../pages/Demo.lzy'
 import Start from '../pages/Start.lzy'
 import State from '../pages/State.lzy'
+import Retry from '../pages/Retry.lzy'
 import './index.css'
 
 
@@ -33,7 +34,8 @@ export default function RouterPage() {
                 dataSorce={[
                     { title: 'Demo', key: 'demo', render: () => <Demo /> },
                     { title: '基本使用', key: 'start', render: () => <Start /> },
-                    { title: '请求状态与新鲜时间', key: 'state', render: () => <State /> }
+                    { title: '请求状态与新鲜时间', key: 'state', render: () => <State /> },
+                    { title: '重复请求', key: 'retry', render: () => <Retry /> }
                 ]} />
         </LZY-TEMPLATE>
     )

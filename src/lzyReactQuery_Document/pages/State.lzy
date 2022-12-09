@@ -20,21 +20,25 @@ export default function Query() {
 
     const code2 =
         `
-        const options = {
-            onSuccess?: ()=>{},
-            onFail?:    ()=>{},
-            onError?:   ()=>{},
-        }
-        const result = queryStore.useQuery(['Query_1'], queryFn,options)
+const options = {
+    onSuccess?: ()=>{},
+    onFail?:    ()=>{},
+    onError?:   ()=>{},
+}
+const result = queryStore.useQuery(['Query_1'], queryFn,options)
         `
 
     const code3 =
         `
-        const options = {
-            staleTime?: 1000*30,//数据新鲜时间ms
-            cacheTime?: 1000*60*5,//数据缓存过期时间
-        }
-        const result = queryStore.useQuery(['Query_1'], queryFn,options)
+const options = {
+    staleTime?: 1000*30,//数据新鲜时间ms
+    cacheTime?: 1000*60*5,//数据缓存过期时间
+}
+const {data,isStale,remove} = queryStore.useQuery(['Query_1'], queryFn,options)
+// 结果中提供了isStale方法用于获取数据新鲜状态
+const isDataStale:boolean = isStale() 
+// 结果中提供了remove用于手动删除当前Query
+remove()
         `
     return (
         <LZY-TEMPLATE>
