@@ -1,5 +1,5 @@
 // 引入基本库
-import LzyReact, { render } from '../my_node_modules/lzy-React/out/index_V3'
+import LzyReact, { render, myUseState } from '../my_node_modules/lzy-React/out/index_V3'
 
 // 
 import DropStart from './DropStart/index.lzy'
@@ -8,6 +8,9 @@ import RoutePage from './RoutePage/RoutePage.lzy'
 
 // 启动基座项目
 function App() {
+
+    const [a, setA] = myUseState()
+
     return (
         <div className="App">
             <RoutePage />

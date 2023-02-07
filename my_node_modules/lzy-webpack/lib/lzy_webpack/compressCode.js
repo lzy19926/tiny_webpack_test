@@ -2,7 +2,6 @@ const UglifyJS = require("uglify-js");
 const { minify } = require("terser");
 
 
-
 //! 代码压缩相关
 async function compressByUMinify(code) {
     var result = await minify(code, {
@@ -24,6 +23,10 @@ async function compressByUMinify(code) {
 function compressByUglify(code) {
     // 压缩配置
     const options = {
+        output: {
+            beautify: true,// 格式美化
+            preamble: "/* -------------------阳九的lzy-mini-webpack---------------------------  */"
+        },
         compress: {
             evaluate: true, // 计算常量表达式
             booleans: true, //优化布尔运算
@@ -34,16 +37,27 @@ function compressByUglify(code) {
     return UglifyJS.minify(code, options).code;
 }
 
-//todo 未完成  格式化代码
-async function beautifly(code) {
-    var result = await minify(code, {
+//! 格式化代码
+function justBeautifly(code) {
+    const options = {
+        annotations: false,
         compress: false,
-        format: {
-            beautify: true
-        }
-    })
-    return result.code
+        expression: false,
+        module: false,
+        warnings: false,
+        mangle: false,
+        parse: false,
+        toplevel: false,
+
+        output: {
+            beautify: true,// 格式美化
+            comments: true,
+            preserve_line: false,
+            preamble: "/* -------------------阳九的lzy-mini-webpack---------------------------  */"
+        },
+    }
+    return UglifyJS.minify(code, options).code;
 }
 
 
-module.exports = { compressByUMinify, compressByUglify, beautifly }
+module.exports = { compressByUMinify, compressByUglify, justBeautifly }

@@ -14,10 +14,6 @@
     "@babel/preset-react": "^7.18.6"
   },
   "dependencies": {
-    "lzy-esbuild": "file:my_node_modules/lzy-esBuild",
-    "lzy-react": "file:my_node_modules/lzy-React",
-    "lzy-watchpack": "file:my_node_modules/lzy-watchpack",
-    "lzy-webpack": "file:my_node_modules/lzy-webpack",
     "prismjs": "^1.29.0"
   }
 }
