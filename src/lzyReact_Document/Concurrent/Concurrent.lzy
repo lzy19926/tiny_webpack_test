@@ -14,11 +14,11 @@ function Child({ num }) {
 export default function LongList() {
     const [num, setNum] = myUseState(1)
     const [count, setCount] = myUseState(10)
-    const arr = new Array(10000).fill('item')
+    const arr = new Array(5000).fill('item')
     return (
         <BaseLayout>
             <h1>Concurrent模式  切片渲染测试页面</h1>
-            <h2>组件数:10000</h2>
+            <h2>组件数:5000</h2>
 
             {/* <h3>设置组件数量</h3>
 

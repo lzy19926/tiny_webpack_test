@@ -21,7 +21,19 @@ function App() {
 }
 
 
-render(<App />, document.getElementById('root'))
+function Test() {
+
+    function aaa() { console.log('子组件'); }
+    function bbb() { console.log('父组件'); }
+
+    return (
+        <div onClick={bbb}>
+            <button onClick={aaa}>print</button>
+        </div>
+    )
+}
+
+render(<Test />, document.getElementById('root'))
 
 
 

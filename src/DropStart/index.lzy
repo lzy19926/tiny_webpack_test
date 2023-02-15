@@ -41,6 +41,10 @@ export default function DropStart(props) {
                         <Link to="/#lzyReactQuery" title='lzyReactQuery文档' />
                     </li>
 
+                    <li class="lzy-dropdown-item">
+                        <Link to="/#chatGPT" title='chatGPT' />
+                    </li>
+
                 </ul>
             </div >
         </LZY-TEMPLATE>

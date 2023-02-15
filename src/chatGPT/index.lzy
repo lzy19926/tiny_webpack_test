@@ -1,0 +1,30 @@
+import LzyReact, { myUseState } from '../../my_node_modules//lzy-React/out/index_V3'
+import { Button } from '../../my_node_modules/lzy-LzyUI/lib/index'
+
+
+//! ChatGPT聊天组件
+export default function ChatGPT() {
+    const [msg, setMsg] = myUseState('')
+    const [message, setMessage] = myUseState("无消息")
+
+    const sendMessage = async () => {
+        if (!msg) return
+        const res = await fetch(`http://localhost:8080/API/message?msg=${msg}`, {
+            method: 'GET',
+        })
+        const { data } = await res.json()
+        setMessage(data)
+    }
+
+    return (
+        <LZY-TEMPLATE>
+            <h2>测试用chatGPT桌面版Demo</h2>
+
+            <input
+                value={msg}
+                onChange={(e) => { setMsg(e.target.value) }} />
+            <Button type="primary" onClick={sendMessage}>发送数据</Button>
+            <div>{message}</div>
+        </LZY-TEMPLATE>
+    )
+}

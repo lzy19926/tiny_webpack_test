@@ -1,5 +1,4 @@
 
-
 // 基本库
 import LzyReact from '../../my_node_modules/lzy-React/out/index_V3'
 import { HashRouter, Routes, Route } from '../../my_node_modules/lzy-React-Router/lib/index.lzy'
@@ -8,6 +7,7 @@ import LzyReactDocument from '../lzyReact_Document/Document/index.lzy'
 import LzyWebpackDocument from '../lzyWebpack_Document/Document/index.lzy'
 import LzyQiankunDocument from '../lzyQiankun_Document/Document/index.lzy'
 import LzyReactQueryDocument from '../lzyReactQuery_Document/Document/index.lzy'
+import ChatGPT from '../chatGPT/index.lzy'
 
 import Demo from '../lzyReact_Document/Demo/Demo.lzy'                   //Demo
 import Test from '../lzyReact_Document/testPage/test.lzy'                //Test
@@ -34,6 +34,8 @@ export default function RoutePage() {
                 <Route path="/#lzyQiankun" component={<LzyQiankunDocument />} />
 
                 <Route path="/#lzyReactQuery" component={<LzyReactQueryDocument />} />
+
+                <Route path="/#chatGPT" component={<ChatGPT />} />
             </Routes>
         </HashRouter>
     )
