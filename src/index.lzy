@@ -20,20 +20,54 @@ function App() {
     );
 }
 
+// 合成事件系统测试
+function EventTest() {
 
-function Test() {
-
-    function aaa() { console.log('子组件'); }
-    function bbb() { console.log('父组件'); }
+    function aaa(e) { console.log('子组件', e); }
+    function bbb(e) { console.log('父组件', e); }
+    function ccc(e) { console.log('爷组件', e); }
 
     return (
-        <div onClick={bbb}>
-            <button onClick={aaa}>print</button>
+        <div>
+            <div onClick={ccc}>
+                <div onClick={bbb}>
+                    <button onClick={aaa}>冒泡</button>
+                </div>
+            </div>
+            <br />
+            <div onClickCapture={ccc}>
+                <div onClickCapture={bbb}>
+                    <button onClickCapture={aaa}>Capture捕获</button>
+                </div>
+            </div>
+            <br />
+            <div onClickCapture={ccc} onClick={ccc}>
+                <div onClickCapture={bbb} onClick={bbb}>
+                    <button onClickCapture={aaa} onClick={aaa}>冒泡与捕获共存</button>
+                </div>
+            </div>
         </div>
     )
 }
 
-render(<Test />, document.getElementById('root'))
+// useContext系统测试
+function ContextTest() {
+
+    const consumer = {
+        Provider: {
+            $$typeof: Symbol.for('lzyContextProviderElement'),
+            name: '1'
+        }
+    }
+
+
+    return (
+        <consumer.Provider>
+            <div>文字</div>
+        </consumer.Provider>
+    )
+}
+render(<ContextTest />, document.getElementById('root'))
 
 
 
