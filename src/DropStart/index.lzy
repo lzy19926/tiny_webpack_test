@@ -38,6 +38,10 @@ export default function DropStart(props) {
                     </li>
 
                     <li class="lzy-dropdown-item">
+                        <Link to="/#lzyMicroApp" title='lzyMicroApp文档' />
+                    </li>
+
+                    <li class="lzy-dropdown-item">
                         <Link to="/#lzyReactQuery" title='lzyReactQuery文档' />
                     </li>
 

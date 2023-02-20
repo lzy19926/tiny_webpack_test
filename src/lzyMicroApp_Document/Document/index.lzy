@@ -1,0 +1,43 @@
+import LzyReact from '../../../my_node_modules//lzy-React/out/index_V3'
+import { Link } from '../../../my_node_modules/lzy-React-Router/lib/index.lzy'
+import { TabContainer } from '../../../my_node_modules/lzy-LzyUI/lib/index'
+
+import Demo from '../pages/Demo.lzy'
+import Start from '../pages/Start.lzy'
+import './index.css'
+
+
+const githubImg = importStatic('/public/img/gitHub2.webp')
+
+//! Demo组件
+export default function RouterPage() {
+
+
+    const openGitHub = () => {
+        window.open("https://github.com/lzy19926/tiny_webpack_test", "_blank")
+    }
+
+    return (
+        <LZY-TEMPLATE>
+
+            <div class='mainPage-top'>
+                <h2>LzyMicroApp文档</h2>
+                <Link to="/#lzyMicroApp" title='文档' />
+                <img class="gitHubImg" onClick={openGitHub} src={githubImg} />
+            </div>
+
+            <TabContainer
+                defaultActiveKey='start'
+                style="height:calc(100vh -60px)"
+                sideWidth={240}
+                dataSorce={[
+                    { title: '开始', key: 'start', render: () => <Start /> },
+                    { title: '试一试', key: 'demo', render: () => <Demo /> }
+                ]} />
+        </LZY-TEMPLATE>
+    )
+}
+
+
+
+

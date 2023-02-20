@@ -6,6 +6,7 @@ import { HashRouter, Routes, Route } from '../../my_node_modules/lzy-React-Route
 import LzyReactDocument from '../lzyReact_Document/Document/index.lzy'
 import LzyWebpackDocument from '../lzyWebpack_Document/Document/index.lzy'
 import LzyQiankunDocument from '../lzyQiankun_Document/Document/index.lzy'
+import LzyMicroAppDocument from '../lzyMicroApp_Document/Document/index.lzy'
 import LzyReactQueryDocument from '../lzyReactQuery_Document/Document/index.lzy'
 import ChatGPT from '../chatGPT/index.lzy'
 
@@ -32,6 +33,8 @@ export default function RoutePage() {
                 <Route path="/#lzyWebpack" component={<LzyWebpackDocument />} />
 
                 <Route path="/#lzyQiankun" component={<LzyQiankunDocument />} />
+
+                <Route path="/#lzyMicroApp" component={<LzyMicroAppDocument />} />
 
                 <Route path="/#lzyReactQuery" component={<LzyReactQueryDocument />} />
 

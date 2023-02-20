@@ -1,0 +1,109 @@
+
+import LzyReact from '../../../my_node_modules/lzy-React/out/index_V3'
+import { CodeBlock, Block } from '../../../my_node_modules/lzy-LzyUI/lib/index'
+
+
+
+export default function Start() {
+
+    const code1 = `// 基座项目的index.lzy
+    import LzyReact, { render } from '../my_node_modules/lzy-React/out/index_V3'
+import { registerMicroApps, start } from '../../../my_node_modules/lzy-Qiankun/out/index';
+
+// 注册微前端
+registerMicroApps([
+    {
+        name: 'react app1',// 子应用名
+        entry: '//localhost:3000',// 子应用的端口
+        container: '#microApp_1',// 挂载点的id (挂载到哪个div中)
+        activeRule: '/#lzyQiankun/#microApp_1',// 微前端的路由
+    },
+    {
+        name: 'react app2',
+        entry: '//localhost:3005',
+        container: '#microApp_2',
+        activeRule: '/#lzyQiankun/#microApp_2',
+    },
+]);
+
+// 启动微前端
+start();
+
+
+function App() {
+    return (
+        <div className="App">
+            <div id='microApp_1'></div> // 子应用挂载点
+            <div id='microApp_2'></div>
+        </div>
+
+    );
+}
+
+render(<App />, document.getElementById('root'))
+    `
+    const code2 = `
+import LzyReact, { render, unmountAtRoot } from '../my_node_modules/lzy-React/out/index_V3'
+
+function App() {
+    return <div className="title">微前端1 运行于port:3000</div>
+}
+
+// 导出三个应用的生命周期函数
+export  function bootstarp() {
+    console.log('微前端1 bootstarp');
+}
+
+export  function mount({ container }) {
+    render(<App />, container)
+}
+
+export  function unmount({ container }) {
+    unmountAtRoot(container)
+}
+    `
+    const code3 = `// 微应用的webpack.config.js配置文件
+devServer: {
+    port: 3000,// 端口
+    socketPort: 3001,// 使用的webSocket的端口
+    cors: true,// 配置是否能跨域
+    publicPath: 'http://localhost:3000' // 读取静态资源的地址(比如localhost:8000) 默认为本服务的端口
+},
+    `
+
+    return (
+        <LZY-TEMPLATE>
+            <h2>开始</h2>
+            <br />
+            <p>原生TS手写的微前端框架,原理和配置借用了qiankun的思路</p>
+            <p>项目运行在手写的webpack中,允许配置端口,跨域,静态资源访问地址</p>
+            <Block />
+
+            <h3>创建基座项目</h3>
+            <br />
+            <p>1. 创建一个React项目并安装lzy-Qiankun</p>
+            <p>2. 注册子应用</p>
+            <p>3. 基座中准备微应用的挂载点dom</p>
+            <CodeBlock codeStr={code1} />
+            <Block />
+
+            <h3>创建微应用</h3>
+            <br />
+            <p>1. 创建一个React项目作为微应用</p>
+            <p>2. 导出三个应用的生命周期函数</p>
+            <CodeBlock codeStr={code2} />
+            <Block />
+
+            <h3>配置微应用的webpack</h3>
+            <br />
+            <p>1. 通过webpack配置子应用的端口,允许跨域,静态资源访问的地址</p>
+            <CodeBlock codeStr={code3} />
+            <Block />
+
+            <h3>启动项目</h3>
+            <p>分别在3000,3005启动两个微应用</p>
+            <p>在8080端口启动基座项目</p>
+            <p>即可通过路由切换渲染子应用</p>
+        </LZY-TEMPLATE>
+    )
+}

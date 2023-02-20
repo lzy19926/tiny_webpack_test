@@ -8,13 +8,13 @@ const lzyLoader = require('./my_node_modules/webpackLoader/lzy-loader/index')
 module.exports = {
     mode: 'development', // development|production
     rootPath: __dirname, // 项目根路径
-    entry: path.join(__dirname, '/src/index.lzy'), //配置打包入口
+    entry: path.join(__dirname, '/src/importTest.js'), //配置打包入口
     output: path.join(__dirname, '/dist'), // 出口
     
 
     devServer: {
         port: 8000,// 端口
-        socketPort: 3001,// 使用的webSocket的端口
+        socketPort: 8001,// 使用的webSocket的端口
         hot: true,// 启动热更新
         cors: true,// 配置是否能跨域
         staticPath: './public',// 静态资源托管文件夹

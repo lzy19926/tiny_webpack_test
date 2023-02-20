@@ -12,7 +12,7 @@ function registeMicroApps() {
     registerMicroApps([
         {
             name: 'react app1',
-            entry: '//localhost:3000',
+            entry: '//localhost:3001',
             container: '#microApp_1',// 挂载点的id (挂载到哪个div中)
             activeRule: '/#lzyQiankun/#microApp_1',// 微前端的路由
         },

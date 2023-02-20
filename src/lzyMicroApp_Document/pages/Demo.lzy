@@ -1,0 +1,27 @@
+
+
+import LzyReact from '../../../my_node_modules/lzy-React/out/index_V3'
+import { Button, Block } from '../../../my_node_modules/lzy-LzyUI/lib/index'
+import './index.css'
+
+import { start } from '../../../my_node_modules/lzy-microApp/out/index'
+
+// 启动lzyMicroApp
+start({ showLoggerInfo: true })
+
+
+export default function Demo() {
+
+
+    return (
+        <LZY-TEMPLATE>
+            <h2>试一试</h2>
+            <Block />
+
+            <div class="microApps_container">
+                <micro-app-element name="microApp_1" url="//localhost:3001" />
+                <micro-app-element name="microApp_2" url="//localhost:3005" />
+            </div>
+        </LZY-TEMPLATE>
+    )
+}

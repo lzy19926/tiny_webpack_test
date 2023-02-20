@@ -8,9 +8,6 @@ import RoutePage from './RoutePage/RoutePage.lzy'
 
 // 启动基座项目
 function App() {
-
-    const [a, setA] = myUseState()
-
     return (
         <div className="App">
             <RoutePage />
@@ -51,26 +48,27 @@ function EventTest() {
 }
 
 
+//todo useContext测试
 
-
-// useContext测试
+//创建context
 const demoContext = createContext(18)
-
+//使用Provider包裹子组件
 function ContextTest() {
     return (
         <demoContext.Provider>
-            <Child />
+            <ContextChild />
         </demoContext.Provider>
     )
 }
-
-function Child() {
+//使用context
+function ContextChild() {
     const value = myUseContext(demoContext)
     return <div>ContextValue:{value}</div>
 }
 
+render(<App />, document.getElementById('root'))
 
-render(<ContextTest />, document.getElementById('root'))
+
 
 
 
