@@ -12,12 +12,24 @@
   },
   "author": "lzy19926",
   "license": "ISC",
-  "devDependencies": {
-    "@babel/preset-react": "^7.18.6"
-  },
   "dependencies": {
     "axios": "^1.3.3",
-    "lzy-webpack": "^2.2.0",
-    "prismjs": "^1.29.0"
+    "lzy-microapp": "file:my_node_modules/lzy-microApp",
+    "lzy-qiankun": "file:my_node_modules/lzy-Qiankun",
+    "lzy-react": "file:my_node_modules/lzy-React",
+    "lzy-react-query": "file:my_node_modules/lzy-React-Query",
+    "lzy-react-router": "file:my_node_modules/lzy-React-Router",
+    "lzy-ruzy": "file:my_node_modules/lzy-Ruzy",
+    "lzy-ui": "file:my_node_modules/lzy-LzyUI",
+    "lzy-watchpack": "file:my_node_modules/lzy-watchpack",
+    "lzy-webpack": "file:my_node_modules/lzy-webpack",
+
+
+    
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/material": "^5.11.10"
   }
 }

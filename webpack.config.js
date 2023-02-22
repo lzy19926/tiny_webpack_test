@@ -3,14 +3,14 @@ const HtmlPlugin = require('./my_node_modules/webpackPlugin/htmlPlugin')
 const CssExtractPlugin = require('./my_node_modules/webpackPlugin/cssExtractPlugin')
 const cssLoader = require('./my_node_modules/webpackLoader/lzy-cssLoader/cssLoader')
 const lzyLoader = require('./my_node_modules/webpackLoader/lzy-loader/index')
-
+const jsxLoader = require('./my_node_modules/webpackLoader/jsx-loader/index')
 
 module.exports = {
     mode: 'development', // development|production
     rootPath: __dirname, // 项目根路径
-    entry: path.join(__dirname, '/src/importTest.js'), //配置打包入口
+    entry: path.join(__dirname, '/src/reactTest.js'), //配置打包入口
     output: path.join(__dirname, '/dist'), // 出口
-    
+
 
     devServer: {
         port: 8000,// 端口
@@ -33,6 +33,10 @@ module.exports = {
         {
             test: /\.lzy$/,
             use: [lzyLoader] //! lzy文件经过lzyloader处理
+        },
+        {
+            test: /\.js$/,
+            use: [jsxLoader] //! lzy文件经过lzyloader处理
         }
     ]
 }
