@@ -20,13 +20,13 @@ nrm use taobao
 # npm uninstall lzy-react-router
 # npm install .\\my_node_modules\\lzy-React-Router\\
 
-npm uninstall lzy-ruzy
-npm install .\\my_node_modules\\lzy-Ruzy\\
+# npm uninstall lzy-ruzy
+# npm install .\\my_node_modules\\lzy-Ruzy\\
 
 # npm uninstall lzy-watchpack
 # npm install .\\my_node_modules\\lzy-watchpack\\
 
-# npm uninstall lzy-webpack
-# npm install .\\my_node_modules\\lzy-webpack\\
+npm uninstall lzy-webpack
+npm install .\\my_node_modules\\lzy-webpack\\
 
 nrm use npm

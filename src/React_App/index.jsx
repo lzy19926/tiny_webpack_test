@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Button from '@mui/material/Button';
+import ChatGPT from './ChatGPT/chatGPT.jsx'
+import './index.css'
+
 
 function App() {
     return (
-        <Button variant="contained">测试测试6</Button>
+        <ChatGPT />
     );
 }
 
