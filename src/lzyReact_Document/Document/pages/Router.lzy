@@ -6,7 +6,7 @@ export default function Router() {
 
     const code1 =
         `import LzyReact, { myUseState } from '../../../../my_node_modules/lzy-React/out/index_V3'
-import { Link, RouteContainer, Route } from '../../../my_node_modules/lzy-React-Router/lib/index.lzy'
+import { Link, RouteContainer, Route } from '../../../my_node_modules/lzy-React-Router/lib/index.js'
 import Document from './Document.lzy'
 import Demo from './Demo.lzy'
 

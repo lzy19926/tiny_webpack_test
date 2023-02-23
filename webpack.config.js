@@ -8,7 +8,7 @@ const jsxLoader = require('./my_node_modules/webpackLoader/jsx-loader/index')
 module.exports = {
     mode: 'development', // development|production
     rootPath: __dirname, // 项目根路径
-    entry: path.join(__dirname, '/src/reactTest.js'), //配置打包入口
+    entry: path.join(__dirname, '/src/index.lzy'), //配置打包入口
     output: path.join(__dirname, '/dist'), // 出口
 
 
@@ -35,7 +35,7 @@ module.exports = {
             use: [lzyLoader] //! lzy文件经过lzyloader处理
         },
         {
-            test: /\.js$/,
+            test: /\.jsx$/,
             use: [jsxLoader] //! lzy文件经过lzyloader处理
         }
     ]
