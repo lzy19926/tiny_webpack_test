@@ -11,8 +11,8 @@ nrm use taobao
 # npm uninstall lzy-qiankun
 # npm install .\\my_node_modules\\lzy-Qiankun\\
 
-npm uninstall lzy-react
-npm install .\\my_node_modules\\lzy-React\\
+# npm uninstall lzy-react
+# npm install .\\my_node_modules\\lzy-React\\
 
 # npm uninstall lzy-react-query
 # npm install .\\my_node_modules\\lzy-React-Query\\
@@ -20,8 +20,8 @@ npm install .\\my_node_modules\\lzy-React\\
 # npm uninstall lzy-react-router
 # npm install .\\my_node_modules\\lzy-React-Router\\
 
-# npm uninstall lzy-ruzy
-# npm install .\\my_node_modules\\lzy-Ruzy\\
+npm uninstall lzy-ruzy
+npm install .\\my_node_modules\\lzy-Ruzy\\
 
 # npm uninstall lzy-watchpack
 # npm install .\\my_node_modules\\lzy-watchpack\\
