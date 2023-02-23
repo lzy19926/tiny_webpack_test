@@ -1,7 +1,7 @@
 
 // 基本库
-import LzyReact from '../../my_node_modules/lzy-React/out/index_V3'
-import { HashRouter, Routes, Route } from '../../my_node_modules/lzy-React-Router/lib/index.js'
+import LzyReact from 'lzy-react'
+import { HashRouter, Routes, Route } from 'lzy-react-router'
 // 页面
 import LzyReactDocument from '../lzyReact_Document/Document/index.lzy'
 import LzyWebpackDocument from '../lzyWebpack_Document/Document/index.lzy'

@@ -1,13 +1,13 @@
-import LzyReact from '../../../../my_node_modules/lzy-React/out/index_V3'
-import { According, Button, CodeBlock, Block } from '../../../../my_node_modules/lzy-LzyUI/lib/index'
+import LzyReact from 'lzy-react'
+import { According, Button, CodeBlock, Block } from 'lzy-ui'
 
 
 export default function LzyUIPage() {
 
     const code1 =
         `
-    import LzyReact from '../../../../my_node_modules/lzy-React/out/index_V3'
-    import { Button } from '../../../../my_node_modules/lzy-LzyUI/lib/index'
+    import LzyReact from 'lzy-react'
+    import { Button } from 'lzy-ui'
 
     const Buttons = () => {
         return (
@@ -27,8 +27,8 @@ export default function LzyUIPage() {
 
     const code2 =
         `
-import LzyReact from '../../../../my_node_modules/lzy-React/out/index_V3'
-import { According } from '../../../../my_node_modules/lzy-LzyUI/lib/index'
+import LzyReact from 'lzy-react'
+import { According } from 'lzy-ui'
 
 const Buttons = () => {
     return (
@@ -44,8 +44,8 @@ const Buttons = () => {
 
     const code3 =
         `
-import LzyReact from '../../../../my_node_modules/lzy-React/out/index_V3'
-import { CodeBlock } from '../../../../my_node_modules/lzy-LzyUI/lib/index'
+import LzyReact from 'lzy-react'
+import { CodeBlock } from 'lzy-ui'
 
 const Buttons = () => {
     const codeStr = "var data = 1"

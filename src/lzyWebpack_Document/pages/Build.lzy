@@ -1,7 +1,7 @@
 
 
-import LzyReact from '../../../my_node_modules/lzy-React/out/index_V3'
-import { CodeBlock, Block } from '../../../my_node_modules/lzy-LzyUI/lib/index'
+import LzyReact from 'lzy-react'
+import { CodeBlock, Block } from 'lzy-ui'
 
 
 export default function Build() {
@@ -9,7 +9,7 @@ export default function Build() {
     const code1 =
         `// package.json
 "scripts": {
-    "t-build": "node ./my_node_modules/lzy-webpack/lib/run/runBuild.js"
+    "t-build": "lzy-webpack-build"
   }`
 
     const code2 = ` npm run t-build`

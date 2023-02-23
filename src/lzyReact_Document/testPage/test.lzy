@@ -1,4 +1,4 @@
-import LzyReact, { myUseEffect, myUseState } from '../../../my_node_modules/lzy-React/out/index_V3' // 因为export default的功能不完善 需要这样进行引入
+import LzyReact, { myUseEffect, myUseState } from 'lzy-react' // 因为export default的功能不完善 需要这样进行引入
 import BaseLayout from '../BaseLayout/BaseLayout.lzy'
 
 function Effect() {

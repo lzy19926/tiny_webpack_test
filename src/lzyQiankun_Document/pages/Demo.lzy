@@ -1,9 +1,7 @@
-
-
-import LzyReact from '../../../my_node_modules/lzy-React/out/index_V3'
-import { Button, Block } from '../../../my_node_modules/lzy-LzyUI/lib/index'
-import { registerMicroApps, start } from '../../../my_node_modules/lzy-Qiankun/out/index';
-import { Link, to } from '../../../my_node_modules/lzy-React-Router/lib/index.js'
+import LzyReact from 'lzy-react'
+import { Button, Block } from 'lzy-ui'
+import { registerMicroApps, start } from 'lzy-qiankun';
+import { Link, to } from 'lzy-react-router'
 import './index.css'
 
 // 注册子应用

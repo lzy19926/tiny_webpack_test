@@ -1,6 +1,6 @@
 // query测试
-import LzyReact from '../../../my_node_modules/lzy-React/out/index_V3'
-import LzyQuery from '../../../my_node_modules/lzy-React-Query/out/index'
+import LzyReact from 'lzy-react'
+import LzyQuery from 'lzy-react-query'
 // 延迟函数
 function sleep(timeout) {
     return new Promise((resolve, _reject) => {

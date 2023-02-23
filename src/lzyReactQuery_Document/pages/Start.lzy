@@ -1,13 +1,13 @@
 
 
-import LzyReact from '../../../my_node_modules/lzy-React/out/index_V3'
-import { CodeBlock, Block } from '../../../my_node_modules/lzy-LzyUI/lib/index'
+import LzyReact from 'lzy-react'
+import { CodeBlock, Block } from 'lzy-ui'
 
 
 export default function Start() {
 
     const code1 =
-        `import LzyQuery from '../../../my_node_modules/lzy-React-Query/out/index'
+        `import LzyQuery from 'lzy-react-query'
 
 export default new LzyQuery({
     Query_1: { fn: undefined, initData: undefined },

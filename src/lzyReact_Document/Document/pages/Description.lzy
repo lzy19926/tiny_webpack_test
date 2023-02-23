@@ -1,6 +1,6 @@
 
-import LzyReact from '../../../../my_node_modules/lzy-React/out/index_V3'
-import { Block } from '../../../../my_node_modules/lzy-LzyUI/lib/index'
+import LzyReact from 'lzy-react'
+import { Block } from 'lzy-ui'
 
 
 

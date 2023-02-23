@@ -1,4 +1,4 @@
-import Ruzy from '../../../my_node_modules/lzy-Ruzy/out/Ruzy'
+import Ruzy from 'lzy-ruzy'
 
 const store = new Ruzy({
     name: '张三',

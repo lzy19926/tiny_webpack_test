@@ -1,52 +1,19 @@
 // 引入基本库
-import LzyReact, { render, createContext, myUseContext } from '../my_node_modules/lzy-React/out/index_V3'
+import LzyReact, { render, createContext, myUseContext } from 'lzy-react'
 
 // 
 import DropStart from './DropStart/index.lzy'
 import RoutePage from './RoutePage/RoutePage.lzy'
 
 
-// todo 路由组件有问题
-import { Link } from '../my_node_modules/lzy-React-Router/lib/index.js'
-
-
 // 启动基座项目
 function App() {
     return (
         <div className="App">
-            <Link />
+            <DropStart />
+            <RoutePage />
         </div>
     );
-}
-
-// 合成事件系统测试
-function EventTest() {
-
-    function aaa(e) { console.log('子组件', e); }
-    function bbb(e) { console.log('父组件', e); }
-    function ccc(e) { console.log('爷组件', e); }
-
-    return (
-        <div>
-            <div onClick={ccc}>
-                <div onClick={bbb}>
-                    <button onClick={aaa}>冒泡</button>
-                </div>
-            </div>
-            <br />
-            <div onClickCapture={ccc}>
-                <div onClickCapture={bbb}>
-                    <button onClickCapture={aaa}>Capture捕获</button>
-                </div>
-            </div>
-            <br />
-            <div onClickCapture={ccc} onClick={ccc}>
-                <div onClickCapture={bbb} onClick={bbb}>
-                    <button onClickCapture={aaa} onClick={aaa}>冒泡与捕获共存</button>
-                </div>
-            </div>
-        </div>
-    )
 }
 
 

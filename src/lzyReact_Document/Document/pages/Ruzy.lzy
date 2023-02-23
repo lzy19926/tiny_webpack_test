@@ -1,5 +1,5 @@
-import LzyReact from '../../../../my_node_modules/lzy-React/out/index_V3'
-import { CodeBlock, Block } from '../../../../my_node_modules/lzy-LzyUI/lib/index'
+import LzyReact from 'lzy-react'
+import { CodeBlock, Block } from 'lzy-ui'
 
 
 export default function Ruzy() {
@@ -7,7 +7,7 @@ export default function Ruzy() {
 
     const code1 =
         `// store.js
-import Ruzy from '../../../my_node_modules/lzy-Ruzy/out/index'
+import Ruzy from 'lzy-ruzy'
 
     const store = new Ruzy()
     
@@ -20,7 +20,7 @@ import Ruzy from '../../../my_node_modules/lzy-Ruzy/out/index'
     `
 
     const code2 =
-        `import LzyReact from '../../../../my_node_modules/lzy-React/out/index_V3'
+        `import LzyReact from 'lzy-react'
 import store from './store.js'
 
 

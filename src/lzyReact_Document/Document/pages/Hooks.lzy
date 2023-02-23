@@ -1,11 +1,11 @@
-import LzyReact from '../../../../my_node_modules/lzy-React/out/index_V3'
-import { CodeBlock, Block } from '../../../../my_node_modules/lzy-LzyUI/lib/index'
+import LzyReact from 'lzy-react'
+import { CodeBlock, Block } from 'lzy-ui'
 
 
 export default function Hooks() {
 
     const code1 =
-        `import LzyReact, { myUseState } from '../../../../my_node_modules/lzy-React/out/index_V3'
+        `import LzyReact, { myUseState } from 'lzy-react'
 
 function App(){
         cosnt[num, setNum] = myUseState(0)
@@ -16,7 +16,7 @@ function App(){
  }`
 
     const code2 =
-        `import LzyReact, { myUseEffect } from '../../../../my_node_modules/lzy-React/out/index_V3'
+        `import LzyReact, { myUseEffect } from 'lzy-react'
 
 function App(){
    cosnt[num, setNum] = myUseState(0)

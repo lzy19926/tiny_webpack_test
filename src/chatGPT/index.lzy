@@ -1,5 +1,5 @@
-import LzyReact, { myUseState } from '../../my_node_modules//lzy-React/out/index_V3'
-import { Button } from '../../my_node_modules/lzy-LzyUI/lib/index'
+import LzyReact, { myUseState } from 'lzy-react'
+import { Button } from 'lzy-ui'
 
 
 //! ChatGPT聊天组件

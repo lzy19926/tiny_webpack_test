@@ -1,14 +1,14 @@
 
 
-import LzyReact from '../../../my_node_modules/lzy-React/out/index_V3'
-import { CodeBlock, Block } from '../../../my_node_modules/lzy-LzyUI/lib/index'
+import LzyReact from 'lzy-react'
+import { CodeBlock, Block } from 'lzy-ui'
 
 
 export default function Start() {
 
     const code1 = `// 基座项目的index.lzy
-    import LzyReact, { render } from '../my_node_modules/lzy-React/out/index_V3'
-import { registerMicroApps, start } from '../../../my_node_modules/lzy-Qiankun/out/index';
+    import LzyReact, { render } from 'lzy-react'
+import { registerMicroApps, start } from 'lzy-qiankun';
 
 // 注册微前端
 registerMicroApps([
@@ -43,7 +43,7 @@ function App() {
 render(<App />, document.getElementById('root'))
     `
     const code2 = `
-import LzyReact, { render, unmountAtRoot } from '../my_node_modules/lzy-React/out/index_V3'
+import LzyReact, { render, unmountAtRoot } from 'lzy-react'
 
 function App() {
     return <div className="title">微前端1 运行于port:3000</div>

@@ -1,10 +1,10 @@
 
 
-import LzyReact from '../../../my_node_modules/lzy-React/out/index_V3'
-import { Button, Block } from '../../../my_node_modules/lzy-LzyUI/lib/index'
+import LzyReact from 'lzy-react'
+import { Button, Block } from 'lzy-ui'
 import './index.css'
 
-import { start } from '../../../my_node_modules/lzy-microApp/out/index'
+import { start } from 'lzy-microapp'
 
 // 启动lzyMicroApp
 start({ showLoggerInfo: true })

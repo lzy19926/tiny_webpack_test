@@ -1,6 +1,6 @@
-import LzyReact from '../../../my_node_modules//lzy-React/out/index_V3'
-import { Link } from '../../../my_node_modules/lzy-React-Router/lib/index.js'
-import { TabContainer } from '../../../my_node_modules/lzy-LzyUI/lib/index'
+import LzyReact from 'lzy-react'
+import { Link } from 'lzy-react-router'
+import { TabContainer } from 'lzy-ui'
 
 import Config from '../pages/Config.lzy'
 import Build from '../pages/Build.lzy'

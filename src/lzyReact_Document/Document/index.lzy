@@ -1,5 +1,5 @@
-import LzyReact from '../../../my_node_modules/lzy-React/out/index_V3'
-import { TabContainer } from '../../../my_node_modules/lzy-LzyUI/lib/index'
+import LzyReact from 'lzy-react'
+import { TabContainer } from 'lzy-ui'
 import BaseLayout from '../BaseLayout/BaseLayout.lzy'
 import LzyUIPage from './pages/LzyUI.lzy'
 import Start from './pages/Start.lzy'
@@ -11,6 +11,7 @@ import Communication from './pages/Communication.lzy'
 import Concurrent from './pages/Concurrent.lzy'
 import Router from './pages/Router.lzy'
 import Ruzy from './pages/Ruzy.lzy'
+import EventSystem from './pages/EventSystem.lzy'
 //! Demo组件
 export default function Document() {
 
@@ -22,6 +23,7 @@ export default function Document() {
         { title: 'hooks功能', key: 'hooks', render: () => <Hooks /> },
         { title: '组件之间的通信', key: 'message', render: () => <Communication /> },
         { title: 'concurrent切片渲染', key: 'concurrent', render: () => <Concurrent /> },
+        { title: '合成事件系统', key: 'event', render: () => <EventSystem /> },
 
         { title: 'lzyReact-router路由', key: 'router', render: () => <Router /> },
         { title: 'ruzy全局状态管理', key: 'ruzy', render: () => <Ruzy /> },
