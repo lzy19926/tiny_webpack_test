@@ -41,7 +41,8 @@ class ProgressBar {
         var afterText = opts.text
 
         // 在单行输出文本
-        slog(cmdText + ' ' + afterText + '\n\n');
+        // slog(cmdText + ' ' + afterText + '\n\n'); // 有进度条
+        slog(' ' + afterText + '\n\n');// 无进度条
 
     };
 }

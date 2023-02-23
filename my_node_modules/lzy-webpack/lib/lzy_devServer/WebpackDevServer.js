@@ -22,8 +22,8 @@ class WebpackDevServer {
             cssHash: ''
         }
         this.watchedFileType = { // 监听需要变更的文件后缀
-            js: ['js', 'lzy'],
-            css: ['css', 'less']
+            js: ['js', 'lzy', 'jsx'],
+            css: ['css', 'less','scss']
         }
     }
 
