@@ -1,0 +1,57 @@
+import LzyReact, { myUseEffect, myUseState } from 'lzy-react'
+
+// import { SideListPage } from 'lzy-ui'
+import SideListPage from '../../../../my_node_modules/lzy-lzyUI/SideListPage/index.lzy'
+
+
+import Communication from './pages/Communication.lzy'
+import Concurrent from './pages/Concurrent.lzy'
+import Description from './pages/Description.lzy'
+import EventSystem from './pages/EventSystem.lzy'
+import Hooks from './pages/Hooks.lzy'
+import LzyWebpack from './pages/LzyWebpack.lzy'
+import Router from './pages/Router.lzy'
+import Ruzy from './pages/Ruzy.lzy'
+import Start from './pages/Start.lzy'
+import UseJSX from './pages/UseJSX.lzy'
+
+
+//! 主要页面
+export default function MainSidePage() {
+    const navList = [
+        {
+            key: 'A', title: '开始',
+            children: [
+                { key: 'tab3Content1', title: '项目简介', render: () => <Description /> },
+                { key: 'tab3Content2', title: '安装', render: () => <Start /> },
+            ]
+        },
+        {
+            key: 'B', title: '基本使用',
+            children: [
+                { key: 'tab3Content3', title: '组件通信', render: () => <Communication /> },
+                { key: 'tab3Content4', title: 'Hooks', render: () => <Hooks /> },
+                { key: 'tab3Content5', title: '使用JSX', render: () => <UseJSX /> },
+            ]
+        },
+        {
+            key: 'C', title: '高级特性',
+            children: [
+                { key: 'tab3Content6', title: '合成事件系统', render: () => <EventSystem /> },
+                { key: 'tab3Content7', title: '时间切片', render: () => <Concurrent /> },
+                { key: 'tab3Content8', title: 'batch更新', render: () => <div>暂无</div> },
+            ]
+        },
+        {
+            key: 'C', title: '配套工具',
+            children: [
+                { key: 'tab3Content9', title: '路由组件', render: () => <Router /> },
+                { key: 'tab3Content10', title: '全局状态管理器', render: () => <Ruzy /> },
+            ]
+        },
+        { key: 'tab3Content11', title: 'lzy打包器', render: () => <LzyWebpack /> },
+
+    ]
+
+    return (<SideListPage dataSource={navList} />)
+}

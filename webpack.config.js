@@ -8,7 +8,7 @@ const jsxLoader = require('./my_node_modules/webpackLoader/jsx-loader/index')
 module.exports = {
     mode: 'development', // development|production
     rootPath: __dirname, // 项目根路径
-    entry: path.join(__dirname, '/src/React_App/index.jsx'), //配置打包入口
+    entry: path.join(__dirname, '/src/LzyDoc/index.lzy'), //配置打包入口
     output: path.join(__dirname, '/dist'), // 出口
 
 
@@ -22,8 +22,15 @@ module.exports = {
     },
 
     plugins: [
-        new HtmlPlugin({ fileName: 'index.html' }),   //! 打包生成html文件插件
-        new CssExtractPlugin({ fileName: 'index.css' }) //! 打包CSS插件
+        //! 打包生成html文件插件
+        new HtmlPlugin({
+            template: path.join(__dirname, '/public/index.html'),
+            fileName: 'index.html'
+        }),
+        //! 打包CSS插件
+        new CssExtractPlugin({
+            fileName: 'bundle.css'
+        })
     ],
     rules: [
         {
@@ -38,6 +45,14 @@ module.exports = {
             test: /\.jsx$/,
             use: [jsxLoader] //! lzy文件经过lzyloader处理
         }
+    ],
+
+    //todo 外部脚本引入功能
+    externals: [
+        {
+            name: 'jQuery',
+            type: 'script',
+            src: 'https://cdn.bootcdn.net/ajax/libs/zui/1.10.0/lib/jquery/jquery.js',
+        }
     ]
 }
-

@@ -1,0 +1,69 @@
+import LzyReact, { myUseState } from 'lzy-react'
+import { CodeBlock, Block, Button } from 'lzy-ui'
+
+
+function UseStateDemo() {
+    const [num, setNum] = myUseState(1)
+    const addNum = () => { setNum(num + 1) }
+    return (
+        <Button onClick={addNum}>{num}</Button>
+    )
+}
+
+
+export default function Hooks() {
+
+    const code1 =
+        `import LzyReact, { myUseState } from 'lzy-react'
+
+function App(){
+        cosnt[num, setNum] = myUseState(0)
+        const addNum = () => { setNum(num + 1) }
+        return (
+            <button onClick={addNum}>Num++ num:{num}</button>
+        )
+ }`
+
+    const code2 =
+        `import LzyReact, { myUseEffect } from 'lzy-react'
+
+function App(){
+   cosnt[num, setNum] = myUseState(0)
+ 
+   myUseEffect(() => {
+      console.log('传入[],仅仅mount时执行');
+   }, [])
+
+   myUseEffect(() => {
+       console.log('不传 任意时候执行');
+   })
+
+   myUseEffect(() => {
+       console.log('依赖num,num改变时执行');
+   }, [num])
+   
+    return (
+        <button onClick={addNum}>Num++ num:{num}</button>
+    )
+}`
+
+
+    return (
+        <LZY-TEMPLATE>
+            <h2>myUseState</h2>
+            <p>与原生useState对应的钩子,使用方法基本相同</p>
+            <CodeBlock codeStr={code1} />
+            <Block />
+
+            <UseStateDemo />
+
+            <h2>myUseEffect</h2>
+            <p>与原生useEffect对应的钩子,使用方法基本相同,在传入不同的依赖项时提供不同的执行时机</p>
+            <CodeBlock codeStr={code2} />
+            <Block />
+
+            <p style={'color:red'}>可以在tab栏的demo中试一试</p>
+        </LZY-TEMPLATE>
+    )
+}
+

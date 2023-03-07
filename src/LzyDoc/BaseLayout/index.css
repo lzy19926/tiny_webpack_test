@@ -1,0 +1,64 @@
+.fixedTop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+}
+
+.header {
+    height: 60px;
+    padding: 8px 16px;
+    border-bottom: 1px solid #E7EBF0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 10px -10px 20px rgba(0, 0, 0, 0.2),
+        -10px 10px 20px rgba(255, 255, 255, 0.1);
+    /*  透明毛玻璃效果 */
+    background: linear-gradient(to top right,
+            rgba(255, 255, 255, 0.8),
+            rgba(255, 255, 255, 0.8));
+    backdrop-filter: blur(6px);
+}
+
+.buttonGroup {
+    display: flex;
+}
+
+.licence {
+    color: #ccc;
+    font-size: 12px;
+    margin-bottom: 0;
+    position: fixed;
+    bottom: 2px;
+    right: 10px;
+    text-indent: 4px;
+    user-select: none;
+}
+
+.sideNavList {
+    padding: 0 !important;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+.sideNavContent {
+    padding: 10px 5% 60px 3% !important;
+    overflow: auto;
+}
+
+.sideNavContainer {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    box-shadow: -1px -2px 5px rgba(0, 0, 0, 0.2), -10px 10px 20px rgba(255, 255, 255, 0.1);
+    display: flex;
+    /*  透明毛玻璃效果 */
+    background: linear-gradient(to top right,
+            rgba(255, 255, 255, 0.8),
+            rgba(255, 255, 255, 0.8));
+    backdrop-filter: blur(6px);
+}

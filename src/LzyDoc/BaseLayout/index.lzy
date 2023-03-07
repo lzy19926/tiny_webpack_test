@@ -1,0 +1,71 @@
+import LzyReact, { myUseEffect, myUseState, render } from 'lzy-react'
+import { Button, Switch, Input, Modal, Slide } from 'lzy-ui'
+
+import './index.css'
+
+
+const Licence = () => (<p className='licence'>designed by lzy19926  mail: 871921282@qq.com version:0.2</p>)
+
+//! 头部导航栏
+function TopGuider({ title }) {
+    return (
+        <div>
+            <header className='header fixedTop'>
+                <h2>{title}</h2>
+                <div className='buttonGroup'>
+                    <Button data-target="#seetingModal" data-toggle="modal">
+                        <i className="icon icon-cog icon-1x"></i>
+                    </Button>
+                    <Button data-target="#listModal" data-toggle="modal">
+                        <i class="icon icon-list icon-1x"></i>
+                    </Button>
+                    <Button>
+                        <i class="icon icon-github icon-1x"></i>
+                    </Button>
+                </div>
+            </header>
+        </div>
+    )
+}
+// 设置模态框
+function SettingModal() {
+    return (
+        <Slide id='seetingModal'>
+            <div class="modal-header">
+                <h4 class="modal-title">设置</h4>
+            </div>
+            <div class="modal-body">
+                <Switch />
+            </div>
+        </Slide >
+    )
+}
+// 列表模态框
+function ListModal() {
+    return (
+        <Slide id='listModal'>
+            <div class="modal-header">
+                <h4 class="modal-title">列表</h4>
+            </div>
+            <div class="modal-body">
+                <Input />
+            </div>
+        </Slide >
+    )
+}
+
+export default function BaseLayout(props, body) {
+
+    const { title } = props
+
+    return (
+        <div>
+            <TopGuider title={title} />
+            {body}
+            {/* 各种模态框 */}
+            <SettingModal />
+            <ListModal />
+            <Licence />
+        </div>
+    );
+}

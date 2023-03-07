@@ -1,0 +1,15 @@
+import LzyReact from 'lzy-react'
+
+export default function Concurrent() {
+
+    return (
+        <LZY-TEMPLATE>
+            <h2>Concurrent模式介绍</h2>
+            <p>在React18中引入了Concurrent模式,针对长任务卡顿问题,对虚拟Dom树的构建过程进行了切片执行</p>
+            <p>(每一帧执行5ms,剩余部分留给用户操作,提高了交互的流畅性)</p>
+            <p>本框架在虚拟Dom树构建,和渲染真实Dom的时候都开启了切片模式,  每一帧进行分片执行</p>
+            <p>在大量渲染任务的情况下,下一次用户的操作可以打断上一次的渲染逻辑</p>
+            <h4>详情请参见上方的concurrent测试页面,并在F12中查看性能面板</h4>
+        </LZY-TEMPLATE>
+    )
+}

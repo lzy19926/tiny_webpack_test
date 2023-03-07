@@ -1,0 +1,63 @@
+
+import LzyReact from 'lzy-react'
+import { Block } from 'lzy-ui'
+
+
+
+export default function Description() {
+    return (
+        <LZY-TEMPLATE>
+
+            <h2>项目简介</h2>
+            <br></br>
+            <h5>--全原生TS手写的简易版React,提供了相似的功能,函数式组件,JSX,Hook,concurrent切片渲染等功能</h5>
+            <br></br>
+            <h5>--全原生TS手写的简易版Webpack,提供了类似与webpack的功能,devServer,plugin,loader等</h5>
+            <br></br>
+            <h6 style={'color:red'}>--注: 本网站全部由lzy-React全家桶和lzy-webpack进行开发</h6>
+            <br></br>
+            <p>提供了手写的htmlLoader和CSS打包器,已预装在lzy-webpack中</p>
+            <p>脚手架安装项目  提供lzy-react-cli</p>
+            <p></p>
+            <p>为了适配框架,手写了适配的如下工具库</p>
+            <p>Ruzy:全局状态管理器</p>
+            <p>lzy-React-Router:适配的路由组件</p>
+            <p>lzyUI: 适配的UI库(开发中)</p>
+            <Block />
+
+            <h2>开发(学习)者的话</h2>
+            <h5>大家好这里是阳九: 一个本着"万物皆可手写"为原则的前端码农</h5>
+            <p> React是我上手的第二个前端框架,(小白第一个是VUE),在我莫名其妙入了react的坑后,便一发不可收拾.</p>
+            <p>在最开始学习JS的时候,我跟着视频手写了一个Promise, 但是并不能正常使用, 我就非常想把他好好写完,作为一个可用的工具</p>
+            <p>在肝了一周的星巴克后,我也是写出了第一个小工具,---属于自己的Promise</p>
+            <p>后来也是入了React的坑,在熟练使用后,我想进一步学习,便到处找相关的课程,某一天我点开了某大佬的React课程,</p>
+            <p>"教你实现一个简易的useState"</p>
+            <p>当我写出一个能用的useState的时候真的很爽啊</p>
+            <p>后来又写了useEffect</p>
+
+            <p>某一天又看到了"webpack实现原理"课程,因为有之前的经验,我开始思考,不如手写一个webpack,多有意思</p>
+            <p>然后就是我一遍遍的翻资料,刷博客,刷源码,真的写出来了一个简易的webpack</p>
+            <p>还不够,还要更多,然后我实现了webpack的插件和loader功能,可以对css进行打包和格式化</p>
+            <p>还不够,转头又开始研究webpack-devServer的原理,热更新,热模块替换等</p>
+            <p>当然最后也是统统手写了下来</p>
+
+
+            <p>从最初的Promise,到简易webpack并持续复杂化,到devServer,手写这些东西和看源码,给了我更强的自信心</p>
+            <p>再之后,在公司项目中接触到了React-Query,我看了看源码,发现也不是很复杂,手写一个!!!</p>
+            <p>于是我也手写了一个react-Query</p>
+
+
+            <p>直到现在</p>
+            <p>我重新拾起react这个大坑,为什么不能手写一个属于自己的框架呢?</p>
+            <p>于是乎有了这个东西 lzyReact</p>
+            <p>本着中国人不骗中国人的态度: 首先我们来实现一下diff算法把</p>
+            <p>再重写一下之前写过的useState和useEffect钩子</p>
+            <p>看一看React18的concurrent模式,时间切片</p>
+            <p>既然框架都能凑合用了,那就再写个全家桶把,再来个组件库,嗯......</p>
+            <p>虽说是写来当作玩具的,但也是一个前端小白的心血</p>
+            <p>也希望自己能不忘初心,在前端工程化方面持续精进把</p>
+            <Block />
+
+        </LZY-TEMPLATE>
+    )
+}

@@ -1,0 +1,45 @@
+import LzyReact from 'lzy-react'
+import { CodeBlock } from 'lzy-ui'
+
+
+export default function Router() {
+
+    const code1 =
+        `import LzyReact, { myUseState } from 'lzy-react'
+import { Link, RouteContainer, Route } from 'lzy-react-router'
+import Document from './Document.lzy'
+import Demo from './Demo.lzy'
+
+function App(){
+    
+    return (
+        <LZY--TEMPLATE>
+
+           // RouteContainer会生成一个路由容器div,路由切换的页面会在这里展示
+           // 使用Route组件注册一个路由, 传入对应的path和渲染的组件
+           <RouteContainer id="router_1">
+               <Route path="/" component={<Document />} />
+               <Route path="/demo" component={<Demo />} />
+           </RouteContainer>
+
+           //Link标签会生成一个a标签  通过id来与对应的路由容器匹配 点击对应的Link切换对应ID的路由容器
+           <Link to="/demo" title='切换到demo' id="router_1" />
+           <Link to="/" title='切换到文档' id="router_1" />
+   
+        </LZY--TEMPLATE>
+    )
+}`
+
+    return (
+        <LZY-TEMPLATE>
+            <h2>lzyReact-router路由组件</h2>
+            <br />
+            <p>默认使用history模式路由</p>
+            <p>设计沿用了VUE的容器路由,并非React的感觉,个人认为使用路由容器更容易理解</p>
+            <p style={'color:red'}>手动修改浏览器url不能触发页面变更,还有很多bug,凑合用把,将个烂就</p>
+            <p>PS:上方黑色的tab栏就是这样将就写的</p>
+            <h4>提供了Link,RouteContainer,Route三个组件</h4>
+            <CodeBlock codeStr={code1} />
+        </LZY-TEMPLATE>
+    )
+}

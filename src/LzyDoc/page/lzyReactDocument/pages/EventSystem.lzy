@@ -1,0 +1,90 @@
+import LzyReact from 'lzy-react'
+import { Button, CodeBlock, Block } from 'lzy-ui'
+
+
+export default function EventSystem() {
+
+    const code1 =
+        `import LzyReact from 'lzy-react'
+function EventTest() {
+    function aaa(e) { console.log('子组件', e); }
+    function bbb(e) { console.log('父组件', e); }
+    function ccc(e) { console.log('爷组件', e); }
+
+    return (
+        <div>
+            <div onClick={ccc}>
+                <div onClick={bbb}>
+                    <button onClick={aaa}>冒泡</button>
+                </div>
+            </div>
+            <br />
+            <div onClickCapture={ccc}>
+                <div onClickCapture={bbb}>
+                    <button onClickCapture={aaa}>Capture捕获</button>
+                </div>
+            </div>
+            <br />
+            <div onClickCapture={ccc} onClick={ccc}>
+                <div onClickCapture={bbb} onClick={bbb}>
+                    <button onClickCapture={aaa} onClick={aaa}>冒泡与捕获共存</button>
+                </div>
+            </div>
+        </div>
+    )
+}
+`
+
+    return (
+        <LZY-TEMPLATE>
+            <h2>合成事件系统</h2>
+            <br />
+            <p>提供了和react一样的简易合成事件系统</p>
+            <p>合成事件用onClick和onClickCapture绑定给节点(大写)</p>
+            <p style={'color:red'}>原理与react相同:</p>
+            <p>初始化页面时注册并监听所有原生事件,并在document层拦截事件,调用栈模拟事件冒泡和捕获的过程</p>
+            <Block />
+
+            <h2>如下代码案例:</h2>
+            <CodeBlock codeStr={code1} />
+            <Block />
+
+            <h2>试一试(打开F12查看)</h2>
+            <EventTest />
+            <Block />
+
+        </LZY-TEMPLATE>
+    )
+}
+
+
+
+// 合成事件系统测试
+function EventTest() {
+
+    function aaa(e) { console.log('子组件', e); }
+    function bbb(e) { console.log('父组件', e); }
+    function ccc(e) { console.log('爷组件', e); }
+
+    return (
+        <div>
+            <div onClick={ccc}>
+                <div onClick={bbb}>
+                    <Button type="primary" onClick={aaa}>冒泡</Button>
+                </div>
+            </div>
+            <br />
+            <div onClickCapture={ccc}>
+                <div onClickCapture={bbb}>
+                    <Button type="Success" onClickCapture={aaa}>Capture捕获</Button>
+                </div>
+            </div>
+            <br />
+            <div onClickCapture={ccc} onClick={ccc}>
+                <div onClickCapture={bbb} onClick={bbb}>
+                    <Button type="Danger" onClickCapture={aaa} onClick={aaa}>冒泡与捕获共存</Button>
+                </div>
+            </div>
+        </div>
+    )
+}
