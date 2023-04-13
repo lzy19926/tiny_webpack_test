@@ -1,0 +1,33 @@
+import LzyReact, { myUseState } from 'lzy-react'
+
+
+function Child({ num }) {
+    return (
+        <LZY-TEMPLATE>
+            <div>num:{num}</div>
+        </LZY-TEMPLATE>
+    )
+}
+
+export default function LongList() {
+    const [num, setNum] = myUseState(1)
+    const [count, setCount] = myUseState(10)
+    const arr = new Array(5000).fill('item')
+    return (
+        <div>
+            <h2>Concurrent模式  切片渲染测试页面:组件数:5000</h2>
+
+            {/* <h3>设置组件数量</h3>
+
+            <button onClick={() => { setCount(10) }}>10</button>
+            <button onClick={() => { setCount(100) }}>100</button>
+            <button onClick={() => { setCount(1000) }}>1000</button>
+            <button onClick={() => { setCount(10000) }}>10000</button> */}
+
+            <button onClick={() => { setNum(num + 1) }}>点击+1</button>
+
+            {arr.map(() => <Child num={num} />)}
+
+        </div>
+    )
+}

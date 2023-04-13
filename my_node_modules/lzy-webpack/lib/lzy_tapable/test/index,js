@@ -1,0 +1,51 @@
+const AsyncSeriesHook = require('../lib/AsyncSeriesHook')
+const SyncHook = require('../lib/SyncHook')
+const SyncWaterfallHook = require('../lib/SyncWaterfallHook')
+
+
+//--------------AsyncSeriesHook钩子测试-----------------------
+function AsyncSeriesHook_Test() {
+    const hook = new AsyncSeriesHook(['compiler']) // 设置接收的参数compiler
+
+    hook.tapAsync('001', (compiler, callback) => {
+        console.log('----1',compiler);
+        callback(); // 告知 Tapable 继续执行下一个回调函数
+    });
+
+    hook.tapAsync('002', (compiler, callback) => {
+        console.log('----2', compiler);
+        callback();
+    });
+
+    // 传入compiler作为参数
+    const compiler = { info: '假想的compiler对象' }
+    hook.callAsync(compiler, () => {
+        console.log('结束');
+    });
+
+}
+AsyncSeriesHook_Test()
+
+//--------------SyncHook钩子测试-----------------------
+function SyncHook_Test() {
+    const hook = new SyncHook(['compiler'])
+
+    hook.tap('001', (compiler, callback) => {
+        console.log('----1');
+    });
+
+    hook.tap('002', (compiler, callback) => {
+        console.log('----2');
+    });
+
+    hook.call('003', () => {
+        console.log('----3');
+    });
+}
+SyncHook_Test()
+
+
+
+
+
+

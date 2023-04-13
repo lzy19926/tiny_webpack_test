@@ -1,5 +1,5 @@
 // 使用zuiUI
-import LzyReact, { myUseEffect, myUseState, render } from 'lzy-react'
+import LzyReact, { render, myUseEffect } from 'lzy-react'
 
 import BaseLayout from './BaseLayout/index.lzy'
 import MainSidePage from './page/lzyReactDocument/mainPage.lzy'
@@ -10,9 +10,8 @@ export function App() {
         <BaseLayout title="LzyReact文档">
             <MainSidePage />
         </BaseLayout>
-    );
+    )
 }
-
 
 render(<App />, document.getElementById('root'),
     { openLogger: true }

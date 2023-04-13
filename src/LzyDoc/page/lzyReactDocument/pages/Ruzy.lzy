@@ -1,6 +1,6 @@
 import LzyReact from 'lzy-react'
 import { CodeBlock, Block } from 'lzy-ui'
-
+import RuzyDemo from '../demos/Ruzy.lzy'
 
 export default function Ruzy() {
 
@@ -9,9 +9,7 @@ export default function Ruzy() {
         `// store.js
 import Ruzy from 'lzy-ruzy'
 
-    const store = new Ruzy()
-    
-    store.initStates({ // 定义初始状态
+    const store = new Ruzy({ // 定义初始状态
         name:'张三',
         age:18
     })
@@ -32,6 +30,8 @@ function Child(){
 
 
 function App(){
+    const { age } = store.useState("age")
+    
     return (
         <LZY--TEMPLATE>
             // 通过store.setState改变全局状态,更新所有使用了该状态的组件
@@ -61,6 +61,11 @@ function App(){
             <h4>使用store</h4>
             <p>提供了store.useState , store.setState两个主要API</p>
             <CodeBlock codeStr={code2} />
+            <Block />
+
+
+            <h2>试一试</h2>
+            <RuzyDemo />
             <Block />
         </LZY-TEMPLATE>
     )

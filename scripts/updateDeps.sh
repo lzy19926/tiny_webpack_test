@@ -2,6 +2,8 @@
 # 一键更新所有的lzy相关依赖(删除后再从my_node_modules导入)
 nrm use taobao
 
+cd E:\\My_Webpack\\myWebpack
+
 # npm uninstall lzy-ui
 # npm install .\\my_node_modules\\lzy-LzyUI\\
 
@@ -11,8 +13,8 @@ nrm use taobao
 # npm uninstall lzy-qiankun
 # npm install .\\my_node_modules\\lzy-Qiankun\\
 
-npm uninstall lzy-react
-npm install .\\my_node_modules\\lzy-React\\
+# npm uninstall lzy-react
+# npm install .\\my_node_modules\\lzy-React\\
 
 # npm uninstall lzy-react-query
 # npm install .\\my_node_modules\\lzy-React-Query\\
@@ -22,6 +24,9 @@ npm install .\\my_node_modules\\lzy-React\\
 
 # npm uninstall lzy-ruzy
 # npm install .\\my_node_modules\\lzy-Ruzy\\
+
+# npm uninstall lzy-ruzy-react
+# npm install .\\my_node_modules\\lzy-ruzy-react\\
 
 # npm uninstall lzy-watchpack
 # npm install .\\my_node_modules\\lzy-watchpack\\

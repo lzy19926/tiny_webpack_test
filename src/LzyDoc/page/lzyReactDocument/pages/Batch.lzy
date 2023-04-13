@@ -1,0 +1,51 @@
+import LzyReact, { myUseState } from 'lzy-react'
+import { Block, CodeBlock, Button } from 'lzy-ui'
+
+
+
+function BatchDemo() {
+    const [num, setNum] = myUseState(1)
+    const [age, setAge] = myUseState(18)
+
+    const handleClick = () => {
+        setNum(num + 1)
+        setAge(age + 1)
+    }
+    return (
+        <Button onClick={handleClick}>num:{num},age:{age}</Button>
+    )
+}
+
+
+
+export default function Batch() {
+    const code1 =
+        `import LzyReact, { myUseState } from 'lzy-react'
+import { Button } from 'lzy-ui'
+
+function App(){
+    const [num, setNum] = myUseState(1)
+    const [age, setAge] = myUseState(18)
+    
+    const handleClick = () => { 
+            setNum(num + 1) 
+            setAge(num + 1) 
+    }
+    return (
+            <Button onClick={handleClick}>num:{num},age:{age}</Button>
+    )
+ }`
+
+    return (
+        <LZY-TEMPLATE>
+            <h2>Batch更新</h2>
+            <p>将多个触发render的事件合并调用,并只进行一次更新</p>
+            <CodeBlock codeStr={code1} />
+            <Block />
+
+            <h2>试一试(打开F12查看)</h2>
+            <BatchDemo />
+            <Block />
+        </LZY-TEMPLATE>
+    )
+}

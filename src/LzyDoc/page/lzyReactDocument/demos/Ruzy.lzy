@@ -1,0 +1,23 @@
+import LzyReact from 'lzy-react'
+import store from '../../../store/store.js'
+
+
+function Child() {
+    // 通过store.useState()传入状态的key使用状态
+    const { name, age } = store.useState("name", "age")
+    return <div>子组件--   姓名:{name},年龄:{age}</div>
+}
+
+
+export default function RuzyDemo() {
+    const { age } = store.useState("age")
+    return (
+        <LZY--TEMPLATE>
+            <button onClick={() => { store.setState({ age: age + 1 }) }}>全局age++</button>
+            <button onClick={() => { store.setState({ name: '李四' }) }}>全局name改变</button>
+            <Child />
+            <Child />
+            <Child />
+        </LZY--TEMPLATE>
+    )
+}

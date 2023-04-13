@@ -12,5 +12,6 @@
 
 
 ## 使用TSLint进行代码格式化
+     npm run lint 检查src下所有.js  .jsx文件
     - 自定义规则:  .lzy文件中需要引入LzyReact
     

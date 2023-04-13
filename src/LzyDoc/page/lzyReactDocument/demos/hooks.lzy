@@ -1,0 +1,49 @@
+import LzyReact, { myUseState, myUseEffect, myUseContext } from 'lzy-react'
+import { Button } from 'lzy-ui'
+
+
+export function UseStateDemo() {
+    const [num, setNum] = myUseState(1)
+    const addNum = () => { setNum(num + 1) }
+    return (
+        <Button onClick={addNum}>点击+1 ---{num}</Button>
+    )
+}
+
+export function UseEffectDemo() {
+    const [num, setNum] = myUseState(1)
+    const addNum = () => { setNum(num + 1) }
+    myUseEffect(() => {
+        console.log('传入[],仅仅mount时执行');
+    }, [])
+
+    myUseEffect(() => {
+        console.log('不传 任意时候执行');
+    })
+
+    myUseEffect(() => {
+        console.log('依赖num,num改变时执行');
+    }, [num])
+
+    return (
+        <Button onClick={addNum}>点击+1 ---{num}</Button>
+    )
+}
+
+
+export function UseContextDemo() {
+
+    const Context = LzyReact.createContext({ initVal: 1 })
+
+    const Children = () => {
+        const contextVal = myUseContext(Context)
+
+        return <Button onClick={() => { console.log(contextVal); }}>查看context</Button>
+    }
+
+    return (
+        <Context.Provider value={"store"}>
+            <Children />
+        </Context.Provider>
+    )
+}

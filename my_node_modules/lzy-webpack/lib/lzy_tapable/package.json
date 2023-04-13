@@ -1,0 +1,16 @@
+{
+  "name": "lzy_tapable",
+  "version": "1.0.0",
+  "description": "手写tapable库",
+  "main": "/lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "lzy19926",
+  "license": "ISC"
+}

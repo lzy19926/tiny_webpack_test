@@ -1,5 +1,5 @@
 import LzyReact from 'lzy-react'
-
+import ConcurrentDemo from '../demos/Concurrent.lzy'
 export default function Concurrent() {
 
     return (
@@ -9,7 +9,10 @@ export default function Concurrent() {
             <p>(每一帧执行5ms,剩余部分留给用户操作,提高了交互的流畅性)</p>
             <p>本框架在虚拟Dom树构建,和渲染真实Dom的时候都开启了切片模式,  每一帧进行分片执行</p>
             <p>在大量渲染任务的情况下,下一次用户的操作可以打断上一次的渲染逻辑</p>
-            <h4>详情请参见上方的concurrent测试页面,并在F12中查看性能面板</h4>
+            <h4>详情请参见下方的concurrent测试列表,并在F12中查看火焰图监控</h4>
+
+
+            < ConcurrentDemo />
         </LZY-TEMPLATE>
     )
 }

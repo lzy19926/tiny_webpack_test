@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prepare": "husky install",
     "t-build": "node ./my_node_modules/lzy-webpack/lib/run/runBuild.js",
     "t-dev": "node ./my_node_modules/lzy-webpack/lib/run/runDev.js",
     "t-esbuild": "node ./my_node_modules/lzy-esBuild/src/run.js",
     "build": "lzy-webpack-build",
-    "dev": "lzy-webpack-dev"
+    "dev": "lzy-webpack-dev",
+    "lint": "eslint ./src/ --ext .js --ext .lzy"
   },
   "author": "lzy19926",
   "license": "ISC",
@@ -31,5 +33,22 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-transition-group": "^4.4.5"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.54.1",
+    "eslint": "^8.35.0",
+    "eslint-config-standard-with-typescript": "^34.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-lzy-react": "^0.0.1",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.32.2",
+    "husky": "^8.0.3",
+    "typescript": "^4.9.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   }
 }

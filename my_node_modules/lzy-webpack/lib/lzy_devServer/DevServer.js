@@ -1,29 +1,30 @@
 const path = require('path')
-const fs = require('fs')
 const Koa = require('koa');
 const cors = require('koa2-cors')
 const WebSocket = require('ws')
-const { DirectoryWatcher } = require('lzy-watchpack')
-const MemoryFileSystem = require("memory-fs");
 const SparkMD5 = require('spark-md5')
 const staticResource = require('koa-static');
-const { changeColor } = require('../progressBar/changeColor')
+const { changeColor } = require('../progressBar/changeColor');
 
-class WebpackDevServer {
-    constructor(webpack) {
-        this.webpack = webpack
-        this.config = webpack.config
+class DevServer {
+    constructor(compiler) {
+        this.compiler = compiler
+        this.config = compiler.config
         this.app = undefined     // koa服务器
-        this.watcher = undefined  // 文件监视系统
         this.wsConnection = undefined  // webSocket链接实例
-        this.memoFs = new MemoryFileSystem()   // 内存文件系统
+
+
+        this.watcher = compiler.watchFileSystem  // 文件监视系统
+        this.memoFs = compiler.memoFileSystem  // 内存文件系统
+
+
         this.hash = { // 文件hash
             jsHash: '',
             cssHash: ''
         }
         this.watchedFileType = { // 监听需要变更的文件后缀
             js: ['js', 'lzy', 'jsx'],
-            css: ['css', 'less','scss']
+            css: ['css', 'less', 'scss']
         }
     }
 
@@ -98,17 +99,10 @@ class WebpackDevServer {
 
     //TODO 开启文件监视系统
     watchFiles() {
-        //创建文件监视器
-        const srcPath = path.resolve(this.config.entry, '..')
-        this.watcher = new DirectoryWatcher({
-            directoryList: [srcPath],
-            poll: 1000
-        })
-
-        const isDep = (path) => {//检查是否是依赖文件
-            const suffix = path.substr(path.lastIndexOf(".") + 1);
-            return this.webpack.dependenciesList.has(path)
-        }
+        if (!this.watcher) { return console.log("初始化watcherFileSystem失败"); }
+        
+        //检查是否是依赖文件
+        const isDep = (path) => this.compiler.dependenciesList.has(path)
 
         //todo 热更新update事件   发现文件变化执行热更新 (重新生成bundle代码 保存到内存 发送hash给客户端  客户端判断hash变更 变更重新拉取新代码)
         this.watcher.on('change', (path) => {
@@ -144,8 +138,8 @@ class WebpackDevServer {
         this.memoFs.writeFileSync(`/memoStatic/bundle.css`, ' ');
 
 
-        const bundleCode = this.webpack.createBundle('serverBundle')
-        const bundleCSS = this.webpack.config.plugins[1].bundleCSS(this.webpack)
+        const bundleCode = this.compiler.createBundle('serverBundle')
+        const bundleCSS = this.compiler.config.plugins[1].bundleCSS(this.compiler)
         const startServerCode = this.initClientCodeForStartServer()
 
         if (startServerCode) {
@@ -170,12 +164,12 @@ class WebpackDevServer {
         const needBundleCss = this.watchedFileType.css.indexOf(suffix) !== -1
 
         if (needBundle) {
-            const jsCode = this.webpack.createNewBundle(path)
+            const jsCode = this.compiler.createNewBundle(path)
             this.memoFs.writeFileSync(`/memoStatic/bundle.js`, jsCode);
             this.hash.jsHash = this.caculateHash('/memoStatic/bundle.js')
         }
         if (needBundleCss) {
-            const cssCode = this.webpack.config.plugins[1].bundleCSS(this.webpack)
+            const cssCode = this.compiler.config.plugins[1].bundleCSS(this.compiler)
             this.memoFs.writeFileSync(`/memoStatic/bundle.css`, cssCode);
             this.hash.cssHash = this.caculateHash('/memoStatic/bundle.css')
         }
@@ -208,7 +202,7 @@ class WebpackDevServer {
 }
 
 
-module.exports = WebpackDevServer
+module.exports = DevServer
 
 
 //! devServer流程

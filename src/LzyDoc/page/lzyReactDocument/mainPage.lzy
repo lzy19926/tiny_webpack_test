@@ -14,7 +14,7 @@ import Router from './pages/Router.lzy'
 import Ruzy from './pages/Ruzy.lzy'
 import Start from './pages/Start.lzy'
 import UseJSX from './pages/UseJSX.lzy'
-
+import Batch from './pages/Batch.lzy'
 
 //! 主要页面
 export default function MainSidePage() {
@@ -39,7 +39,7 @@ export default function MainSidePage() {
             children: [
                 { key: 'tab3Content6', title: '合成事件系统', render: () => <EventSystem /> },
                 { key: 'tab3Content7', title: '时间切片', render: () => <Concurrent /> },
-                { key: 'tab3Content8', title: 'batch更新', render: () => <div>暂无</div> },
+                { key: 'tab3Content8', title: 'batch更新', render: () => <Batch /> },
             ]
         },
         {
