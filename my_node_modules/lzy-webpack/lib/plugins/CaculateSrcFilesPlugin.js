@@ -7,7 +7,7 @@ const fs = require('fs')
 class CaculateSrcFilesPlugin {
     constructor() { }
 
-    caculateAllFiles(compiler) {
+    caculateAllFiles(compilation) {
 
         let srcFiles = 0
 
@@ -30,16 +30,16 @@ class CaculateSrcFilesPlugin {
             })
         }
 
-        const srcPath = path.resolve(compiler.config.entry, '..')
+        const srcPath = path.resolve(compilation.config.entry, '..')
 
         countFile(srcPath)
         // 给进度条设置步数(不准确)
-        compiler.progressBar.allStep = srcFiles
+        compilation.progressBar.allStep = srcFiles
     }
 
-    run(compiler) {
-        const handler = this.caculateAllFiles.bind(this, compiler)
-        compiler.hooks.initSync.tap("CaculateSrcFilesPlugin", handler)
+    run(compilation) {
+        const handler = this.caculateAllFiles.bind(this, compilation)
+        compilation.hooks.beforeCompileSync.tap("CaculateSrcFilesPlugin", handler)
     }
 }
 

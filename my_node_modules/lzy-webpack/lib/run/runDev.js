@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const DevServer = require('../lzy_devServer/DevServer')
-const Compiler = require('../lzy_webpack/webpackCompiler')
+const Compiler = require('../lzy_webpack/Compiler')
 const webpackConfig = require('../../../../webpack.config')
 
 

@@ -4,14 +4,14 @@ const Bar = require('../progressBar/Bar')
 class InitProgressBarPlugin {
     constructor() { }
 
-    initProgressBar(compiler) {
+    initProgressBar(compilation) {
         const progressBar = new Bar()
-        compiler.progressBar = progressBar
+        compilation.progressBar = progressBar
     }
 
-    run(compiler) {
-        const handler = this.initProgressBar.bind(this, compiler)
-        compiler.hooks.initSync.tap("InitProgressBarPlugin", handler)
+    run(compilation) {
+        const handler = this.initProgressBar.bind(this, compilation)
+        compilation.hooks.beforeCompileSync.tap("InitProgressBarPlugin", handler)
     }
 }
 
