@@ -19,7 +19,7 @@ class Compiler {
             environmentSync: new SyncHook(), // 初始化环境
 
             // 子模块创建时执行的钩子
-            compilation: new SyncHook(),
+            compilation: new SyncHook(['compilation']), // 接收compilation作为参数(见文档)
             moduleFactory: new SyncHook()
         }
 
@@ -50,9 +50,11 @@ class Compiler {
         this.callEnvironmentSyncHook()
     }
 
-    // 注册系统内置插件(按顺序执行)
+    //todo 注册系统内置插件(按顺序执行)
+    // 在webpack中 compiler插件的注册通过WebpackOptionsApply类进行注册的
     registSystemPlugins() {
         new NodeEnvironmentPlugin().run(this)
+        // new RegistCompilerPlugin().run(this)
     }
 
     // 执行各Hook回调
@@ -63,8 +65,8 @@ class Compiler {
         this.hooks.environmentSync.call()
     }
 
-    callCompilationSyncHook() {
-        this.hooks.compilation.call()
+    callCompilationSyncHook(compilation) {
+        this.hooks.compilation.call(compilation)
     }
     callModuleFactorySyncHook() {
         this.hooks.moduleFactory.call()
@@ -104,7 +106,7 @@ class Compiler {
         }
         const compilation = new Compilation(this, params);
         this._lastCompilation = compilation
-        this.callCompilationSyncHook()
+        this.callCompilationSyncHook(compilation)
         return compilation
     }
 
