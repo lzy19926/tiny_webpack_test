@@ -1,9 +1,7 @@
 #!/usr/bin/env node
-const Compiler = require('../lzy_webpack/Compiler')
-const webpackConfig = require('../../../../webpack.config')
+const createCompiler = require('../lzy_webpack/webpack')
 
-
-const webpackCompiler = new Compiler(webpackConfig)
+const webpackCompiler = createCompiler()
 
 webpackCompiler.compile()
 

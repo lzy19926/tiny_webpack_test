@@ -1,5 +1,5 @@
 //初始化进度条  计算总进度步数
-const Bar = require('../progressBar/Bar')
+const Bar = require('../../progressBar/Bar')
 
 class InitProgressBarPlugin {
     constructor() { }
