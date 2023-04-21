@@ -3,7 +3,7 @@
 class CheckFileSuffixPlugin {
     constructor() { }
     //非js,cjs,mjs,jsx文件或者lzy不执行
-    checkFileSuffix(resolveData) {
+    checkFileSuffix(resolveData, callNext) {
         
         const absolutePath = resolveData.request
 
@@ -17,17 +17,18 @@ class CheckFileSuffixPlugin {
 
         if (!isJSFile && !isLzyFile) {
             console.error('只能加载js,ts,cjs,mjs,jsx,tsx类型文件')
-            resolveData.isValid = false
+
             return false
         }
 
-        return true
+        // 继续下个插件
+        callNext()
     }
 
     //todo 将checkFileSuffix方法注册到moduleFactory的create钩子队列  创建module时执行 
     run(moduleFactory) {
         const handler = this.checkFileSuffix.bind(this)
-        moduleFactory.hooks.create.tap("CheckFileSuffixPlugin", handler)
+        moduleFactory.hooks.create.tapAsync("CheckFileSuffixPlugin", handler)
     }
 }
 

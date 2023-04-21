@@ -1,7 +1,7 @@
 // 模块工厂,用来给Compilation创建单个模块资源
 // 在创建Compilation时通过param注入
 const fs = require('fs')
-const { SyncHook } = require('../lzy_tapable/lib/index')
+const { AsyncSeriesHook } = require('../lzy_tapable/lib/index')
 const babel = require('@babel/core')
 const parser = require('@babel/parser')
 const types = require('@babel/types') // 用于创建AST节点
@@ -13,15 +13,15 @@ const AddFileSuffixPlugin = require('../plugins/forModuleFactory/AddFileSuffixPl
 const UseCustomLoaderPlugin = require('../plugins/forModuleFactory/UseCustomLoaderPlugin')
 const CheckFileSuffixPlugin = require('../plugins/forModuleFactory/CheckFileSuffixPlugin')
 const TraverseASTPlugin = require('../plugins/forModuleFactory/TraverseASTPlugin')
-
+const ModuleResultPlugin = require('../plugins/forModuleFactory/ModuleResultPlugin')
 
 class ModuleFactory {
     constructor(resolverFactory, config) {
-        // todo 需要修改为Bail类型hook,出错终止,或者是手动触发类型的hook
+
         this.hooks = {
-            beforeCreate: new SyncHook(),
-            create: new SyncHook(["resolveData"]),
-            afterCreate: new SyncHook()
+            beforeCreate: new AsyncSeriesHook(),
+            create: new AsyncSeriesHook(["resolveData"]),// 手动触发下个回调,支持异步的hook
+            afterCreate: new AsyncSeriesHook()
         }
 
         this.config = config
@@ -44,6 +44,7 @@ class ModuleFactory {
         new UseCustomLoaderPlugin().run(this)
         new CheckFileSuffixPlugin().run(this)
         new TraverseASTPlugin().run(this)
+        new ModuleResultPlugin().run(this)
         // afterCreate
 
     }
@@ -167,21 +168,19 @@ class ModuleFactory {
         const request = absolutePath       // 模块路径
         const resultCode = undefined       // 结果代码
         const processResult = {}           // 中间产物
-        const isValid = true               // 流转标记,是否能继续向下流转
-        
+        const isDone = false               // 流转标记,是否完成模块化构建
+
         return {
             dependencies,
             request,
             resultCode,
             processResult,
-            isValid
+            isDone
         }
     }
 
 
     create(params) {
-        const { absolutePath } = params
-
         const resolveData = this.initResolveData(params)
 
         // 执行插件流转逻辑 
@@ -189,15 +188,17 @@ class ModuleFactory {
         this.hooks.create.call(resolveData)
         this.hooks.afterCreate.callAsync()
 
-
+        
         // 读取流转结果,生成模块
-        const module = {
-            filePath: resolveData.request,
-            code: resolveData.resultCode,
-            dependencies: resolveData.dependencies
+        if (resolveData.isDone) {
+            return {
+                filePath: resolveData.request,
+                code: resolveData.resultCode,
+                dependencies: resolveData.dependencies
+            }
         }
 
-        return module
+        return
     }
 
 

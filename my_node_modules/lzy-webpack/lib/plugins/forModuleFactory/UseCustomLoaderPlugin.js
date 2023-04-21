@@ -5,8 +5,8 @@ const fs = require('fs')
 class UseCustomLoaderPlugin {
     constructor() { }
 
-    useCustomLoader(moduleFactory, resolveData) {
-
+    useCustomLoader(moduleFactory, resolveData, callNext) {
+        
         const absolutePath = resolveData.request
         const fileContent = fs.readFileSync(absolutePath, 'utf-8')
         const rules = moduleFactory.config.rules
@@ -24,12 +24,15 @@ class UseCustomLoaderPlugin {
         })
 
         Object.assign(resolveData.processResult, { fileContent: res })
+
+        // 继续下个插件
+        callNext()
     }
 
     //todo 将useCustomLoader方法注册到moduleFactory的create钩子队列  创建module时执行 
     run(moduleFactory) {
         const handler = this.useCustomLoader.bind(this, moduleFactory)
-        moduleFactory.hooks.create.tap("UseCustomLoaderPlugin", handler)
+        moduleFactory.hooks.create.tapAsync("UseCustomLoaderPlugin", handler)
     }
 }
 

@@ -42,7 +42,7 @@ function SyncHook_Test() {
         console.log('----3');
     });
 }
-SyncHook_Test()
+// SyncHook_Test()
 
 
 

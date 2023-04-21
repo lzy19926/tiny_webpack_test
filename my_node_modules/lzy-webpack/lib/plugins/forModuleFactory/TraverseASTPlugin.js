@@ -9,7 +9,7 @@ class TraverseASTPlugin {
     constructor() { }
 
     // 生成es5 代码和依赖数组(需要插件化)
-    traverseAST(resolveData) {
+    traverseAST(resolveData, callNext) {
         
         const dependencies = resolveData?.dependencies
         const fileContent = resolveData?.processResult?.fileContent
@@ -73,13 +73,16 @@ class TraverseASTPlugin {
 
 
         resolveData.resultCode = es5Code?.code || ""
+
+        // 继续下个插件
+        callNext()
     }
 
 
     //todo 将useCustomLoader方法注册到moduleFactory的create钩子队列  创建module时执行 
     run(moduleFactory) {
         const handler = this.traverseAST.bind(this)
-        moduleFactory.hooks.create.tap("TraverseASTPlugin", handler)
+        moduleFactory.hooks.create.tapAsync("TraverseASTPlugin", handler)
     }
 }
 

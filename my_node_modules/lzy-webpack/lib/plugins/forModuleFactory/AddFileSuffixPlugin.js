@@ -4,7 +4,8 @@ class AddFileSuffixPlugin {
     constructor() { }
 
     // 添加.js后缀（需要插件化） 
-    addFileSuffix(resolveData) {
+    addFileSuffix(resolveData, callNext) {
+
         let path = resolveData.request
         const needHandle = !(path[0] !== '.' && path[1] !== ':')
 
@@ -16,15 +17,17 @@ class AddFileSuffixPlugin {
                 path = path + '.js'
             }
         }
-        
+
         resolveData.request = path
-        return path
+
+        // 继续下个插件
+        callNext()
     }
 
     //todo 将addFileSuffix方法注册到moduleFactory的create钩子队列  创建module时执行 
     run(moduleFactory) {
         const handler = this.addFileSuffix.bind(this)
-        moduleFactory.hooks.create.tap("AddFileSuffixPlugin", handler)
+        moduleFactory.hooks.create.tapAsync("AddFileSuffixPlugin", handler)
     }
 }
 
