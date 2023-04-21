@@ -1,18 +1,51 @@
 // 模块工厂,用来给Compilation创建单个模块资源
 // 在创建Compilation时通过param注入
 const fs = require('fs')
-const { AsyncSeriesHook } = require('../lzy_tapable/lib/index')
+const { SyncHook } = require('../lzy_tapable/lib/index')
 const babel = require('@babel/core')
 const parser = require('@babel/parser')
 const types = require('@babel/types') // 用于创建AST节点
 const traverse = require('@babel/traverse').default
-const { importStatic } = require('./importStatic')
+const { importStatic } = require('../lzy_webpack/importStatic')
+
+
+const AddFileSuffixPlugin = require('../plugins/forModuleFactory/AddFileSuffixPlugin')
+const UseCustomLoaderPlugin = require('../plugins/forModuleFactory/UseCustomLoaderPlugin')
+const CheckFileSuffixPlugin = require('../plugins/forModuleFactory/CheckFileSuffixPlugin')
+const TraverseASTPlugin = require('../plugins/forModuleFactory/TraverseASTPlugin')
 
 
 class ModuleFactory {
     constructor(resolverFactory, config) {
+        // todo 需要修改为Bail类型hook,出错终止,或者是手动触发类型的hook
+        this.hooks = {
+            beforeCreate: new SyncHook(),
+            create: new SyncHook(["resolveData"]),
+            afterCreate: new SyncHook()
+        }
+
         this.config = config
         this.resolverFactory = resolverFactory
+
+        this.init()
+    }
+
+    init() {
+        this.registSystemPlugins()
+    }
+
+    //! 注册系统内置插件(按顺序执行)(这里的插件从下往上执行??? 需要处理)
+    registSystemPlugins() {
+        // beforeCreate
+
+
+        // create
+        new AddFileSuffixPlugin().run(this)
+        new UseCustomLoaderPlugin().run(this)
+        new CheckFileSuffixPlugin().run(this)
+        new TraverseASTPlugin().run(this)
+        // afterCreate
+
     }
 
     // 使用自定义loader （需要插件化） 
@@ -125,49 +158,43 @@ class ModuleFactory {
         return es5Code?.code || ""
     }
 
-
     // 初始化resolveData,这个object会持续在hook中流转,用于构建
     initResolveData(params) {
         const { absolutePath } = params
 
         // const dependencies = new LazySet() // 依赖项
-        const dependencies = undefined // 依赖项
-
+        const dependencies = [] // 依赖项
         const request = absolutePath       // 模块路径
         const resultCode = undefined       // 结果代码
-
+        const processResult = {}           // 中间产物
+        const isValid = true               // 流转标记,是否能继续向下流转
+        
         return {
             dependencies,
             request,
-            resultCode
+            resultCode,
+            processResult,
+            isValid
         }
     }
 
 
-    create2(params) {
+    create(params) {
         const { absolutePath } = params
 
         const resolveData = this.initResolveData(params)
 
-        //! 先调用用户的loader
-        absolutePath = this.addFileSuffix(absolutePath)
-        const fileContent = this.useCustomLoader(absolutePath)
-
-        //! 非js,cjs,mjs,jsx文件或者lzy不执行
-        const validateSuffix = this.checkFileSuffix(absolutePath)
-        if (!validateSuffix) return
-
-        //! --------生成ES5代码  生成dependencies数组
-        const dependencies = []
-        const es5Code = this.traverseAST({ fileContent, dependencies })
-
+        // 执行插件流转逻辑 
+        this.hooks.beforeCreate.callAsync()
+        this.hooks.create.call(resolveData)
+        this.hooks.afterCreate.callAsync()
 
 
         // 读取流转结果,生成模块
         const module = {
-            filePath: absolutePath,
-            code: es5Code,
-            dependencies
+            filePath: resolveData.request,
+            code: resolveData.resultCode,
+            dependencies: resolveData.dependencies
         }
 
         return module
@@ -175,7 +202,7 @@ class ModuleFactory {
 
 
 
-    create(params) {
+    create2(params) {
         let { absolutePath } = params
 
         const resolveData = this.initResolveData(params)
@@ -190,6 +217,7 @@ class ModuleFactory {
 
         //! --------生成ES5代码  生成dependencies数组
         const dependencies = []
+        debugger
         const es5Code = this.traverseAST({ fileContent, dependencies })
 
 

@@ -3,7 +3,7 @@ const Bar = require('../../progressBar/Bar')
 
 class InitProgressBarPlugin {
     constructor() { }
-
+    
     initProgressBar(compilation) {
         const progressBar = new Bar()
         compilation.progressBar = progressBar

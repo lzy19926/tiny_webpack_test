@@ -6,9 +6,9 @@ const fs = require('fs')
 
 class CaculateSrcFilesPlugin {
     constructor() { }
-
+    
     caculateAllFiles(compilation) {
-
+        
         let srcFiles = 0
 
         const needBuild = (suffix) => ["js", "css", "lzy"].indexOf(suffix) !== -1

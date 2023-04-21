@@ -1,7 +1,7 @@
 //初始化用户插件 将用户插件注册到Hook中
 class InitCustomPluginsPlugin {
     constructor() { }
-
+    
     //todo 调用所有plugins上的run方法  挂载plugins上的处理函数到钩子上
     initPlugins(compilation) {
         const plugins = compilation.config.plugins
