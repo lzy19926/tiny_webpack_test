@@ -1,20 +1,32 @@
-import LzyReact from 'lzy-react'
+import LzyReact, { myUseEffect, myUseState } from 'lzy-react'
 import { Button } from 'lzy-ui'
-import { UseEffectDemo, UseStateDemo, UseContextDemo } from '../demos/hooks.lzy'
-import { getUser } from '../../../../service'
+
+import { getUser, getAllUser } from '../../../../service'
 
 export default function Nest() {
 
+    const [data, setData] = myUseState()
 
-    const handleClick = async () => {
+    myUseEffect(() => {
+        getAllUserData()
+    }, [])
+
+
+    const getUserData = async () => {
         const res = await getUser()
-        console.log(res.data,'----');
+        setData(res.data)
+    }
+
+    const getAllUserData = async () => {
+        const res = await getAllUser()
+        setData(res.data)
     }
 
     return (
         <LZY-TEMPLATE>
             <h2>数据获取测试页面</h2>
-            <Button onClick={handleClick}>点击获取数据</Button>
+            <Button onClick={getUserData}>点击获取数据</Button>
+            <div> {data}</div>
         </LZY-TEMPLATE>
     )
 }

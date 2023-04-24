@@ -17,7 +17,6 @@ import UseJSX from './pages/UseJSX.lzy'
 import Batch from './pages/Batch.lzy'
 import Nest from './pages/NestTest.lzy'
 
-
 //! 主要页面
 export default function MainSidePage() {
     const navList = [
@@ -52,9 +51,7 @@ export default function MainSidePage() {
             ]
         },
         { key: 'tab3Content11', title: 'lzy打包器', render: () => <LzyWebpack /> },
-        { key: 'tab3Content12', title: '服务端测试', render: () => <Nest /> },
-
-
+        { key: 'tab3Content12', title: '服务端测试', render: () => <Nest /> }
     ]
 
     return (<SideListPage dataSource={navList} />)
