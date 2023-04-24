@@ -1,0 +1,21 @@
+import LzyReact from 'lzy-react'
+import { Button } from 'lzy-ui'
+import { UseEffectDemo, UseStateDemo, UseContextDemo } from '../demos/hooks.lzy'
+import { getUser } from '../../../../service'
+
+export default function Nest() {
+
+
+    const handleClick = async () => {
+        const res = await getUser()
+        console.log(res.data,'----');
+    }
+
+    return (
+        <LZY-TEMPLATE>
+            <h2>数据获取测试页面</h2>
+            <Button onClick={handleClick}>点击获取数据</Button>
+        </LZY-TEMPLATE>
+    )
+}
+

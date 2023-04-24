@@ -20,7 +20,7 @@ class CaculateSrcFilesPlugin {
             filesList.forEach((fileName) => {
                 let isDir = fileName.split('.').length === 1
                 let suffix = fileName.split('.').pop().toLowerCase();
-                const absolutePath = dirPath + '\\' + fileName
+                const absolutePath = dirPath + '/' + fileName
 
                 if (needBuild(suffix)) {
                     srcFiles += 1

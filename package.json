@@ -26,7 +26,7 @@
     "lzy-react-query": "file:my_node_modules/lzy-React-Query",
     "lzy-react-router": "file:my_node_modules/lzy-React-Router",
     "lzy-ruzy": "file:my_node_modules/lzy-Ruzy",
-    "lzy-ruzy-react": "file:my_node_modules/lzy-Ruzy-React",
+    "lzy-ruzy-react": "file:my_node_modules/lzy-ruzy-react",
     "lzy-ui": "file:my_node_modules/lzy-LzyUI",
     "lzy-watchpack": "file:my_node_modules/lzy-watchpack",
     "lzy-webpack": "file:my_node_modules/lzy-webpack",
