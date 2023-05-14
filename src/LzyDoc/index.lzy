@@ -1,5 +1,10 @@
 // 使用zuiUI
-import LzyReact, { render, myUseEffect } from 'lzy-react'
+import LzyReact, { render } from 'lzy-react'
+// 国际化组件
+import { FormatMessageProvider } from 'lzy-formatjs'
+import { config_en } from './local/en'
+import { config_zh } from './local/zh'
+
 
 import BaseLayout from './BaseLayout/index.lzy'
 import MainSidePage from './page/lzyReactDocument/mainPage.lzy'
@@ -7,9 +12,11 @@ import MainSidePage from './page/lzyReactDocument/mainPage.lzy'
 
 export function App() {
     return (
-        <BaseLayout title="LzyReact文档">
-            <MainSidePage />
-        </BaseLayout>
+        <FormatMessageProvider config={config_en}>
+            <BaseLayout title="LzyReact文档">
+                <MainSidePage />
+            </BaseLayout>
+        </FormatMessageProvider>
     )
 }
 

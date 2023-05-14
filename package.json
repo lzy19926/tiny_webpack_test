@@ -20,6 +20,7 @@
     "@mui/icons-material": "^5.11.9",
     "@mui/material": "^5.11.10",
     "axios": "^1.3.3",
+    "lzy-formatjs": "file:my_node_modules/lzy-FormatJS",
     "lzy-microapp": "file:my_node_modules/lzy-microApp",
     "lzy-qiankun": "file:my_node_modules/lzy-Qiankun",
     "lzy-react": "file:my_node_modules/lzy-React",

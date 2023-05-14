@@ -8,9 +8,11 @@ const jsxLoader = require('./my_node_modules/webpackLoader/jsx-loader/index')
 module.exports = {
     mode: 'development', // development|production
     rootPath: __dirname, // 项目根路径
-    entry: path.join(__dirname, '/src/LzyDoc/index.lzy'), //配置打包入口
-    output: path.join(__dirname, '/dist'), // 出口
 
+    entry: path.join(__dirname, '/src/LzyDoc/index.lzy'), //配置打包入口
+    // entry: path.join(__dirname, '/src/libTest/formatjsTest/app.lzy'), //测试入口
+
+    output: path.join(__dirname, '/dist'), // 出口
 
     devServer: {
         port: 8000,// 端口

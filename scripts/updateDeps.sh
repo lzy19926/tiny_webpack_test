@@ -34,4 +34,7 @@ npm install .\\my_node_modules\\lzy-watchpack\\
 npm uninstall lzy-webpack
 npm install .\\my_node_modules\\lzy-webpack\\
 
+npm uninstall lzy-formatjs
+npm install .\\my_node_modules\\lzy-FormatJS\\
+
 nrm use npm

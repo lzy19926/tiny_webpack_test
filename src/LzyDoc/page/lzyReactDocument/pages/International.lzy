@@ -1,0 +1,63 @@
+import LzyReact from 'lzy-react'
+import { Block, CodeBlock } from 'lzy-ui'
+
+
+export default function International() {
+    const code1 =
+        `
+const messages_zh = {
+     hellow: "你好,{name}",
+}
+const messages_en = {
+    hellow: "hellow,{name}!",
+}
+const config_zh = {
+    locale: 'zh',
+    messages: messages_zh,
+}
+const config_en = {
+    locale: 'en',
+    messages: messages_en,
+}`
+
+    const code2 =
+        `// 组件内使用
+import LzyReact, { render } from 'lzy-react'
+import { FormatMessage, FormatMessageProvider, changeIntl } from 'lzy-formatjs'
+
+// 提供切换语言配置方法
+const changeLanguage = () => { changeIntl(config_en) }
+
+// 使用FormatMessageProvider组件给下级组件提供国际化配置
+// 使用FormatMessage组件渲染对应的文本节点
+export function App() {
+    return (
+        <FormatMessageProvider config={config_zh}> 
+            <button onClick={changeLanguage}>切换语言</button>
+
+            <FormatMessage id="hellow" values={{ name: "张三" }} />
+            <FormatMessage id="fxxk" values={{ name: "张三" }} />
+        </FormatMessageProvider>
+    )
+}
+
+render(<App />, document.getElementById('root'))
+`
+
+    return (
+        <LZY-TEMPLATE>
+            <h2>国际化</h2>
+            <p>提供了适配的国际化组件FormatMessage,由原生Intl类封装而来,实现了Intl类的拓展并适配了Lzy-React框架</p>
+
+            <p>创建国际化配置文本</p>
+            <CodeBlock codeStr={code1} />
+            <Block />
+
+            <p>使用国际化组件</p>
+            <CodeBlock codeStr={code2} />
+            <Block />
+
+            <h2>本站点使用该国际化组件,可以在右上角的选项中设置语言</h2>
+        </LZY-TEMPLATE>
+    )
+}

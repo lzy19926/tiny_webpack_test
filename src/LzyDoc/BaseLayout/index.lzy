@@ -1,5 +1,8 @@
 import LzyReact, { myUseEffect, myUseState, render } from 'lzy-react'
 import { Button, Switch, Input, Modal, Slide } from 'lzy-ui'
+import { changeIntl } from 'lzy-formatjs'
+import { config_en } from '../local/en'
+import { config_zh } from '../local/zh'
 
 import './index.css'
 
@@ -27,6 +30,25 @@ function TopGuider({ title }) {
         </div>
     )
 }
+
+
+
+//TODO 语言选择切换按钮(未完成)
+const LangSwitch = () => {
+    let config = config_en
+
+    const changeLang = () => {
+        if (config == config_en) {
+            config = config_zh
+            changeIntl(config_zh)
+        } else {
+            config = config_en
+            changeIntl(config_en)
+        }
+    }
+    return (<Switch label={`语言选择`} onClick={changeLang} />)
+}
+
 // 设置模态框
 function SettingModal() {
     return (
@@ -35,11 +57,16 @@ function SettingModal() {
                 <h4 class="modal-title">设置</h4>
             </div>
             <div class="modal-body">
-                <Switch />
+                <Switch label="夜间模式" />
+                <LangSwitch />
             </div>
         </Slide >
     )
 }
+
+
+
+
 // 列表模态框
 function ListModal() {
     return (

@@ -1,0 +1,26 @@
+
+// Lzy-FormatJS国际化组件测试
+import LzyReact, { render } from 'lzy-react'
+import { FormatMessage, FormatMessageProvider, changeIntl } from 'lzy-formatjs'
+import { config_en } from './en'
+import { config_zh } from './zh'
+
+
+const changeLanguage = () => { changeIntl(config_en) }
+
+export function App() {
+
+    return (
+        <FormatMessageProvider config={config_zh}>
+            <button onClick={changeLanguage}>切换语言</button>
+            <br />
+            <FormatMessage id="hellow" values={{ name: "张三" }} />
+            <br />
+            <FormatMessage id="fxxk" values={{ name: "张三" }} />
+        </FormatMessageProvider>
+    )
+}
+
+render(<App />, document.getElementById('root'),
+    { openLogger: false }
+)
