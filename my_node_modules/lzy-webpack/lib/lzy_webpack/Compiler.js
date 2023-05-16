@@ -32,7 +32,7 @@ class Compiler {
         this._lastModuleFactory = undefined
 
         // 路径解析工厂
-        this.resolverFactory = new ResolverFactory()
+        this.resolverFactory = new ResolverFactory(this)
 
         // 文件系统(通过插件注入)
         this.watchFileSystem = undefined      // 文件监视系统

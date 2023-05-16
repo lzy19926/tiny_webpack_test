@@ -70,6 +70,17 @@ class Hook {
         this._tap("promise", name, fn);
     }
 
+    // unTap方法系列  删除回调函数
+    unTap() {
+        this.taps.pop()
+    }
+
+    unTapAll() {
+        while (this.taps.length) {
+            this.taps.pop()
+        }
+    }
+
     //todo 添加hook配置
     withOptions({ before, stage }) {
         Object.assign(this.addtionalOptions, { before }, { stage })

@@ -5,7 +5,6 @@ class AddFileSuffixPlugin {
 
     // 添加.js后缀（需要插件化） 
     addFileSuffix(resolveData, callNext) {
-
         let path = resolveData.request
         const needHandle = !(path[0] !== '.' && path[1] !== ':')
 

@@ -10,6 +10,8 @@ class SyncWaterfallHook {
     }
 
     call(...args) {
+        if (!this.tasks.length) return
+
         this.tasks.reduce((pre, next) => {
             if (typeof next === 'function') {
                 return next(pre, ...args)
