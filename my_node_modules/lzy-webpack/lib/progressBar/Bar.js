@@ -1,5 +1,3 @@
-const fs = require('fs')
-const path = require('path')
 const ProgressBar = require('./progressBar')
 
 //!--------------- 进度条相关-----------------------

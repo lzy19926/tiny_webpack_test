@@ -28,9 +28,6 @@ npm install .\\my_node_modules\\lzy-Ruzy\\
 npm uninstall lzy-ruzy-react
 npm install .\\my_node_modules\\lzy-ruzy-react\\
 
-npm uninstall lzy-watchpack
-npm install .\\my_node_modules\\lzy-watchpack\\
-
 npm uninstall lzy-webpack
 npm install .\\my_node_modules\\lzy-webpack\\
 

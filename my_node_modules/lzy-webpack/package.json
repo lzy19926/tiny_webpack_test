@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "lzy-webpack-build": "./lib/run/runBuild.js",
-    "lzy-webpack-dev": "./lib/run/runDev.js"
+    "lzy-webpack-build": "./scripts/runBuild.js",
+    "lzy-webpack-dev": "./scripts/runDev.js"
   },
   "keywords": [],
   "author": "",

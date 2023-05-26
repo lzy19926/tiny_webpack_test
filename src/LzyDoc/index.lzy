@@ -12,7 +12,7 @@ import MainSidePage from './page/lzyReactDocument/mainPage.lzy'
 
 export function App() {
     return (
-        <FormatMessageProvider config={config_en}>
+        <FormatMessageProvider config={config_zh}>
             <BaseLayout title="LzyReact文档">
                 <MainSidePage />
             </BaseLayout>

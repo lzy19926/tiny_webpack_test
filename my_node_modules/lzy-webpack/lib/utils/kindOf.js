@@ -2,8 +2,29 @@
  * 此函数用于获取一个变量的类型名 
  * 比如"string","Array","Promise"等,在源码里用于控制台打印。
 */
+function ctorName(val) {
+  return typeof val.constructor === 'function' ? val.constructor.name : null
+}
 
-export function miniKindOf(val) {
+function isError(val) {
+  return (
+    val instanceof Error ||
+    (typeof val.message === 'string' &&
+      val.constructor &&
+      typeof val.constructor.stackTraceLimit === 'number')
+  )
+}
+
+function isDate(val) {
+  if (val instanceof Date) return true
+  return (
+    typeof val.toDateString === 'function' &&
+    typeof val.getDate === 'function' &&
+    typeof val.setDate === 'function'
+  )
+}
+
+function miniKindOf(val) {
   if (val === void 0) return 'undefined'
   if (val === null) return 'null'
 
@@ -41,29 +62,7 @@ export function miniKindOf(val) {
     .replace(/\s/g, '')
 }
 
-function ctorName(val) {
-  return typeof val.constructor === 'function' ? val.constructor.name : null
-}
-
-function isError(val) {
-  return (
-    val instanceof Error ||
-    (typeof val.message === 'string' &&
-      val.constructor &&
-      typeof val.constructor.stackTraceLimit === 'number')
-  )
-}
-
-function isDate(val) {
-  if (val instanceof Date) return true
-  return (
-    typeof val.toDateString === 'function' &&
-    typeof val.getDate === 'function' &&
-    typeof val.setDate === 'function'
-  )
-}
-
-export function kindOf(val) {
+function kindOf(val) {
   let typeOfVal = typeof val
 
   if (process.env.NODE_ENV !== 'production') {
@@ -72,3 +71,5 @@ export function kindOf(val) {
 
   return typeOfVal
 }
+
+module.exports = { miniKindOf, kindOf }

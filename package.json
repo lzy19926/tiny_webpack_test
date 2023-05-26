@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "prepare": "husky install",
-    "t-build": "node ./my_node_modules/lzy-webpack/lib/run/runBuild.js",
-    "t-dev": "node ./my_node_modules/lzy-webpack/lib/run/runDev.js",
+    "t-build": "node ./my_node_modules/lzy-webpack/scripts/runBuild.js",
+    "t-dev": "node ./my_node_modules/lzy-webpack/scripts/runDev.js",
     "t-esbuild": "node ./my_node_modules/lzy-esBuild/src/run.js",
     "build": "lzy-webpack-build",
     "dev": "lzy-webpack-dev",
@@ -29,7 +29,6 @@
     "lzy-ruzy": "file:my_node_modules/lzy-Ruzy",
     "lzy-ruzy-react": "file:my_node_modules/lzy-ruzy-react",
     "lzy-ui": "file:my_node_modules/lzy-LzyUI",
-    "lzy-watchpack": "file:my_node_modules/lzy-watchpack",
     "lzy-webpack": "file:my_node_modules/lzy-webpack",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

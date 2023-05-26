@@ -2,6 +2,7 @@
 
 class AmdLibraryPlugin {
     constructor() { }
+    render() { }
     run() { }
 }
 

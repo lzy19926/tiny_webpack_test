@@ -35,7 +35,7 @@ function TopGuider({ title }) {
 
 //TODO 语言选择切换按钮(未完成)
 const LangSwitch = () => {
-    let config = config_en
+    let config = config_zh
 
     const changeLang = () => {
         if (config == config_en) {
