@@ -1,14 +1,22 @@
 import LzyReact, { render } from 'lzy-react'
-import DropStart from './DropStart/index.lzy'
+import { HashRouter, Routes, Route } from 'lzy-react-router'
 
-//
+//页面
+import DropStart from './DropStart/index.lzy'
 import LzyReactDocument from './page/lzyReactDocument/index.lzy'
+import LzyWebpackDocument from './page/LzyWebpackDocument/index.lzy'
 
 export function App() {
   return (
     <div>
+      <HashRouter>
+        <Routes>
+          <Route path="/" component={<LzyReactDocument />} />
+          <Route path="/#lzyReact" component={<LzyReactDocument />} />
+          <Route path="/#lzyWebpack" component={<LzyWebpackDocument />} />
+        </Routes>
+      </HashRouter>
       <DropStart />
-      <LzyReactDocument />
     </div>
   )
 }

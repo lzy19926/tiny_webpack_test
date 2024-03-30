@@ -23,31 +23,24 @@ export default function DropStart(props) {
                 <button type="button" class="btn btn-secondary dropdown-toggle lzy-dropStart" data-bs-toggle="dropdown">
                 </button>
                 <ul class={show ? "lzy-dropdown-menu lzy-dropdown-menu-active" : "lzy-dropdown-menu"}>
-
                     <li class="lzy-dropdown-item">
                         <Link to="/#lzyReact" title='lzyReact文档' />
                     </li>
-
                     <li class="lzy-dropdown-item">
                         <Link to="/#lzyWebpack" title='lzyWebpack文档' />
                     </li>
-
-                    <li class="lzy-dropdown-item">
+                    {/* <li class="lzy-dropdown-item">
                         <Link to="/#lzyQiankun" title='lzyQiankun文档' />
                     </li>
-
                     <li class="lzy-dropdown-item">
                         <Link to="/#lzyMicroApp" title='lzyMicroApp文档' />
                     </li>
-
                     <li class="lzy-dropdown-item">
                         <Link to="/#lzyReactQuery" title='lzyReactQuery文档' />
                     </li>
-
                     <li class="lzy-dropdown-item">
                         <Link to="/#chatGPT" title='chatGPT' />
-                    </li>
-
+                    </li> */}
                 </ul>
             </div >
         </LZY-TEMPLATE>
