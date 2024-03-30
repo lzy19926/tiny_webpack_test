@@ -1,0 +1,75 @@
+
+
+import LzyReact from 'lzy-react'
+import { CodeBlock, Block } from 'lzy-ui'
+
+
+export default function Build() {
+
+    const code1 =
+        `// package.json
+"scripts": {
+    "t-build": "lzy-webpack-build"
+  }`
+
+    const code2 = ` npm run t-build`
+
+
+    const code3 =
+        `// 导出
+ let name = "张三"
+ let age = 18
+ let sex = "男"
+ 
+ export {name}
+ export default Age
+ module.exports = {sex}
+
+`
+    const code4 =
+        `// 引入
+  import {name} from './index.js'
+  import Age from './index.js'
+  const {sex} = require('./index.js')
+`
+
+    const code5 =
+        `// 项目根目录创建webpack.config.json文件
+const path = require('path')
+
+module.exports = {
+    rootPath: __dirname, // 项目根路径
+    entry: path.join(__dirname, '/src/index.js'), //配置打包入口
+    output: path.join(__dirname, '/dist'), // 出口
+}
+`
+
+    return (
+        <LZY-TEMPLATE>
+            <h2>打包与构建</h2>
+            <Block />
+
+
+            <h3>基本使用</h3>
+            <p>提供了跟原版webpack一样的使用方式,创建webpack.config.js文件,配置打包入口出口,执行命令即可打包</p>
+            <br />
+            <p>1. lzy-webpack包中的lib/run文件夹中定义了两个脚本  runBuild和runDev</p>
+            <p>2. 将runBuild脚本设置为package.json的script命令</p>
+            <CodeBlock codeStr={code1} />
+            <p>3. 执行命令</p>
+            <CodeBlock codeStr={code2} />
+            <p>4.即会通过入口文件对项目进行构建,生成dist文件夹</p>
+            <Block />
+
+            <h3>支持ESM和CJS语法</h3>
+            <br />
+            <CodeBlock codeStr={code3} />
+            <CodeBlock codeStr={code4} />
+            <Block />
+
+            <h3>配置打包入口出口</h3>
+            <br />
+            <CodeBlock codeStr={code5} />
+        </LZY-TEMPLATE>
+    )
+}

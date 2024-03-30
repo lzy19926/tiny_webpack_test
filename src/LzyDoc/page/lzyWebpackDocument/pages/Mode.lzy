@@ -1,0 +1,48 @@
+import LzyReact from 'lzy-react'
+import { CodeBlock, Block } from 'lzy-ui'
+
+
+export default function Mode() {
+
+    const code1 = ` mode: 'development', // development|production`
+
+    const code2 = `// -------------------阳九的webpack---------------------------
+(() => {
+  var modules = {
+    "E:\\My_Webpack\\myWebpack\\src\\page.lzy": [
+      (require, module, exports) => {
+        "use strict";
+
+        function _typeof(obj) { }
+         
+        ......
+
+})
+    `
+
+    const code3 =
+        `(()=>{var a={"E:\\My_Webpack\\myWebpack\\src\\index.lzy":[(e,t,n)=>{"use strict";function i(e)
+{return(i="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){
+return typeof e}:function(e){return e&&"function"===typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof
+    `
+    return (
+        <LZY-TEMPLATE>
+            <h2>开发模式</h2>
+            <Block />
+            <p>提供了两种开发模式 development|production 在webpack.config.js中进行配置:</p>
+            <CodeBlock codeStr={code1} />
+            <Block />
+
+            <h2>代码压缩</h2>
+            <br />
+            <p>与原版一样,开发模式下不会进行代码压缩,生产模式会进行代码压缩</p>
+            <h3>Development模式下的bundle代码</h3>
+            <br />
+            <CodeBlock codeStr={code2} />
+            <br />
+            <h3>Production模式下的bundle代码</h3>
+            <br />
+            <CodeBlock codeStr={code3} />
+        </LZY-TEMPLATE>
+    )
+}

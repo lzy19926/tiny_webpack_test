@@ -1,0 +1,44 @@
+
+
+import LzyReact from 'lzy-react'
+import { CodeBlock, Block } from 'lzy-ui'
+
+
+export default function DevServer() {
+
+    const code1 =
+        `"scripts": {
+   "t-dev": "lzy-webpack-dev",
+}`
+
+    const code2 =
+        `devServer: {
+    port: 8000,// 端口
+    socketPort: 3001,// 使用的webSocket的端口
+    hot: true,// 启动热更新
+    cors: true,// 配置是否能跨域
+},`
+
+    return (
+        <LZY-TEMPLATE>
+            <h2>DevServer</h2>
+            <br />
+            <p>提供了与原版类似的开发服务器devServer,配置命令即可运行</p>
+            <CodeBlock codeStr={code1} />
+            <Block />
+
+            <h2>DevServer基本配置</h2>
+            <br />
+            <CodeBlock codeStr={code2} />
+            <Block />
+
+            <h2>热更新</h2>
+            <br />
+            <p>提供了devServer热更新,进行配置后即可使用热模块替换功能</p>
+            <p>会默认监听src文件夹下的文件变更,保存文件即会热更新</p>
+            <p style={'color:red'}>(功能不完善,在新增,删除,新引用文件后需要重新执行devServer)</p>
+            <Block />
+
+        </LZY-TEMPLATE>
+    )
+}

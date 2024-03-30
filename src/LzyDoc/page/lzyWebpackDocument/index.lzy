@@ -9,7 +9,13 @@ import SideListPage from '../../../../my_node_modules/lzy-lzyUI/SideListPage/ind
 
 // tab页面
 import LzyWebpack from './pages/LzyWebpack.lzy'
-
+import Config from './pages/Config.lzy'
+import Build from './pages/Build.lzy'
+import Mode from './pages/Mode.lzy'
+import DevServer from './pages/DevServer.lzy'
+import ImportStatic from './pages/ImportStatic.lzy'
+import Plugin from './pages/Plugin.lzy'
+import Loader from './pages/Loader.lzy'
 
 export default function LzyWebpackDocument() {
 
@@ -17,7 +23,14 @@ export default function LzyWebpackDocument() {
     {
       key: 'A', title: <FormatMessage id="start" />,
       children: [
-        { key: 'tab3Content1', title: <FormatMessage id="lzyWebpack" />, render: () => <LzyWebpack /> },
+        { key: 'tab1Content1', title: <FormatMessage id="lzyWebpack" />, render: () => <LzyWebpack /> },
+        { key: 'tab1Content2', title: <FormatMessage id="config" />, render: () => <Config /> },
+        { key: 'tab1Content3', title: <FormatMessage id="build" />, render: () => <Build /> },
+        { key: 'tab1Content4', title: <FormatMessage id="mode" />, render: () => <Mode /> },
+        { key: 'tab1Content5', title: <FormatMessage id="devServer" />, render: () => <DevServer /> },
+        { key: 'tab1Content6', title: <FormatMessage id="importStatic" />, render: () => <ImportStatic /> },
+        { key: 'tab1Content7', title: <FormatMessage id="plugin" />, render: () => <Plugin /> },
+        { key: 'tab1Content8', title: <FormatMessage id="loader" />, render: () => <Loader /> },
       ]
     },
   ]

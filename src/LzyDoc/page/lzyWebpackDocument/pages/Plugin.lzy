@@ -1,0 +1,71 @@
+
+
+import LzyReact from 'lzy-react'
+import { CodeBlock, Block } from 'lzy-ui'
+
+
+export default function Plugin() {
+
+    const code1 =
+        `// 引入插件
+const HtmlPlugin = require('./my_node_modules/webpackPlugin/htmlPlugin')
+const CssExtractPlugin = require('./my_node_modules/webpackPlugin/cssExtractPlugin')
+
+module.exports = {
+    plugins: [
+        new HtmlPlugin({ fileName: 'index.html' }),   //! 打包生成html文件插件
+        new CssExtractPlugin({ fileName: 'index.css' }) //! 打包CSS插件
+    ],
+}
+        `
+
+    const code2 =
+        `class TestPlugin {
+
+     constructor() {}
+     
+     run(compiler) {
+         // 定义插件逻辑
+         const handler = ()=>{console.log('执行插件')}
+         // 注册插件到构建流程(生成打包文件后执行)
+         compiler.hooks.afterDistSync.tap(handler)
+     }
+}
+        
+module.exports = CssExtractPlugin
+`
+
+
+    return (
+        <LZY-TEMPLATE>
+
+            <h2>插件plugin</h2>
+            <br />
+            <p>提供了与原webpack类似的插件系统</p>
+            <p>可通过配置进行使用</p>
+            <p>插件是一个类,会根据插件内代码在不同的构建进度中调用</p>
+            <p>已开发并预装了CSS打包和打包生成html模板插件</p>
+            <CodeBlock codeStr={code1} />
+            <Block />
+
+            <h2>插件开发</h2>
+            <br />
+            <p>插件内部使用<span style={"color:red"}>lzy-tapable</span>进行调用</p>
+            <p>插件类需要暴露run方法,接收一个webpackCompiler实例</p>
+            <p>compiler.hooks中暴露了多个钩子,使用tap方法将插件处理逻辑注册到构建流程中</p>
+            <br />
+            <p>可插入钩子的构建流程:</p>
+            <p> beforeCompileSync: 构建前执行</p>
+            <p> afterCompileSync: 构建后执行</p>
+            <p> beforeDistSync: 生成打包文件前执行</p>
+            <p> afterDistSync: 生成打包文件后执行</p>
+            <Block />
+
+            <h2>一个自定义插件例子</h2>
+            <br />
+            <CodeBlock codeStr={code2} />
+            <Block />
+
+        </LZY-TEMPLATE>
+    )
+}

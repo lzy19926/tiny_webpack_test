@@ -1,0 +1,62 @@
+import LzyReact from 'lzy-react'
+import { CodeBlock, Block } from 'lzy-ui'
+
+
+export default function ImportStatic() {
+
+    const code1 =
+        `devServer: {
+  staticPath: './public', // 静态资源托管文件夹
+},`
+
+
+    const code2 =
+        `devServer: {
+// 配置是否能跨域
+cors: true,
+
+// 读取静态资源的地址(比如localhost:8000) 默认为本服务的端口
+publicPath: 'http://localhost:8000'
+},`
+
+    const code3 =
+        `// importStatic是一个内置函数,不需要引入,类似node的require
+const imgSrc = importStatic('../../public/img.jpg')
+
+function App(){
+    return (
+        <LZY - TEMPLATE>
+        <img src={imgSrc}>
+        <LZY - TEMPLATE>
+    )
+}
+`
+
+
+    return (
+        <LZY-TEMPLATE>
+            <h2>静态资源托管</h2>
+            <br />
+            <p>devServer提供静态资源托管服务,默认为项目下public文件夹</p>
+            <p>或者在devServer中进行配置</p>
+            <CodeBlock codeStr={code1} />
+            <Block />
+
+            <h2>配置获取静态资源的地址</h2>
+            <br />
+            <p>通过publicPath配置项,可配置从哪里获取静态资源(需要开启跨域)</p>
+            <p>比如通过配置,让跑在3000端口的项目,从4000端口获取数据</p>
+            <br />
+            <CodeBlock codeStr={code2} />
+            <Block />
+
+            <h2>调用静态资源</h2>
+            <br />
+            <p>因为配置会产生路径问题,提供了importStatic函数进行静态资源引入</p>
+            <p>例子</p>
+            <CodeBlock codeStr={code3} />
+            <Block />
+
+        </LZY-TEMPLATE>
+    )
+}

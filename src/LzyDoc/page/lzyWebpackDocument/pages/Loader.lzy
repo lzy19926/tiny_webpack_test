@@ -1,0 +1,67 @@
+import LzyReact from 'lzy-react'
+import { CodeBlock, Block } from 'lzy-ui'
+
+export default function Loader() {
+
+    const code1 =
+        `// webpack.config.js中进行配置
+const cssLoader = require('./my_node_modules/webpackLoader/lzy-cssLoader/cssLoader')
+const lzyLoader = require('./my_node_modules/webpackLoader/lzy-loader/index')
+
+
+module.exports = {
+    
+    ...
+
+    rules: [
+      {
+          test: /\.css$/,  // 通过正则检查文件后缀
+          use: [cssLoader] // .css尾缀的文件会通过cssLoader处理
+      },
+      {
+          test: /\.lzy$/,
+          use: [lzyLoader,otherLoader] // .lzy文件经过lzyloader处理
+      }
+    ]
+}
+`
+
+    const code2 =
+        `// source为接收的文件内容字符串
+function testLoader(source) {
+
+    console.log('执行testLoader');
+    
+    return source
+}
+
+module.exports = cssLoader
+        `
+
+    return (
+        <LZY-TEMPLATE>
+            <h2>Loader</h2>
+            <br />
+
+            <p>提供了跟原版webpack类似的loader文件处理单元</p>
+            <p>loader是一个函数</p>
+            <p>用于在构建时,读取文件内容字符串,处理后再交给webpack进行构建</p>
+            <Block />
+
+            <h3>使用loader</h3>
+            <br />
+            <p>跟原版webpack不同,loader会从数组第0项开始依次执行</p>
+            <CodeBlock codeStr={code1} />
+            <Block />
+
+            <h3>loader开发</h3>
+            <br />
+            <p>loader是一个函数,接收上一个loader的返回值</p>
+            <p>第一个loader接收的是文件内容字符串</p>
+            <p>一个简易的loader</p>
+            <CodeBlock codeStr={code2} />
+            <Block />
+
+        </LZY-TEMPLATE>
+    )
+}
