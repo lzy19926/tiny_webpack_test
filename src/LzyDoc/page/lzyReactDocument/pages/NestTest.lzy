@@ -8,7 +8,7 @@ export default function Nest() {
     const [data, setData] = myUseState()
 
     myUseEffect(() => {
-        getAllUserData()
+        // getAllUserData()
     }, [])
 
 
@@ -30,4 +30,3 @@ export default function Nest() {
         </LZY-TEMPLATE>
     )
 }
-

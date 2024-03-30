@@ -1,0 +1,55 @@
+// 外层路由切换组件
+import LzyReact, { myUseState } from 'lzy-react'
+import { Link } from 'lzy-react-router'
+import './index.css'
+
+export default function DropStart(props) {
+
+    const { dataSource } = props
+    const [show, setShow] = myUseState(false)
+
+    if (dataSource) {
+        if (!Array.isArray(dataSource)) {
+            console.warn('dataSource 应是一个数组')
+        }
+    }
+
+    return (
+        <LZY-TEMPLATE>
+            <div class="dropend lzy-dropStart"
+                onMouseover={() => { setShow(true) }}
+                onMouseout={() => { setShow(false) }}
+            >
+                <button type="button" class="btn btn-secondary dropdown-toggle lzy-dropStart" data-bs-toggle="dropdown">
+                </button>
+                <ul class={show ? "lzy-dropdown-menu lzy-dropdown-menu-active" : "lzy-dropdown-menu"}>
+
+                    <li class="lzy-dropdown-item">
+                        <Link to="/#lzyReact" title='lzyReact文档' />
+                    </li>
+
+                    <li class="lzy-dropdown-item">
+                        <Link to="/#lzyWebpack" title='lzyWebpack文档' />
+                    </li>
+
+                    <li class="lzy-dropdown-item">
+                        <Link to="/#lzyQiankun" title='lzyQiankun文档' />
+                    </li>
+
+                    <li class="lzy-dropdown-item">
+                        <Link to="/#lzyMicroApp" title='lzyMicroApp文档' />
+                    </li>
+
+                    <li class="lzy-dropdown-item">
+                        <Link to="/#lzyReactQuery" title='lzyReactQuery文档' />
+                    </li>
+
+                    <li class="lzy-dropdown-item">
+                        <Link to="/#chatGPT" title='chatGPT' />
+                    </li>
+
+                </ul>
+            </div >
+        </LZY-TEMPLATE>
+    )
+}

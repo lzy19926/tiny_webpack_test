@@ -10,12 +10,12 @@ module.exports = {
     rootPath: __dirname, // 项目根路径
 
     entry: path.join(__dirname, '/src/LzyDoc/index.lzy'), //文档入口
-
+    // entry: path.join(__dirname, '/src/LzyReact_App/index.lzy'), //全部文档入口(旧版)
     // entry: path.join(__dirname, '/src/libTest/formatjsTest/app.lzy'), //formatjsTest测试入口
 
-    // entry: path.join(__dirname, '/src/buildTest/0.js'), //打包测试入口
 
-    output: path.join(__dirname, '/dist'), // 出口
+
+    output: path.join(__dirname, '/dist'),
 
     devServer: {
         port: 8000,// 端口

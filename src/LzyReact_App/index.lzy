@@ -1,7 +1,5 @@
-// 引入基本库
 import LzyReact, { render, createContext, myUseContext } from 'lzy-react'
 
-// 
 import DropStart from './DropStart/index.lzy'
 import RoutePage from './RoutePage/RoutePage.lzy'
 
@@ -36,8 +34,3 @@ function ContextChild() {
 }
 
 render(<App />, document.getElementById('root'))
-
-
-
-
-

@@ -9,9 +9,7 @@ class CreateDistPlugin {
 
     // 创建dist文件夹并生成bundle.js和index.html文件
     createDistFile(compilation) {
-        debugger
         const { code, name } = compilation.chunks.get("bundle.js")
-        const config = compilation.config
         const outputPath = compilation.config.output
         //todo 没有dist时创建dist文件夹
         const hasDir = fs.existsSync(outputPath)
