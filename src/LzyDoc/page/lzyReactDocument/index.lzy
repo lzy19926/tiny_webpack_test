@@ -1,0 +1,71 @@
+import LzyReact, { myUseEffect, myUseState } from 'lzy-react'
+// 国际化组件
+import { FormatMessageProvider,FormatMessage } from 'lzy-formatjs'
+import { config_en } from '../../local/en'
+import { config_zh } from '../../local/zh'
+
+import Communication from './pages/Communication.lzy'
+import Concurrent from './pages/Concurrent.lzy'
+import Description from './pages/Description.lzy'
+import EventSystem from './pages/EventSystem.lzy'
+import Hooks from './pages/Hooks.lzy'
+import LzyWebpack from './pages/LzyWebpack.lzy'
+import Router from './pages/Router.lzy'
+import Ruzy from './pages/Ruzy.lzy'
+import Start from './pages/Start.lzy'
+import UseJSX from './pages/UseJSX.lzy'
+import Batch from './pages/Batch.lzy'
+import Nest from './pages/NestTest.lzy'
+import International from './pages/International.lzy'
+
+import BaseLayout from '../../BaseLayout/index.lzy'
+
+// import { SideListPage } from 'lzy-ui'
+import SideListPage from '../../../../my_node_modules/lzy-lzyUI/SideListPage/index.lzy'
+
+export default function LzyReactDocument() {
+
+  const navList = [
+    {
+      key: 'A', title: <FormatMessage id="start" />,
+      children: [
+        { key: 'tab3Content1', title: <FormatMessage id="description" />, render: () => <Description /> },
+        { key: 'tab3Content2', title: <FormatMessage id="install" />, render: () => <Start /> },
+      ]
+    },
+    {
+      key: 'B', title: <FormatMessage id="useage" />,
+      children: [
+        { key: 'tab3Content3', title: <FormatMessage id="communication" />, render: () => <Communication /> },
+        { key: 'tab3Content4', title: <FormatMessage id="hooks" />, render: () => <Hooks /> },
+        { key: 'tab3Content5', title: <FormatMessage id="JSX" />, render: () => <UseJSX /> },
+      ]
+    },
+    {
+      key: 'C', title: <FormatMessage id="features" />,
+      children: [
+        { key: 'tab3Content6', title: <FormatMessage id="eventSystem" />, render: () => <EventSystem /> },
+        { key: 'tab3Content7', title: <FormatMessage id="concurrent" />, render: () => <Concurrent /> },
+        { key: 'tab3Content8', title: <FormatMessage id="batch" />, render: () => <Batch /> },
+      ]
+    },
+    {
+      key: 'D', title: <FormatMessage id="tools" />,
+      children: [
+        { key: 'tab3Content9', title: <FormatMessage id="router" />, render: () => <Router /> },
+        { key: 'tab3Content10', title: <FormatMessage id="ruzy" />, render: () => <Ruzy /> },
+        { key: 'tab3Content11', title: <FormatMessage id="i18n" />, render: () => <International /> },
+      ]
+    },
+    { key: 'tab3Content12', title: <FormatMessage id="lzyWebpack" />, render: () => <LzyWebpack /> },
+    { key: 'tab3Content13', title: <FormatMessage id="nestTest" />, render: () => <Nest /> }
+  ]
+
+  return (
+    <FormatMessageProvider config={config_zh}>
+      <BaseLayout title="LzyReact文档">
+        <SideListPage dataSource={navList} />
+      </BaseLayout>
+    </FormatMessageProvider>
+  )
+}
