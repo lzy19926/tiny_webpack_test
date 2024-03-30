@@ -1,0 +1,62 @@
+import LzyReact from 'lzy-react'
+import { CodeBlock, Block } from 'lzy-ui'
+
+
+export default function Webpack() {
+
+
+    const code1 =
+        `const path = require('path')
+const HtmlPlugin = require('./my_node_modules/webpackPlugin/htmlPlugin')
+const CssExtractPlugin = require('./my_node_modules/webpackPlugin/cssExtractPlugin')
+const cssLoader = require('./my_node_modules/webpackLoader/lzy-cssLoader/cssLoader')
+const lzyLoader = require('./my_node_modules/webpackLoader/lzy-loader/index')
+
+
+module.exports = {
+    //模式选择 development开发模式 不会进行代码压缩  production:生产模式,会进行代码压缩
+    mode: 'development',
+    //配置项目根路径
+    rootPath: __dirname, // 项目根路径
+    //配置打包入口
+    entry: path.join(__dirname, '/src/index.lzy'),
+    //配置打包输出目录
+    output: path.join(__dirname, '/dist'),
+    // 启动devServer热更新
+    hot: true,
+    // 配置插件
+    plugins: [
+        new HtmlPlugin({ fileName: 'index.html' }),   //! 打包生成html文件插件
+        new CssExtractPlugin({ fileName: 'index.css' }) //! 打包CSS插件
+    ],
+    // 配置loader
+    rules: [
+        {
+            test: /\.css$/,
+            use: [cssLoader] //! CSS尾缀的文件会通过cssLoader处理
+        },
+        {
+            test: /\.lzy$/,
+            use: [lzyLoader] //! lzy文件经过lzyloader处理
+        }
+    ]
+}
+    `
+
+
+    return (
+        <LZY-TEMPLATE>
+            <h2>Lzy-Webpack</h2>
+
+            <p>这也是一个大工程,一篇估计讲不完,更多细节可参考我的掘金专栏:<a href="https://juejin.cn/column/7140881164553682952">造轮子系列-手把手教你手写一个webpack</a></p>
+            <Block />
+
+            <h2>基本使用与配置</h2>
+            <p>提供了跟原版webpack类似的loader,plugin功能,默认已经配置了CSS打包插件和HtmlPlugin插件</p>
+            <p>不熟悉的朋友可以去翻一番webpack文档</p>
+            <p>提供了devServer热更新,热模块替换功能,保存文件即会热更新</p>
+            <p style={'color:red'}>(功能不完善,在新增,删除,引用文件后需要重新执行devServer)</p>
+            <CodeBlock codeStr={code1} />
+        </LZY-TEMPLATE>
+    )
+}

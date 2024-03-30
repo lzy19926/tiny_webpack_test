@@ -1,0 +1,32 @@
+import LzyReact, { myUseEffect, myUseState } from 'lzy-react'
+// 国际化组件
+import { FormatMessageProvider,FormatMessage } from 'lzy-formatjs'
+import { config_en } from '../../local/en'
+import { config_zh } from '../../local/zh'
+
+import BaseLayout from '../../BaseLayout/index.lzy'
+import SideListPage from '../../../../my_node_modules/lzy-lzyUI/SideListPage/index.lzy'
+
+// tab页面
+import LzyWebpack from './pages/LzyWebpack.lzy'
+
+
+export default function LzyWebpackDocument() {
+
+  const navList = [
+    {
+      key: 'A', title: <FormatMessage id="start" />,
+      children: [
+        { key: 'tab3Content1', title: <FormatMessage id="lzyWebpack" />, render: () => <LzyWebpack /> },
+      ]
+    },
+  ]
+
+  return (
+    <FormatMessageProvider config={config_zh}>
+      <BaseLayout title="LzyWebpack文档">
+        <SideListPage dataSource={navList} />
+      </BaseLayout>
+    </FormatMessageProvider>
+  )
+}
