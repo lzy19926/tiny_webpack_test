@@ -9,7 +9,8 @@ module.exports = {
     mode: 'development', // development|production
     rootPath: __dirname, // 项目根路径
 
-    entry: path.join(__dirname, '/src/LzyDoc/index.lzy'), //文档入口
+    // entry: path.join(__dirname, '/src/LzyDoc/index.lzy'), //文档入口
+    entry: path.join(__dirname, '/src/React_App/index.jsx'), //真实React18测试构建
     // entry: path.join(__dirname, '/src/LzyReact_App/index.lzy'), //全部文档入口(旧版)
     // entry: path.join(__dirname, '/src/libTest/formatjsTest/app.lzy'), //formatjsTest测试入口
 
