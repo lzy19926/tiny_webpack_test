@@ -20,7 +20,7 @@ function App(){
       {/* 普通的函数式组件不能传递ref属性 【报错】 */}
       <MyInput1 ref={ref1} />
       <button
-        onClick={() => { console.log(ref2) }}
+        onClick={() => { console.log(ref1) }}
       >获取MyInput1引用</button>
 
       {/* 使用forwardRef包裹的函数式组件,可以向下传递ref属性*/}
