@@ -11,6 +11,8 @@ function App() {
   const MyInput = forwardRef(function MyInput(props, ref) {
     debugger
     useImperativeHandle(ref, () => {
+      console.log(ref);
+      debugger
       return {
         foo: () => { },
         bar: () => { },

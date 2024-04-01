@@ -24,7 +24,7 @@ export function App() {
 
 
 // myUseImperativeHandle测试
-import { myUseRef, forwardRef, myUseImperativeHandle } from 'lzy-react'
+import { myUseRef, forwardRef, myUseImperativeHandle, myUseEffect } from 'lzy-react'
 function App2() {
   const ref = myUseRef(null);
 
@@ -33,7 +33,6 @@ function App2() {
       return {
         foo: () => { },
         bar: () => { },
-        focus: () => { }
       };
     }, []);
 
