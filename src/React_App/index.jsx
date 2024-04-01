@@ -9,7 +9,7 @@ function App() {
   const ref2 = useRef(null)
 
   const MyInput = forwardRef(function MyInput(props, ref) {
-
+    debugger
     useImperativeHandle(ref, () => {
       return {
         foo: () => { },
