@@ -1,12 +1,12 @@
 import LzyReact from 'lzy-react'
 import { CodeBlock, Block } from 'lzy-ui'
-import { UseEffectDemo, UseStateDemo, UseContextDemo } from '../demos/hooks.lzy'
+import { UseEffectDemo, UseStateDemo, UseContextDemo, UseRefDemo } from '../demos/hooks.lzy'
 
 
 export default function Hooks() {
 
-    const code1 =
-        `import LzyReact, { myUseState } from 'lzy-react'
+  const code1 =
+    `import LzyReact, { myUseState } from 'lzy-react'
 
 function App(){
     const [num, setNum] = myUseState(0)
@@ -16,57 +16,97 @@ function App(){
         )
  }`
 
-    const code2 =
-        `import LzyReact, { myUseEffect } from 'lzy-react'
+  const code2 =
+    `import LzyReact, { myUseEffect } from 'lzy-react'
 
 function App(){
     const [num, setNum] = myUseState(0)
- 
+
    myUseEffect(() => {
       console.log('传入[],仅仅mount时执行');
    }, [])
-
    myUseEffect(() => {
        console.log('不传 任意时候执行');
    })
-
    myUseEffect(() => {
        console.log('依赖num,num改变时执行');
    }, [num])
-   
+
     return (
         <button onClick={addNum}>Num++ num:{num}</button>
     )
 }`
 
-    return (
-        <LZY-TEMPLATE>
-            <h2>myUseState</h2>
-            <p>与原生useState对应的钩子,使用方法基本相同</p>
-            <CodeBlock codeStr={code1} />
+  const code3 =
+    `import LzyReact, { myUseContext } from 'lzy-react'
 
-            <h2>试一试</h2>
-            <UseStateDemo />
-            <Block />
+function App(){
+  const Context = LzyReact.createContext({ initVal: 1 })
+
+  const Children = () => {
+    const contextVal = myUseContext(Context)
+    return <Button onClick={() => { console.log(contextVal); }}>查看context</Button>
+  }
+
+  return (
+    <Context.Provider value={"store"}>
+      <Children />
+    </Context.Provider>
+  )
+}`
+
+  const code4 =
+    `import LzyReact, { myUseRef } from 'lzy-react'
+
+function App(){
+  const ref = myUseRef(null);
+  const focus = () => {
+    console.log(ref);
+    ref.current.focus()
+  }
+
+  return (
+    <div>
+      <input ref={ref} />
+      <button onClick={focus}> 获取Dom并focus </button>
+    </div>
+  )
+}`
+
+  return (
+    <LZY-TEMPLATE>
+      <h2>myUseState</h2>
+      <p>与原生useState对应的钩子,使用方法基本相同</p>
+      <CodeBlock codeStr={code1} />
+
+      <h2>试一试</h2>
+      <UseStateDemo />
+      <Block />
 
 
-            <h2>myUseEffect</h2>
-            <p>与原生useEffect对应的钩子,使用方法基本相同,在传入不同的依赖项时提供不同的执行时机</p>
-            <CodeBlock codeStr={code2} />
+      <h2>myUseEffect</h2>
+      <p>与原生useEffect对应的钩子,使用方法基本相同,在传入不同的依赖项时提供不同的执行时机</p>
+      <CodeBlock codeStr={code2} />
 
-            <h2>试一试(打开F12查看)</h2>
-            <UseEffectDemo />
-            <Block />
+      <h2>试一试(打开F12查看)</h2>
+      <UseEffectDemo />
+      <Block />
 
 
-            <h2>myUseContext</h2>
-            <p>与原生useContext对应的钩子,使用方法基本相同</p>
-            
-            <h2>试一试(打开F12查看)</h2>
-            <UseContextDemo />
-            <Block />
+      <h2>myUseContext</h2>
+      <p>与原生useContext对应的钩子,使用方法基本相同</p>
+      <CodeBlock codeStr={code3} />
+      <h2>试一试(打开F12查看)</h2>
+      <UseContextDemo />
+      <Block />
 
-        </LZY-TEMPLATE>
-    )
+
+      <h2>myUseRef</h2>
+      <p>与原生useRef对应的钩子,使用方法基本相同</p>
+      <CodeBlock codeStr={code4} />
+      <h2>试一试(打开F12查看)</h2>
+      <UseRefDemo />
+      <Block />
+    </LZY-TEMPLATE>
+  )
 }
-

@@ -1,49 +1,61 @@
-import LzyReact, { myUseState, myUseEffect, myUseContext } from 'lzy-react'
+import LzyReact, { myUseState, myUseEffect, myUseContext, myUseRef } from 'lzy-react'
 import { Button } from 'lzy-ui'
 
-
 export function UseStateDemo() {
-    const [num, setNum] = myUseState(1)
-    const addNum = () => { setNum(num + 1) }
-    return (
-        <Button onClick={addNum}>点击+1 ---{num}</Button>
-    )
+  const [num, setNum] = myUseState(1)
+  const addNum = () => { setNum(num + 1) }
+  return (
+    <Button onClick={addNum}>点击+1 ---{num}</Button>
+  )
 }
 
 export function UseEffectDemo() {
-    const [num, setNum] = myUseState(1)
-    const addNum = () => { setNum(num + 1) }
-    myUseEffect(() => {
-        console.log('传入[],仅仅mount时执行');
-    }, [])
+  const [num, setNum] = myUseState(1)
+  const addNum = () => { setNum(num + 1) }
+  myUseEffect(() => {
+    console.log('传入[],仅仅mount时执行');
+  }, [])
 
-    myUseEffect(() => {
-        console.log('不传 任意时候执行');
-    })
+  myUseEffect(() => {
+    console.log('不传 任意时候执行');
+  })
 
-    myUseEffect(() => {
-        console.log('依赖num,num改变时执行');
-    }, [num])
+  myUseEffect(() => {
+    console.log('依赖num,num改变时执行');
+  }, [num])
 
-    return (
-        <Button onClick={addNum}>点击+1 ---{num}</Button>
-    )
+  return (
+    <Button onClick={addNum}>点击+1 ---{num}</Button>
+  )
 }
 
-
 export function UseContextDemo() {
+  const Context = LzyReact.createContext({ initVal: 1 })
 
-    const Context = LzyReact.createContext({ initVal: 1 })
+  const Children = () => {
+    const contextVal = myUseContext(Context)
+    return <Button onClick={() => { console.log(contextVal); }}>查看context</Button>
+  }
 
-    const Children = () => {
-        const contextVal = myUseContext(Context)
+  return (
+    <Context.Provider value={"store"}>
+      <Children />
+    </Context.Provider>
+  )
+}
 
-        return <Button onClick={() => { console.log(contextVal); }}>查看context</Button>
-    }
+export function UseRefDemo() {
+  const ref = myUseRef(null);
 
-    return (
-        <Context.Provider value={"store"}>
-            <Children />
-        </Context.Provider>
-    )
+  const focus = () => {
+    console.log(ref);
+    ref.current.focus()
+  }
+
+  return (
+    <div>
+      <input ref={ref} />
+      <button onClick={focus}> 获取Dom并focus </button>
+    </div>
+  )
 }
