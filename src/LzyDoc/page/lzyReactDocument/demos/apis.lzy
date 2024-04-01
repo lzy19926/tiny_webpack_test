@@ -1,0 +1,26 @@
+import LzyReact, { myUseRef, forwardRef } from 'lzy-react'
+
+export function ForwardRefDemo() {
+  const ref1 = myUseRef(null);
+  const ref2 = myUseRef(null);
+
+
+  const MyInput1 = ({ ref }) => <input ref={ref} />
+  const MyInput2 = forwardRef((props, ref) => <input ref={ref} />)
+
+  return (
+    <div>
+      {/* 普通的函数式组件不能传递ref属性 【报错】 */}
+      <MyInput1 ref={ref1} />
+      <button
+        onClick={() => { console.log(ref1) }}
+      >获取MyInput1引用</button>
+
+      {/* 使用forwardRef包裹的函数式组件,可以向下传递ref属性*/}
+      <MyInput2 ref={ref2} />
+      <button
+        onClick={() => { console.log(ref2) }}
+      >获取MyInput2引用</button>
+    </div>
+  )
+}

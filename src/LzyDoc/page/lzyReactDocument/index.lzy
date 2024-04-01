@@ -1,6 +1,6 @@
-import LzyReact, { myUseEffect, myUseState } from 'lzy-react'
+import LzyReact from 'lzy-react'
 // 国际化组件
-import { FormatMessageProvider,FormatMessage } from 'lzy-formatjs'
+import { FormatMessageProvider, FormatMessage } from 'lzy-formatjs'
 import { config_en } from '../../local/en'
 import { config_zh } from '../../local/zh'
 
@@ -9,6 +9,7 @@ import Concurrent from './pages/Concurrent.lzy'
 import Description from './pages/Description.lzy'
 import EventSystem from './pages/EventSystem.lzy'
 import Hooks from './pages/Hooks.lzy'
+import Apis from './pages/Apis.lzy'
 import LzyWebpack from './pages/LzyWebpack.lzy'
 import Router from './pages/Router.lzy'
 import Ruzy from './pages/Ruzy.lzy'
@@ -19,7 +20,6 @@ import Nest from './pages/NestTest.lzy'
 import International from './pages/International.lzy'
 
 import BaseLayout from '../../BaseLayout/index.lzy'
-
 // import { SideListPage } from 'lzy-ui'
 import SideListPage from '../../../../my_node_modules/lzy-lzyUI/SideListPage/index.lzy'
 
@@ -38,7 +38,8 @@ export default function LzyReactDocument() {
       children: [
         { key: 'tab3Content3', title: <FormatMessage id="communication" />, render: () => <Communication /> },
         { key: 'tab3Content4', title: <FormatMessage id="hooks" />, render: () => <Hooks /> },
-        { key: 'tab3Content5', title: <FormatMessage id="JSX" />, render: () => <UseJSX /> },
+        { key: 'tab3Content5', title: <FormatMessage id="API" />, render: () => <Apis /> },
+        { key: 'tab3Content6', title: <FormatMessage id="JSX" />, render: () => <UseJSX /> },
       ]
     },
     {

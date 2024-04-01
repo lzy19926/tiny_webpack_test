@@ -22,5 +22,5 @@ export function App() {
 }
 
 render(<App />, document.getElementById('root'),
-  { openLogger: true }
+  { openLogger: false }
 )

@@ -7,6 +7,7 @@ const messages_en = {
   useage: "Useage",
   communication: "Communication",
   hooks: "Hooks",
+  API:"API",
   JSX: "JSX",
   features: "Features",
   eventSystem: "Synthetic EventSystem",

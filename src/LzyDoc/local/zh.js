@@ -8,6 +8,7 @@ const messages_zh = {
   useage: "基本使用",
   communication: "组件通信",
   hooks: "Hooks",
+  API:"API",
   JSX: "使用JSX",
   features: "高级特性",
   eventSystem: "合成事件系统",

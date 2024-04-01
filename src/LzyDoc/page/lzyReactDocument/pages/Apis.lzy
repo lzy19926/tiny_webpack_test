@@ -1,0 +1,47 @@
+import LzyReact from 'lzy-react'
+import { CodeBlock, Block } from 'lzy-ui'
+import { ForwardRefDemo } from '../demos/apis.lzy'
+
+
+export default function Apis() {
+
+  const code1 =
+    `import LzyReact, { myUseRef, forwardRef } from 'lzy-react'
+
+function App(){
+  const ref1 = myUseRef(null);
+  const ref2 = myUseRef(null);
+
+  const MyInput1 = ({ ref }) => <input ref={ref} />
+  const MyInput2 = forwardRef((props, ref) => <input ref={ref} />)
+
+  return (
+    <div>
+      {/* 普通的函数式组件不能传递ref属性 【报错】 */}
+      <MyInput1 ref={ref1} />
+      <button
+        onClick={() => { console.log(ref2) }}
+      >获取MyInput1引用</button>
+
+      {/* 使用forwardRef包裹的函数式组件,可以向下传递ref属性*/}
+      <MyInput2 ref={ref2} />
+      <button
+        onClick={() => { console.log(ref2) }}
+      >获取MyInput2引用</button>
+    </div>
+  )
+ }`
+
+
+  return (
+    <LZY-TEMPLATE>
+      <h2>forwardRef</h2>
+      <p>与原生forwardRef使用方法基本相同,可让组件向下传递ref属性</p>
+      <p>而普通的函数组件,无法设置ref,只能在dom类型节点上设置</p>
+      <CodeBlock codeStr={code1} />
+      <h2>试一试(打开F12查看)</h2>
+      <ForwardRefDemo />
+      <Block />
+    </LZY-TEMPLATE>
+  )
+}
