@@ -1,4 +1,4 @@
-import LzyReact, { render } from 'lzy-react'
+import LzyReact, { myUseState, render } from 'lzy-react'
 import { HashRouter, Routes, Route } from 'lzy-react-router'
 
 //页面
@@ -24,27 +24,35 @@ export function App() {
 
 
 // myUseImperativeHandle测试
-import { myUseRef, forwardRef, myUseImperativeHandle, myUseEffect } from 'lzy-react'
-function App2() {
-  const ref = myUseRef(null);
+// import { myUseRef, forwardRef, myUseImperativeHandle } from 'lzy-react'
+// function App2() {
+//   const ref = myUseRef(null);
 
-  const MyInput = forwardRef(function MyInput(props, ref) {
-    myUseImperativeHandle(ref, () => {
-      return {
-        foo: () => { },
-        bar: () => { },
-      };
-    }, []);
+//   const MyInput = forwardRef(function MyInput(props, ref) {
+//     myUseImperativeHandle(ref, () => {
+//       return {
+//         foo: () => { },
+//         bar: () => { },
+//       };
+//     }, []);
 
-    return <input {...props} ref={ref} />;
-  });
+//     return <input {...props} ref={ref} />;
+//   });
 
-  return (<div>
-    <MyInput ref={ref} />
-    <button onClick={() => { console.log(ref) }}> Focus </button>
-  </div>)
-}
+//   return (<div>
+//     <MyInput ref={ref} />
+//     <button onClick={() => { console.log(ref) }}> Focus </button>
+//   </div>)
+// }
 
-render(<App2 />, document.getElementById('root'),
+// function App3() {
+//   const [num, setNum] = myUseState(1)
+//   return (<button onClick={() => {
+
+//     setNum(num + 1)
+//   }}> {num}</button>)
+// }
+
+render(<App />, document.getElementById('root'),
   { openLogger: false }
 )
